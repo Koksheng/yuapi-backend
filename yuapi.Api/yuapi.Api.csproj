@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\yuapi.Application\yuapi.Application.csproj" />
+    <ProjectReference Include="..\yuapi.Contracts\yuapi.Contracts.csproj" />
+    <ProjectReference Include="..\yuapi.Infrastructure\yuapi.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

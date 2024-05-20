@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\yuapi.Application\yuapi.Application.csproj" />
+  </ItemGroup>
+
 </Project>
