@@ -12,6 +12,7 @@ namespace yuapi.Application.MappingProfiles
             CreateMap<InterfaceInfoAddRequest, InterfaceInfo>();
             CreateMap<UserRegisterRequest, User>();
             CreateMap<User, UserSafetyResponse>();
+            CreateMap<SearchUserRequest, User>();
         }
     }
 }

@@ -34,5 +34,13 @@ namespace yuapi.Infrastructure.Persistence
 
             return result;
         }
+
+        public async Task<User> GetUser(int id)
+        {
+            var user = await _context.Users
+                             .Where(u => !u.isDelete && u.Id == id)
+                             .FirstOrDefaultAsync();
+            return user;
+        }
     }
 }

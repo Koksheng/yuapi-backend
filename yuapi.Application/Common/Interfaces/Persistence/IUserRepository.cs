@@ -11,5 +11,6 @@ namespace yuapi.Application.Common.Interfaces.Persistence
     {
         Task<User> GetUserByUserAccount(string userAccount);
         Task<int> CreateUser(User user);
+        Task<User> GetUser(int id);
     }
 }

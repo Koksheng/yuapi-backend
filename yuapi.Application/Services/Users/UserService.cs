@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Azure.Core;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -149,6 +150,25 @@ namespace yuapi.Application.Services.Users
             //string userName = user.userName;
             //var token = _jwtTokenGenerator.GenerateToken(newUserId, userName);
 
+            return safetyUser;
+        }
+
+        public async Task<UserSafetyResponse> GetCurrentUser(string userState)
+        {
+            // 1. get user by id
+            var loggedInUser = JsonConvert.DeserializeObject<User>(userState);
+            var user = await _userRepository.GetUser(loggedInUser.Id);
+
+            if (user == null || user.isDelete)
+            {
+                //return null;
+                throw new BusinessException(ErrorCode.NULL_ERROR, "找不到该用户");
+            }
+            // 3. 用户脱敏 desensitization
+            UserSafetyResponse safetyUser = await GetSafetyUser(user);
+            //var safetyUser = await _userRepository.GetSafetyUser(user);
+            //safetyUser.IsAdmin = await verifyIsAdminRoleAsync();
+            //return safetyUser;
             return safetyUser;
         }
     }

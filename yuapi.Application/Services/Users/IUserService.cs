@@ -8,5 +8,7 @@ namespace yuapi.Application.Services.Users
     {
         Task<BaseResponse<int>> UserRegister(UserRegisterRequest request);
         Task<UserSafetyResponse?> UserLogin(string userAccount, string userPassword);
+        Task<UserSafetyResponse> GetCurrentUser(string userState);
+        //Task<List<UserSafetyResponse>> SearchUserList(SearchUserRequest user);
     }
 }
