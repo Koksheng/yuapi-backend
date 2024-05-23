@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using yuapi.Application.Services.Users;
 using yuapi.Contracts.User;
@@ -21,6 +22,7 @@ namespace yuapi.Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<BaseResponse<int>> userRegister(UserRegisterRequest request)
         {
 
@@ -28,6 +30,7 @@ namespace yuapi.Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<BaseResponse<UserSafetyResponse>?> userLogin(UserLoginRequest request)
         {
             var safetyUser = await _userService.UserLogin(request.userAccount, request.userPassword);
@@ -44,6 +47,7 @@ namespace yuapi.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<BaseResponse<int>> userLogout()
         {
             var userState = HttpContext.Session.GetString(USER_LOGIN_STATE);
@@ -57,6 +61,7 @@ namespace yuapi.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<BaseResponse<UserSafetyResponse>?> getCurrentUser()
         {
             var userState = HttpContext.Session.GetString(USER_LOGIN_STATE);

@@ -14,5 +14,6 @@ namespace yuapi.Contracts.User
         int gender,
         int userRole,
         DateTime createTime,
-        DateTime updateTime);
+        DateTime updateTime,
+        string token);
 }

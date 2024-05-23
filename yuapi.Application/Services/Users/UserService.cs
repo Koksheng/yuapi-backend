@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using yuapi.Application.Common.Interfaces.Authentication;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Migrations;
 using yuapi.Application.Services.Common;
@@ -21,12 +22,14 @@ namespace yuapi.Application.Services.Users
     public class UserService : IUserService
     {
         private readonly IMapper _mapper;
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper, IJwtTokenGenerator jwtTokenGenerator)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _jwtTokenGenerator = jwtTokenGenerator;
         }
 
         public async Task<BaseResponse<int>> UserRegister(UserRegisterRequest request)
@@ -123,12 +126,19 @@ namespace yuapi.Application.Services.Users
             // 3. 用户脱敏 desensitization
             UserSafetyResponse safetyUser = await GetSafetyUser(user);
 
+            // 4. JWT Token
+            int newUserId = user.Id;
+            string userName = user.userName;
+            var token = _jwtTokenGenerator.GenerateToken(newUserId, userName);
+            // Assign the generated token
+            safetyUser = safetyUser with { token = token };
+
             return safetyUser;
         }
 
         public async Task<UserSafetyResponse> GetSafetyUser(User user)
         {
-            UserSafetyResponse safetyUser = _mapper.Map<UserSafetyResponse>(user);
+            var safetyUser = _mapper.Map<UserSafetyResponse>(user);
 
             //User safetyUser = new User(
             //    user.Id,
