@@ -75,7 +75,7 @@ namespace yuapi.Api.Controllers
         //public async Task<BaseResponse<List<User>>?> searchUserList([FromQuery] SearchUserRequest request)
         //{
 
-        //    User searchUser= _mapper.Map<User>(request);
+        //    User searchUser = _mapper.Map<User>(request);
         //    var userRquest = new User()
         //    {
         //        userName = request.username == null ? "" : request.username,

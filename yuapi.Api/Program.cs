@@ -18,12 +18,12 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(10);
 });
 
-builder.Services.AddDbContext<DataContext>(opt =>
-{
-    //opt.UseSqlServer("Server=.;Database=usercenter;Trusted_Connection=True;TrustServerCertificate=True;");
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-builder.Services.AddApplication().AddInfrastructure();
+//builder.Services.AddDbContext<DataContext>(opt =>
+//{
+//    //opt.UseSqlServer("Server=.;Database=usercenter;Trusted_Connection=True;TrustServerCertificate=True;");
+//    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+//});
+builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
 
 
 var app = builder.Build();

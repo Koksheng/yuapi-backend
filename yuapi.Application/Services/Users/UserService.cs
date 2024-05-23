@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using yuapi.Application.Common.Interfaces.Persistence;
+using yuapi.Application.Migrations;
 using yuapi.Application.Services.Common;
 using yuapi.Contracts.InterfaceInfo;
 using yuapi.Contracts.User;
@@ -170,6 +171,93 @@ namespace yuapi.Application.Services.Users
             //safetyUser.IsAdmin = await verifyIsAdminRoleAsync();
             //return safetyUser;
             return safetyUser;
+        }
+
+        public async Task<BaseResponse<List<UserSafetyResponse>>?> SearchUserList(SearchUserRequest request)
+        {
+            User userRquest = _mapper.Map<User>(request);
+            //var userRquest = new User()
+            //{
+            //    userName = request.username == null ? "" : request.username,
+            //    userAccount = request.userAccount == null ? "" : request.userAccount,
+            //    avatarUrl = request.avatarUrl == null ? "" : request.avatarUrl,
+            //    gender = request.gender,
+            //    phone = request.phone == null ? "" : request.phone,
+            //    email = request.email == null ? "" : request.email,
+            //    userStatus = request.userStatus,
+            //    planetCode = request.planetCode == null ? "" : request.planetCode,
+            //    userRole = request.userRole,
+            //    createTime = request.createTime,
+            //};
+            //var safetyUsersList = await _userService.SearchUserList(userRquest);
+            //var query = _context.Users.Where(u => !u.isDelete);
+
+            //if (!string.IsNullOrEmpty(user.userName))
+            //{
+            //    query = query.Where(u => u.userName.Contains(user.userName));
+            //}
+
+            //if (!string.IsNullOrEmpty(user.userAccount))
+            //{
+            //    query = query.Where(u => u.userAccount.Contains(user.userAccount));
+            //}
+
+            //if (!string.IsNullOrEmpty(user.avatarUrl))
+            //{
+            //    query = query.Where(u => u.avatarUrl.Contains(user.avatarUrl));
+            //}
+
+            //if (user.gender != 0)
+            //{
+            //    query = query.Where(u => u.gender == user.gender);
+            //}
+
+            //if (!string.IsNullOrEmpty(user.phone))
+            //{
+            //    query = query.Where(u => u.phone.Contains(user.phone));
+            //}
+
+            //if (!string.IsNullOrEmpty(user.email))
+            //{
+            //    query = query.Where(u => u.email.Contains(user.email));
+            //}
+
+            //if (user.userStatus != 0)
+            //{
+            //    query = query.Where(u => u.userStatus == user.userStatus);
+            //}
+
+            //if (!string.IsNullOrEmpty(user.planetCode))
+            //{
+            //    query = query.Where(u => u.planetCode.Contains(user.planetCode));
+            //}
+
+            //if (user.userRole != 0)
+            //{
+            //    query = query.Where(u => u.userRole == user.userRole);
+            //}
+
+            //Check if createTime has been set(not default)
+            //if (user.createTime != default(DateTime))
+            //{
+            //    query = query.Where(u => u.createTime == user.createTime);
+            //}
+
+            //var users = await _userRepository.SearchUserByFilter(query);
+
+            //Create a list to store simplified user objects
+            List<UserSafetyResponse> safetyUsersList = new List<UserSafetyResponse>();
+
+            //Loop through each user and call getSafetyUser to get simplified user object
+            //foreach (var u in users)
+            //{
+            //    var safetyUser = await _userRepository.GetSafetyUser(u);
+            //    safetyUsersList.Add(safetyUser);
+
+            //}
+
+
+            return ResultUtils.success(safetyUsersList);
         }
     }
 }
