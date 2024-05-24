@@ -109,11 +109,17 @@ namespace yuapi.Application.Services.Users
             }
 
             // 2. check user is exist
-            var user = await _userRepository.GetUserByUserAccount(userAccount);
-            if (user == null)
+            //var user = await _userRepository.GetUserByUserAccount(userAccount);
+            //if (user == null)
+            //{
+            //    throw new BusinessException(ErrorCode.NULL_ERROR, "找不到该用户");
+            //}
+
+            if (await _userRepository.GetUserByUserAccount(userAccount) is not User user)
             {
                 throw new BusinessException(ErrorCode.NULL_ERROR, "找不到该用户");
             }
+
             if (user.isDelete == true)
             {
                 throw new BusinessException(ErrorCode.NULL_ERROR, "找不到该用户 用户已被删除");
@@ -127,9 +133,7 @@ namespace yuapi.Application.Services.Users
             UserSafetyResponse safetyUser = await GetSafetyUser(user);
 
             // 4. JWT Token
-            int newUserId = user.Id;
-            string userName = user.userName;
-            var token = _jwtTokenGenerator.GenerateToken(newUserId, userName);
+            var token = _jwtTokenGenerator.GenerateToken(user.Id, user.userName);
             // Assign the generated token
             safetyUser = safetyUser with { token = token };
 
