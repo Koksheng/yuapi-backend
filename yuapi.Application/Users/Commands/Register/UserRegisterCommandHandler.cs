@@ -1,21 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Services.Common;
 using yuapi.Domain.Common;
+using yuapi.Domain.Entities;
 using yuapi.Domain.Exception;
 
-namespace yuapi.Application.User.Commands.Register
+namespace yuapi.Application.Users.Commands.Register
 {
-    public class UserRegisterCommandHandler : 
+    public class UserRegisterCommandHandler :
         IRequestHandler<UserRegisterCommand, BaseResponse<int>>
     {
-
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
@@ -25,15 +20,15 @@ namespace yuapi.Application.User.Commands.Register
             _mapper = mapper;
         }
 
-        public async Task<BaseResponse<int>> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<int>> Handle(UserRegisterCommand command, CancellationToken cancellationToken)
         {
-            if (request == null)
+            if (command == null)
             {
                 throw new BusinessException(ErrorCode.PARAMS_ERROR);
             }
-            string userAccount = request.userAccount;
-            string userPassword = request.userPassword;
-            string checkPassword = request.checkPassword;
+            string userAccount = command.userAccount;
+            string userPassword = command.userPassword;
+            string checkPassword = command.checkPassword;
             // 1. Verify
             if (string.IsNullOrWhiteSpace(userAccount) || string.IsNullOrWhiteSpace(userPassword) || string.IsNullOrWhiteSpace(checkPassword))
             {
@@ -65,9 +60,9 @@ namespace yuapi.Application.User.Commands.Register
 
             // 3. Insert User to DB
 
-            User newUser = _mapper.Map<User>(request);
+            User newUser = _mapper.Map<User>(command);
             newUser.userPassword = hashedPassword;
-            newUser.userName = "test";
+            newUser.userName = "test"; 
             newUser.accessKey = "access";
             newUser.secretKey = "secret";
             newUser.userAvatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpy6bicoFta2pSa5I3U1mKbUQPEB7Hxobc0oVEKp2YZknVoJlq0CjgtrbxEFSM4O6F8Dg&usqp=CAU";

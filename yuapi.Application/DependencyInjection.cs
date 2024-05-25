@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using yuapi.Application.MappingProfiles;
 using yuapi.Application.Services.InterfaceInfos;
 using yuapi.Application.Services.Users;
@@ -13,7 +14,9 @@ namespace yuapi.Application
             services.AddAutoMapper(typeof(MappingProfile));
             // Register application services
             services.AddScoped<IInterfaceInfoService, InterfaceInfoService>();
-            services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IUserService, UserService>();
+            //services.AddMediatR(typeof(DependencyInjection).Assembly);
+            services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
             return services;
         }
     }

@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using yuapi.Application.Services.Users;
-using yuapi.Application.User.Commands.Register;
+using yuapi.Application.Users.Commands.Register;
+using yuapi.Application.Users.Queries.GetCurrentUser;
+using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.User;
 using yuapi.Domain.Common;
-using yuapi.Domain.Entities;
 using yuapi.Domain.Exception;
 
 namespace yuapi.Api.Controllers
@@ -15,13 +15,11 @@ namespace yuapi.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly IUserService _userService;
+        private readonly ISender _mediator;
         private const string USER_LOGIN_STATE = "userLoginState";
 
-        public UserController(IUserService userService, IMediator mediator)
+        public UserController(ISender mediator)
         {
-            _userService = userService;
             _mediator = mediator;
         }
 
@@ -38,7 +36,9 @@ namespace yuapi.Api.Controllers
         [AllowAnonymous]
         public async Task<BaseResponse<UserSafetyResponse>?> userLogin(UserLoginRequest request)
         {
-            var safetyUser = await _userService.UserLogin(request.userAccount, request.userPassword);
+            //var safetyUser = await _userService.UserLogin(request.userAccount, request.userPassword);
+            var query = new UserLoginQuery(request.userAccount, request.userPassword);
+            var safetyUser = await _mediator.Send(query);
 
             // Convert user object to JSON string
             var serializedSafetyUser = JsonConvert.SerializeObject(safetyUser);
@@ -76,7 +76,9 @@ namespace yuapi.Api.Controllers
                 throw new BusinessException(ErrorCode.NOT_LOGIN);
             }
 
-            var currentSafetyUser = await _userService.GetCurrentUser(userState);
+            //var currentSafetyUser = await _userService.GetCurrentUser(userState);
+            var query = new GetCurrentUserQuery(userState);
+            var currentSafetyUser = await _mediator.Send(query);
 
             return ResultUtils.success(currentSafetyUser);
         }
