@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using yuapi.Application.Services.Users;
+using yuapi.Application.User.Commands.Register;
 using yuapi.Contracts.User;
 using yuapi.Domain.Common;
 using yuapi.Domain.Entities;
@@ -13,20 +15,23 @@ namespace yuapi.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IMediator _mediator;
         private readonly IUserService _userService;
         private const string USER_LOGIN_STATE = "userLoginState";
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IMediator mediator)
         {
             _userService = userService;
+            _mediator = mediator;
         }
 
         [HttpPost]
         [AllowAnonymous]
         public async Task<BaseResponse<int>> userRegister(UserRegisterRequest request)
         {
-
-            return await _userService.UserRegister(request);
+            var command = new UserRegisterCommand(request.userAccount, request.userPassword, request.checkPassword);
+            return await _mediator.Send(command);
+            //return await _userService.UserRegister(request);
         }
 
         [HttpPost]
