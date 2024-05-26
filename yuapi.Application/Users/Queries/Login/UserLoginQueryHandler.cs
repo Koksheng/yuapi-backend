@@ -34,37 +34,10 @@ namespace yuapi.Application.Users.Queries.Login
 
         public async Task<UserSafetyResponse?> Handle(UserLoginQuery query, CancellationToken cancellationToken)
         {
-            if (query == null)
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR);
-            }
             string userAccount = query.userAccount;
             string userPassword = query.userPassword;
-            if (string.IsNullOrWhiteSpace(userAccount) || string.IsNullOrWhiteSpace(userPassword))
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数为空");
-            }
-            if (userAccount.Length < 4)
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账户过短");
-            }
-            if (userPassword.Length < 8)
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "账户密码过短");
-
-            // userAccount cant contain special character
-            string pattern = @"[^a-zA-Z0-9\s]";
-            if (Regex.IsMatch(userAccount, pattern))
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账户有特殊字符");
-            }
 
             // 2. check user is exist
-            //var user = await _userRepository.GetUserByUserAccount(userAccount);
-            //if (user == null)
-            //{
-            //    throw new BusinessException(ErrorCode.NULL_ERROR, "找不到该用户");
-            //}
-
             if (await _userRepository.GetUserByUserAccount(userAccount) is not User user)
             {
                 throw new BusinessException(ErrorCode.NULL_ERROR, "找不到该用户");

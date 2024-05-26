@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -17,17 +18,20 @@ namespace yuapi.Api.Controllers
     {
         private readonly ISender _mediator;
         private const string USER_LOGIN_STATE = "userLoginState";
+        private readonly IMapper _mapper;
 
-        public UserController(ISender mediator)
+        public UserController(ISender mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpPost]
         [AllowAnonymous]
         public async Task<BaseResponse<int>> userRegister(UserRegisterRequest request)
         {
-            var command = new UserRegisterCommand(request.userAccount, request.userPassword, request.checkPassword);
+            //var command = new UserRegisterCommand(request.userAccount, request.userPassword, request.checkPassword);
+            var command = _mapper.Map<UserRegisterCommand>(request);
             return await _mediator.Send(command);
             //return await _userService.UserRegister(request);
         }
@@ -36,8 +40,8 @@ namespace yuapi.Api.Controllers
         [AllowAnonymous]
         public async Task<BaseResponse<UserSafetyResponse>?> userLogin(UserLoginRequest request)
         {
-            //var safetyUser = await _userService.UserLogin(request.userAccount, request.userPassword);
-            var query = new UserLoginQuery(request.userAccount, request.userPassword);
+            //var query = new UserLoginQuery(request.userAccount, request.userPassword);
+            var query = _mapper.Map<UserLoginQuery>(request);
             var safetyUser = await _mediator.Send(query);
 
             // Convert user object to JSON string
@@ -70,13 +74,13 @@ namespace yuapi.Api.Controllers
         public async Task<BaseResponse<UserSafetyResponse>?> getCurrentUser()
         {
             var userState = HttpContext.Session.GetString(USER_LOGIN_STATE);
-            if (string.IsNullOrWhiteSpace(userState))
-            {
-                //return null;
-                throw new BusinessException(ErrorCode.NOT_LOGIN);
-            }
+            // 1. Validate - GetCurrentUserQueryValidator will handle the validate data whether is null or empty
+            //if (string.IsNullOrWhiteSpace(userState))
+            //{
+            //    //return null;
+            //    throw new BusinessException(ErrorCode.NOT_LOGIN);
+            //}
 
-            //var currentSafetyUser = await _userService.GetCurrentUser(userState);
             var query = new GetCurrentUserQuery(userState);
             var currentSafetyUser = await _mediator.Send(query);
 

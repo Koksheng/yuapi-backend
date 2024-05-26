@@ -22,30 +22,10 @@ namespace yuapi.Application.Users.Commands.Register
 
         public async Task<BaseResponse<int>> Handle(UserRegisterCommand command, CancellationToken cancellationToken)
         {
-            if (command == null)
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR);
-            }
             string userAccount = command.userAccount;
             string userPassword = command.userPassword;
             string checkPassword = command.checkPassword;
-            // 1. Verify
-            if (string.IsNullOrWhiteSpace(userAccount) || string.IsNullOrWhiteSpace(userPassword) || string.IsNullOrWhiteSpace(checkPassword))
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数为空");
-            }
-            if (userAccount.Length < 4)
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账户过短");
-            }
-            if (userPassword.Length < 8 || checkPassword.Length < 8)
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "账户密码过短");
-
-            // userPassword & checkPassword must same
-            if (!userPassword.Equals(checkPassword))
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "账户密码与检查密码不对等");
-            }
+            // 1. Verify in UserRegisterCommandValidator, so here dont need to verify again
 
             // userAccount cant existed
             var user = await _userRepository.GetUserByUserAccount(userAccount);
