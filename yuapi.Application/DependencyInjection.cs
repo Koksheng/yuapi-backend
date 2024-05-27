@@ -16,7 +16,11 @@ namespace yuapi.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             // Add AutoMapper and register profiles from the Application layer
-            services.AddAutoMapper(typeof(MappingProfile));
+            //services.AddAutoMapper(typeof(MappingProfile));
+
+            // Register AutoMapper and scan for profiles
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             // Register application services
             services.AddScoped<IInterfaceInfoService, InterfaceInfoService>();
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));

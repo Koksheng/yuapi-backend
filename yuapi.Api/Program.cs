@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using yuapi.Application.Data;
 using yuapi.Application;
 using yuapi.Infrastructure;
+using yuapi.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,10 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(10);
 });
 
-builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
+builder.Services
+    .AddPresentation()
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
 
 
 var app = builder.Build();
