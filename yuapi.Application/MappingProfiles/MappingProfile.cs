@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using yuapi.Application.Common.Interfaces.Authentication;
 using yuapi.Application.Users.Commands.Register;
+using yuapi.Application.Users.Common;
 using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.InterfaceInfo;
 using yuapi.Contracts.User;
@@ -21,8 +22,10 @@ namespace yuapi.Application.MappingProfiles
             CreateMap<UserRegisterCommand, User>();
 
 
-            CreateMap<User, UserSafetyResponse>()
+            //CreateMap<User, UserSafetyResponse>();
+            CreateMap<User, UserSafetyResult>()
             .ForCtorParam("token", opt => opt.MapFrom(src => string.Empty));
+            CreateMap<UserSafetyResult, UserSafetyResponse>();
             CreateMap<SearchUserRequest, User>();
         }
     }

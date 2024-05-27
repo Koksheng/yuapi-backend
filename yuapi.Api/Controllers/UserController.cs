@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using yuapi.Application.Users.Commands.Register;
+using yuapi.Application.Users.Common;
 using yuapi.Application.Users.Queries.GetCurrentUser;
 using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.User;
@@ -52,7 +53,10 @@ namespace yuapi.Api.Controllers
             {
                 HttpContext.Session.SetString(USER_LOGIN_STATE, serializedSafetyUser);
             }
-            return ResultUtils.success(safetyUser);
+
+            // map UserSafetyResult to UserSafetyResponse
+            var response = _mapper.Map<UserSafetyResponse>(safetyUser);
+            return ResultUtils.success(response);
         }
 
         [HttpPost]
@@ -84,7 +88,10 @@ namespace yuapi.Api.Controllers
             var query = new GetCurrentUserQuery(userState);
             var currentSafetyUser = await _mediator.Send(query);
 
-            return ResultUtils.success(currentSafetyUser);
+            // map UserSafetyResult to UserSafetyResponse
+            var response = _mapper.Map<UserSafetyResponse>(currentSafetyUser);
+
+            return ResultUtils.success(response);
         }
 
         //[HttpGet]

@@ -10,6 +10,7 @@ using yuapi.Application.Common.Interfaces.Authentication;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Services.Common;
 using yuapi.Application.Users.Commands.Register;
+using yuapi.Application.Users.Common;
 using yuapi.Contracts.User;
 using yuapi.Domain.Common;
 using yuapi.Domain.Entities;
@@ -19,7 +20,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace yuapi.Application.Users.Queries.Login
 {
     public class UserLoginQueryHandler :
-        IRequestHandler<UserLoginQuery, UserSafetyResponse?>
+        IRequestHandler<UserLoginQuery, UserSafetyResult?>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -32,7 +33,7 @@ namespace yuapi.Application.Users.Queries.Login
             _jwtTokenGenerator = jwtTokenGenerator;
         }
 
-        public async Task<UserSafetyResponse?> Handle(UserLoginQuery query, CancellationToken cancellationToken)
+        public async Task<UserSafetyResult?> Handle(UserLoginQuery query, CancellationToken cancellationToken)
         {
             string userAccount = query.userAccount;
             string userPassword = query.userPassword;
@@ -53,7 +54,7 @@ namespace yuapi.Application.Users.Queries.Login
             }
 
             // 3. 用户脱敏 desensitization
-            UserSafetyResponse safetyUser = _mapper.Map<UserSafetyResponse>(user);
+            UserSafetyResult safetyUser = _mapper.Map<UserSafetyResult>(user);
 
             // 4. JWT Token
             var token = _jwtTokenGenerator.GenerateToken(user.Id, user.userName);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using yuapi.Application.Common.Interfaces.Persistence;
+using yuapi.Application.Users.Common;
 using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.User;
 using yuapi.Domain.Common;
@@ -16,7 +17,7 @@ using yuapi.Domain.Exception;
 namespace yuapi.Application.Users.Queries.GetCurrentUser
 {
     public class GetCurrentUserQueryHandler :
-        IRequestHandler<GetCurrentUserQuery, UserSafetyResponse>
+        IRequestHandler<GetCurrentUserQuery, UserSafetyResult>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -27,7 +28,7 @@ namespace yuapi.Application.Users.Queries.GetCurrentUser
             _mapper = mapper;
         }
 
-        public async Task<UserSafetyResponse> Handle(GetCurrentUserQuery query, CancellationToken cancellationToken)
+        public async Task<UserSafetyResult> Handle(GetCurrentUserQuery query, CancellationToken cancellationToken)
         {
             if (query == null)
             {
@@ -44,7 +45,7 @@ namespace yuapi.Application.Users.Queries.GetCurrentUser
                 throw new BusinessException(ErrorCode.NULL_ERROR, "找不到该用户");
             }
             // 3. 用户脱敏 desensitization
-            UserSafetyResponse safetyUser = _mapper.Map<UserSafetyResponse>(user);
+            UserSafetyResult safetyUser = _mapper.Map<UserSafetyResult>(user);
             //UserSafetyResponse safetyUser = await GetSafetyUser(user);
             //var safetyUser = await _userRepository.GetSafetyUser(user);
             //safetyUser.IsAdmin = await verifyIsAdminRoleAsync();
