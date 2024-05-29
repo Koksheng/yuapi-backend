@@ -19,13 +19,21 @@ namespace yuapi.Infrastructure.Persistence
             _context = context;
         }
 
-        public async Task<int> CreateInterfaceInfo(InterfaceInfo interfaceInfo)
+        public async Task<int> Add(Domain.InterfaceInfoAggregate.InterfaceInfo interfaceInfo)
         {
-            // Check if interfaceInfo already exists
-            var newInterfaceInfo = await _context.InterfaceInfo.AddAsync(interfaceInfo);
+            // how to add Domain.InterfaceInfoAggregate.InterfaceInfo into DB using DBContext or do u have other method?
+            var newInterfaceInfo =  await _context.InterfaceInfos.AddAsync(interfaceInfo);
             var result = await _context.SaveChangesAsync();
-            
             return result;
         }
+
+        //public async Task<int> CreateInterfaceInfo(InterfaceInfo interfaceInfo)
+        //{
+        //    // Check if interfaceInfo already exists
+        //    var newInterfaceInfo = await _context.InterfaceInfo.AddAsync(interfaceInfo);
+        //    var result = await _context.SaveChangesAsync();
+            
+        //    return result;
+        //}
     }
 }

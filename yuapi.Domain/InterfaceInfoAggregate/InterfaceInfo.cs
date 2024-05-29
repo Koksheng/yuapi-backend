@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using yuapi.Domain.Common.Models;
+﻿using yuapi.Domain.Common.Models;
 using yuapi.Domain.InterfaceInfoAggregate.ValueObjects;
 
 namespace yuapi.Domain.InterfaceInfoAggregate
@@ -21,7 +16,6 @@ namespace yuapi.Domain.InterfaceInfoAggregate
         public DateTime createTime { get; set; }
         public DateTime updateTime { get; set; }
         public int isDelete { get; set; }
-
 
         private InterfaceInfo(
             InterfaceInfoId interfaceInfoId,

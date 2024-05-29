@@ -22,7 +22,7 @@ namespace yuapi.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             // Register application services
-            services.AddScoped<IInterfaceInfoService, InterfaceInfoService>();
+            //services.AddScoped<IInterfaceInfoService, InterfaceInfoService>();
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
             // Register FluentValidation validators

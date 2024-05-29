@@ -1,13 +1,15 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using yuapi.Domain.Common;
 
-namespace yuapi.Contracts.InterfaceInfo
+namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
 {
-    public record InterfaceInfoAddRequest(
-     /**
+    public record CreateInterfaceInfoCommand(
+    /**
      * 接口名称
      */
     string name,
@@ -31,6 +33,9 @@ namespace yuapi.Contracts.InterfaceInfo
      * 响应头
      */
     string responseHeader,
+
+    
+    string userId,
     int status,
 
     /**
@@ -41,7 +46,6 @@ namespace yuapi.Contracts.InterfaceInfo
     /**
      * 请求参数
      */
-    //string requestParams,
-
-    );
+    //string requestParams
+        ) : IRequest<BaseResponse<int>>;
 }

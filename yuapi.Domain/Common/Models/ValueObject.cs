@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace yuapi.Domain.Common.Models
+﻿namespace yuapi.Domain.Common.Models
 {
     public abstract class ValueObject : IEquatable<ValueObject>
     {
