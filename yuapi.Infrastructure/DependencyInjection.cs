@@ -37,6 +37,7 @@ namespace yuapi.Infrastructure
             // Register repositories
             services.AddScoped<IInterfaceInfoRepository, InterfaceInfoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
             return services;
         }
 

@@ -22,9 +22,10 @@ namespace yuapi.Infrastructure.Persistence
         public async Task<int> Add(Domain.InterfaceInfoAggregate.InterfaceInfo interfaceInfo)
         {
             // how to add Domain.InterfaceInfoAggregate.InterfaceInfo into DB using DBContext or do u have other method?
-            var newInterfaceInfo =  await _context.InterfaceInfos.AddAsync(interfaceInfo);
-            var result = await _context.SaveChangesAsync();
-            return result;
+            //var newInterfaceInfo =  await _context.InterfaceInfos.AddAsync(interfaceInfo);
+            //var result = await _context.SaveChangesAsync();
+            //return result;
+            return 1;
         }
 
         //public async Task<int> CreateInterfaceInfo(InterfaceInfo interfaceInfo)
