@@ -1,6 +1,5 @@
 ﻿using yuapi.Contracts.User;
 using yuapi.Domain.Common;
-using yuapi.Domain.Entities;
 
 namespace yuapi.Application.Services.Users
 {

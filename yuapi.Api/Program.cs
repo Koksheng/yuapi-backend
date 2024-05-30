@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using yuapi.Application.Data;
 using yuapi.Application;
 using yuapi.Infrastructure;
 using yuapi.Api;

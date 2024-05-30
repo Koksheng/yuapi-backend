@@ -32,7 +32,6 @@ namespace yuapi.Infrastructure
         {
             services.AddDbContext<DataContext>(opt =>
             {
-                //opt.UseSqlServer("Server=.;Database=usercenter;Trusted_Connection=True;TrustServerCertificate=True;");
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 

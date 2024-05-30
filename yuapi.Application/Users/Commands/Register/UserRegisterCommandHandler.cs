@@ -3,8 +3,8 @@ using MediatR;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Services.Common;
 using yuapi.Domain.Common;
-using yuapi.Domain.Entities;
 using yuapi.Domain.Exception;
+using yuapi.Domain.UserAggregate;
 
 namespace yuapi.Application.Users.Commands.Register
 {
@@ -53,7 +53,7 @@ namespace yuapi.Application.Users.Commands.Register
             if (result == 0)
                 throw new BusinessException(ErrorCode.STSTEM_ERROR, "注册失败，数据库错误");
 
-            return ResultUtils.success(newUser.Id);
+            return ResultUtils.success(newUser.Id.Value);
         }
     }
 }

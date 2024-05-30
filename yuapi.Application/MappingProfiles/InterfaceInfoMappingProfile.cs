@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
-using yuapi.Application.Users.Common;
 using yuapi.Contracts.InterfaceInfo;
-using yuapi.Domain.Entities;
+using yuapi.Domain.InterfaceInfoAggregate;
 
 namespace yuapi.Application.MappingProfiles
 {
@@ -19,6 +13,7 @@ namespace yuapi.Application.MappingProfiles
             //CreateMap<InterfaceInfoAddRequest, InterfaceInfo>();
             CreateMap<InterfaceInfoAddRequest, CreateInterfaceInfoCommand>()
                 .ForCtorParam("userId", opt => opt.MapFrom(src => string.Empty));
+            CreateMap<CreateInterfaceInfoCommand, InterfaceInfo>();
         }
     }
 }

@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
-using yuapi.Application.Services.InterfaceInfos;
-using yuapi.Application.Users.Commands.Register;
 using yuapi.Contracts.InterfaceInfo;
 using yuapi.Domain.Common;
-using yuapi.Domain.Entities;
 using yuapi.Domain.Exception;
 
 namespace yuapi.Api.Controllers
@@ -25,14 +21,6 @@ namespace yuapi.Api.Controllers
             _mapper = mapper;
             _mediator = mediator;
         }
-
-        //private readonly IInterfaceInfoService _interfaceInfoService;
-
-        //public InterfaceInfoController(IMapper mapper, IInterfaceInfoService interfaceInfoService)
-        //{
-        //    _mapper = mapper;
-        //    _interfaceInfoService = interfaceInfoService;
-        //}
 
         [HttpPost]
         public async Task<BaseResponse<int>> addInterfaceInfo(InterfaceInfoAddRequest interfaceInfoAddRequest)

@@ -1,9 +1,5 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using MediatR;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Domain.Common;
 using yuapi.Domain.Exception;
@@ -15,36 +11,29 @@ namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
         IRequestHandler<CreateInterfaceInfoCommand, BaseResponse<int>>
     {
         private readonly IInterfaceInfoRepository _interfaceInfoRepository;
+        private readonly IMapper _mapper;
 
-        public CreateInterfaceInfoCommandHandler(IInterfaceInfoRepository interfaceInfoRepository)
+        public CreateInterfaceInfoCommandHandler(IInterfaceInfoRepository interfaceInfoRepository, IMapper mapper)
         {
             _interfaceInfoRepository = interfaceInfoRepository;
+            _mapper = mapper;
         }
 
-        public async Task<BaseResponse<int>> Handle(CreateInterfaceInfoCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<int>> Handle(CreateInterfaceInfoCommand command, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
 
-            // Create InterfaceInfo
-            var interfaceInfo = InterfaceInfo.Create(
-                name: request.name,
-                description: request.description,
-                url: request.url,
-                requestHeader: request.requestHeader,
-                responseHeader: request.responseHeader,
-                userId: request.userId,
-                status: request.status,
-                method: request.method
-                );
+            // Map Command to InterfaceInfo
+            InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(command);
 
             // Persist InterfaceInfo
             var result =  await _interfaceInfoRepository.Add(interfaceInfo);
 
-            // Return InterfaceInfo or 1
+            // Return InterfaceInfo ID
             if (result == 1)
             {
                 //return ResultUtils.success(data: interfaceInfo.Id);
-                return ResultUtils.success(data: result);
+                return ResultUtils.success(data: interfaceInfo.Id.Value);
             }
             else
             {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using yuapi.Domain.Common.Models;
+﻿using yuapi.Domain.Common.Models;
 using yuapi.Domain.UserAggregate.ValueObjects;
 
 namespace yuapi.Domain.UserAggregate
@@ -62,7 +56,7 @@ namespace yuapi.Domain.UserAggregate
             string secretKey)
         {
             return new(
-                UserId.CreateUnique(),
+                null,  // EF Core will set this value
                 userName,
                 userAccount,
                 userAvatar,
@@ -74,6 +68,12 @@ namespace yuapi.Domain.UserAggregate
                 DateTime.UtcNow,
                 DateTime.UtcNow,
                 false);
+        }
+
+        // Private parameterless constructor for EF Core
+        private User() : base(null)
+        {
+            // EF Core requires an empty constructor for materialization
         }
     }
 

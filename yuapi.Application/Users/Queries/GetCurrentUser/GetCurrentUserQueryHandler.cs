@@ -1,17 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Users.Common;
-using yuapi.Application.Users.Queries.Login;
-using yuapi.Contracts.User;
 using yuapi.Domain.Common;
-using yuapi.Domain.Entities;
 using yuapi.Domain.Exception;
 
 namespace yuapi.Application.Users.Queries.GetCurrentUser
@@ -36,7 +28,8 @@ namespace yuapi.Application.Users.Queries.GetCurrentUser
             }
             string userState = query.userState;
             // 1. get user by id
-            var loggedInUser = JsonConvert.DeserializeObject<User>(userState);
+            //var loggedInUser = JsonConvert.DeserializeObject<User>(userState);
+            var loggedInUser = JsonConvert.DeserializeObject<UserSafetyResult>(userState);
             var user = await _userRepository.GetUser(loggedInUser.Id);
 
             if (user == null || user.isDelete)

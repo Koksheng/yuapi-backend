@@ -3,11 +3,6 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using yuapi.Application.Common.Behaviors;
-using yuapi.Application.MappingProfiles;
-using yuapi.Application.Services.InterfaceInfos;
-using yuapi.Application.Services.Users;
-using yuapi.Application.Users.Commands.Register;
-using yuapi.Domain.Common;
 
 namespace yuapi.Application
 {
@@ -22,11 +17,9 @@ namespace yuapi.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             // Register application services
-            //services.AddScoped<IInterfaceInfoService, InterfaceInfoService>();
             services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
-            // Register FluentValidation validators
-            //services.AddValidatorsFromAssemblyContaining<UserRegisterCommandValidator>();
+            // Register FluentValidation validators and scan for validators
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             // Register pipeline behaviors

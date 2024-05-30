@@ -56,7 +56,7 @@ namespace yuapi.Domain.InterfaceInfoAggregate
             string method)
         {
             return new(
-                InterfaceInfoId.CreateUnique(),
+                null,  // EF Core will set this value
                 name,
                 description,
                 url,
@@ -68,6 +68,11 @@ namespace yuapi.Domain.InterfaceInfoAggregate
                 DateTime.UtcNow,
                 DateTime.UtcNow,
                 0);
+        }
+        // Private parameterless constructor for EF Core
+        private InterfaceInfo() : base(null)
+        {
+            // EF Core requires an empty constructor for materialization
         }
     }
 }

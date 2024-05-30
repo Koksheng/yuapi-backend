@@ -1,21 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using yuapi.Application.Common.Interfaces.Authentication;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Services.Common;
-using yuapi.Application.Users.Commands.Register;
 using yuapi.Application.Users.Common;
-using yuapi.Contracts.User;
 using yuapi.Domain.Common;
-using yuapi.Domain.Entities;
 using yuapi.Domain.Exception;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using yuapi.Domain.UserAggregate;
 
 namespace yuapi.Application.Users.Queries.Login
 {
@@ -57,7 +48,7 @@ namespace yuapi.Application.Users.Queries.Login
             UserSafetyResult safetyUser = _mapper.Map<UserSafetyResult>(user);
 
             // 4. JWT Token
-            var token = _jwtTokenGenerator.GenerateToken(user.Id, user.userName);
+            var token = _jwtTokenGenerator.GenerateToken(user.Id.Value, user.userName);
             // Assign the generated token
             safetyUser = safetyUser with { token = token };
 

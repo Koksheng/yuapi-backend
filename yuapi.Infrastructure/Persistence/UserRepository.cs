@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using yuapi.Application.Common.Interfaces.Persistence;
-using yuapi.Application.Data;
-using yuapi.Domain.Entities;
+using yuapi.Domain.UserAggregate;
+using yuapi.Domain.UserAggregate.ValueObjects;
 
 namespace yuapi.Infrastructure.Persistence
 {
@@ -37,9 +32,13 @@ namespace yuapi.Infrastructure.Persistence
 
         public async Task<User> GetUser(int id)
         {
+            // Create a UserId object from the provided integer ID
+            var userId = UserId.Create(id);
+
+            // Query the database for the user with the specified ID
             var user = await _context.Users
-                             .Where(u => !u.isDelete && u.Id == id)
-                             .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
             return user;
         }
     }

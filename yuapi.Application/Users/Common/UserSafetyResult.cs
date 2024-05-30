@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace yuapi.Application.Users.Common
+﻿namespace yuapi.Application.Users.Common
 {
     public record UserSafetyResult(
         int Id,
