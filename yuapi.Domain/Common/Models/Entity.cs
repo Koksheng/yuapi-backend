@@ -34,5 +34,7 @@
         {
             return Id.GetHashCode();
         }
+
+        protected Entity() { }
     }
 }

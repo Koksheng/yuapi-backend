@@ -6,17 +6,18 @@ namespace yuapi.Domain.MenuAggregate
 
     public sealed class Menu : AggregateRoot<MenuId>
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Url { get; set; }
-        public string RequestHeader { get; set; }
-        public string ResponseHeader { get; set; }
-        public string UserId { get; set; }
-        public int Status { get; set; }
-        public string Method { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime UpdateTime { get; set; }
-        public int IsDelete { get; set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public string Url { get; private set; }
+        public string RequestHeader { get; private set; }
+        public string ResponseHeader { get; private set; }
+        public string UserId { get; private set; }
+        public int Status { get; private set; }
+        public string Method { get; private set; }
+        public DateTime CreateTime { get; private set; }
+        public DateTime UpdateTime { get; private set; }
+        public int IsDelete { get; private set; }
+
 
         private Menu(
             MenuId menuId,
@@ -71,7 +72,13 @@ namespace yuapi.Domain.MenuAggregate
                 0);
         }
 
+
+        // Private parameterless constructor for EF Core
+        private Menu() : base(MenuId.CreateUnique())
+        {
+            // EF Core requires an empty constructor for materialization
+        }
     }
 
-    
+
 }

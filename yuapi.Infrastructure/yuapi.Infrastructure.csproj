@@ -20,4 +20,8 @@
     <ProjectReference Include="..\yuapi.Application\yuapi.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

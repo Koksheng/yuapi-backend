@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using yuapi.Domain.InterfaceInfoAggregate.ValueObjects;
 using yuapi.Domain.MenuAggregate;
 
 namespace yuapi.Infrastructure.Persistence
@@ -16,6 +14,11 @@ namespace yuapi.Infrastructure.Persistence
         //public DbSet<Domain.InterfaceInfoAggregate.InterfaceInfo> InterfaceInfos { get; set; }
         public DbSet<Menu> Menus { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
+            base.OnModelCreating(modelBuilder);
+        }
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    base.OnModelCreating(modelBuilder);

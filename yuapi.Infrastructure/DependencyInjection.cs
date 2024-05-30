@@ -19,21 +19,23 @@ namespace yuapi.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             
-            services.AddDbContext<DataContext>(opt =>
-            {
-                //opt.UseSqlServer("Server=.;Database=usercenter;Trusted_Connection=True;TrustServerCertificate=True;");
-                opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-            });
+            
             services
                 .AddAuth(configuration)
-                .AddPersistance();
+                .AddPersistance(configuration);
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
             return services;
         }
 
-        public static IServiceCollection AddPersistance(this IServiceCollection services)
+        public static IServiceCollection AddPersistance(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<DataContext>(opt =>
+            {
+                //opt.UseSqlServer("Server=.;Database=usercenter;Trusted_Connection=True;TrustServerCertificate=True;");
+                opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            });
+
             // Register repositories
             services.AddScoped<IInterfaceInfoRepository, InterfaceInfoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
