@@ -3,7 +3,7 @@ using yuapi.Domain.UserAggregate.ValueObjects;
 
 namespace yuapi.Domain.UserAggregate
 {
-    public sealed class User : AggregateRoot<UserId>
+    public sealed class User : AggregateRoot<UserId, int>
     {
         public string userName { get; set; }
         public string userAccount { get; set; }

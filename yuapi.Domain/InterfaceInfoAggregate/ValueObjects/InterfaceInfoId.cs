@@ -2,9 +2,9 @@
 
 namespace yuapi.Domain.InterfaceInfoAggregate.ValueObjects
 {
-    public sealed class InterfaceInfoId : ValueObject
+    public sealed class InterfaceInfoId : AggregateRootId<int>
     {
-        public int Value { get; }
+        public override int Value { get; protected set; }
         private InterfaceInfoId(int value)
         {
             Value = value;

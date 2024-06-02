@@ -4,7 +4,7 @@ using yuapi.Domain.MenuAggregate.ValueObjects;
 namespace yuapi.Domain.MenuAggregate
 {
 
-    public sealed class Menu : AggregateRoot<MenuId>
+    public sealed class Menu : AggregateRoot<MenuId, int>
     {
         public string Name { get; private set; }
         public string Description { get; private set; }

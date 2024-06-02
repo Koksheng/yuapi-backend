@@ -2,9 +2,9 @@
 
 namespace yuapi.Domain.UserAggregate.ValueObjects
 {
-    public sealed class UserId : ValueObject
+    public sealed class UserId : AggregateRootId<int>
     {
-        public int Value { get; }
+        public override int Value { get; protected set; }
         public UserId(int value)
         {
             Value = value;

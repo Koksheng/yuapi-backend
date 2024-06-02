@@ -2,9 +2,9 @@
 
 namespace yuapi.Domain.MenuAggregate.ValueObjects
 {
-    public sealed class MenuId : ValueObject
+    public sealed class MenuId : AggregateRootId<int>
     {
-        public int Value { get; }
+        public override int Value { get; protected set; }
         private MenuId(int value)
         {
             Value = value;

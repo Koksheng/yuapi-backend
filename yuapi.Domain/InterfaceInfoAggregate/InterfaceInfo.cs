@@ -3,7 +3,7 @@ using yuapi.Domain.InterfaceInfoAggregate.ValueObjects;
 
 namespace yuapi.Domain.InterfaceInfoAggregate
 {
-    public sealed class InterfaceInfo : AggregateRoot<InterfaceInfoId>
+    public sealed class InterfaceInfo : AggregateRoot<InterfaceInfoId, int>
     {
         public string name { get; set; }
         public string description { get; set; }
