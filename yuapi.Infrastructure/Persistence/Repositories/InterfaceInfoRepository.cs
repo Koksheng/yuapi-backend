@@ -1,7 +1,7 @@
 ﻿using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Domain.InterfaceInfoAggregate;
 
-namespace yuapi.Infrastructure.Persistence
+namespace yuapi.Infrastructure.Persistence.Repositories
 {
     public class InterfaceInfoRepository : IInterfaceInfoRepository
     {

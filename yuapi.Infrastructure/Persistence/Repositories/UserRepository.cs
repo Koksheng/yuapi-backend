@@ -3,7 +3,7 @@ using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Domain.UserAggregate;
 using yuapi.Domain.UserAggregate.ValueObjects;
 
-namespace yuapi.Infrastructure.Persistence
+namespace yuapi.Infrastructure.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {

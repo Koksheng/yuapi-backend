@@ -11,6 +11,7 @@ using yuapi.Application.Common.Interfaces.Services;
 using yuapi.Infrastructure.Authentication;
 using yuapi.Infrastructure.Persistence;
 using yuapi.Infrastructure.Persistence.Interceptors;
+using yuapi.Infrastructure.Persistence.Repositories;
 using yuapi.Infrastructure.Services;
 
 namespace yuapi.Infrastructure
