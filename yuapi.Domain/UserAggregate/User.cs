@@ -1,4 +1,5 @@
 ﻿using yuapi.Domain.Common.Models;
+using yuapi.Domain.UserAggregate.Events;
 using yuapi.Domain.UserAggregate.ValueObjects;
 
 namespace yuapi.Domain.UserAggregate
@@ -18,19 +19,19 @@ namespace yuapi.Domain.UserAggregate
         public bool isDelete { get; set; }
 
         private User(
-        UserId userId,
-        string userName,
-        string userAccount,
-        string userAvatar,
-        int gender,
-        int userRole,
-        string userPassword,
-        string accessKey,
-        string secretKey,
-        DateTime createTime,
-        DateTime updateTime,
-        bool isDelete)
-        : base(userId)
+            UserId userId,
+            string userName,
+            string userAccount,
+            string userAvatar,
+            int gender,
+            int userRole,
+            string userPassword,
+            string accessKey,
+            string secretKey,
+            DateTime createTime,
+            DateTime updateTime,
+            bool isDelete)
+            : base(userId)
         {
             userName = userName;
             userAccount = userAccount;
@@ -55,7 +56,7 @@ namespace yuapi.Domain.UserAggregate
             string accessKey,
             string secretKey)
         {
-            return new(
+            var user = new User(
                 null,  // EF Core will set this value
                 userName,
                 userAccount,
@@ -68,6 +69,8 @@ namespace yuapi.Domain.UserAggregate
                 DateTime.UtcNow,
                 DateTime.UtcNow,
                 false);
+            user.AddDomainEvent(new UserCreated(user));
+            return user;
         }
 
         // Private parameterless constructor for EF Core

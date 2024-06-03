@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Domain.UserAggregate;
+using yuapi.Domain.UserAggregate.Events;
 using yuapi.Domain.UserAggregate.ValueObjects;
 
 namespace yuapi.Infrastructure.Persistence.Repositories
@@ -25,7 +26,13 @@ namespace yuapi.Infrastructure.Persistence.Repositories
         {
             // Check if user already exists
             var newUser = await _context.Users.AddAsync(user);
-            var result = await _context.SaveChangesAsync();
+            var result = await _context.SaveChangesAsync(); // suppose can add Domain Event here, but since UserId is null, cant add Domain Event here
+            
+            // Add domain event after the user is saved and the ID is generated
+            user.AddDomainEvent(new UserCreated(user));
+
+            // Save changes again to persist domain event
+            await _context.SaveChangesAsync();
 
             return result;
         }
