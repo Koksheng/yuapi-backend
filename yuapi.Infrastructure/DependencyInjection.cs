@@ -10,6 +10,7 @@ using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Common.Interfaces.Services;
 using yuapi.Infrastructure.Authentication;
 using yuapi.Infrastructure.Persistence;
+using yuapi.Infrastructure.Persistence.Interceptors;
 using yuapi.Infrastructure.Services;
 
 namespace yuapi.Infrastructure
@@ -36,6 +37,7 @@ namespace yuapi.Infrastructure
             });
 
             // Register repositories
+            services.AddScoped<PublishDomainEventsInterceptor>();
             services.AddScoped<IInterfaceInfoRepository, InterfaceInfoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();

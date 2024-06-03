@@ -1,4 +1,5 @@
 ﻿using yuapi.Domain.Common.Models;
+using yuapi.Domain.MenuAggregate.Events;
 using yuapi.Domain.MenuAggregate.ValueObjects;
 
 namespace yuapi.Domain.MenuAggregate
@@ -57,7 +58,7 @@ namespace yuapi.Domain.MenuAggregate
                 int status,
                 string method)
         {
-            return new(
+            var menu = new Menu(
                 MenuId.CreateUnique(),
                 name,
                 description,
@@ -70,6 +71,10 @@ namespace yuapi.Domain.MenuAggregate
                 DateTime.UtcNow,
                 DateTime.UtcNow,
                 0);
+
+            menu.AddDomainEvent(new MenuCreated(menu));
+
+            return menu;
         }
 
 
