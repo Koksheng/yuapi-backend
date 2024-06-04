@@ -26,6 +26,9 @@ namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
             // Map Command to InterfaceInfo
             InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(command);
 
+            // Verify User
+
+
             // Persist InterfaceInfo
             var result =  await _interfaceInfoRepository.Add(interfaceInfo);
 

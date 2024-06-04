@@ -10,8 +10,7 @@ namespace yuapi.Application.MappingProfiles
         public InterfaceInfoMappingProfile()
         {
             // InterfaceInfo mappings
-            //CreateMap<InterfaceInfoAddRequest, InterfaceInfo>();
-            CreateMap<InterfaceInfoAddRequest, CreateInterfaceInfoCommand>()
+            CreateMap<CreateInterfaceInfoRequest, CreateInterfaceInfoCommand>()
                 .ForCtorParam("userId", opt => opt.MapFrom(src => string.Empty));
             CreateMap<CreateInterfaceInfoCommand, InterfaceInfo>();
         }

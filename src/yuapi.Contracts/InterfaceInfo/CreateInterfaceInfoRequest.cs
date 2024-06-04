@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace yuapi.Contracts.InterfaceInfo
 {
-    public record InterfaceInfoAddRequest(
-     /**
-     * 接口名称
-     */
+    public record CreateInterfaceInfoRequest(
+    /**
+    * 接口名称
+    */
     string name,
 
     /**

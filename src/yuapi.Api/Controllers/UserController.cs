@@ -78,12 +78,6 @@ namespace yuapi.Api.Controllers
         public async Task<BaseResponse<UserSafetyResponse>?> getCurrentUser()
         {
             var userState = HttpContext.Session.GetString(USER_LOGIN_STATE);
-            // 1. Validate - GetCurrentUserQueryValidator will handle the validate data whether is null or empty
-            //if (string.IsNullOrWhiteSpace(userState))
-            //{
-            //    //return null;
-            //    throw new BusinessException(ErrorCode.NOT_LOGIN);
-            //}
 
             var query = new GetCurrentUserQuery(userState);
             var currentSafetyUser = await _mediator.Send(query);
