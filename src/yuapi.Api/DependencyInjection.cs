@@ -1,6 +1,4 @@
-﻿
-
-namespace yuapi.Api
+﻿namespace yuapi.Api
 {
     public static class DependencyInjection
     {

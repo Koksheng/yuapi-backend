@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Api", "yuapi.Api\yuapi.Api.csproj", "{D5B0F562-A6E4-4035-A8F3-569AE96A5C49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Api", "src\yuapi.Api\yuapi.Api.csproj", "{D5B0F562-A6E4-4035-A8F3-569AE96A5C49}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Application", "yuapi.Application\yuapi.Application.csproj", "{B0D46CC0-75CE-4E14-80F7-C24659D6CA2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Application", "src\yuapi.Application\yuapi.Application.csproj", "{B0D46CC0-75CE-4E14-80F7-C24659D6CA2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Contracts", "yuapi.Contracts\yuapi.Contracts.csproj", "{244D2970-12A4-4455-A227-45A259694EB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Contracts", "src\yuapi.Contracts\yuapi.Contracts.csproj", "{244D2970-12A4-4455-A227-45A259694EB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Infrastructure", "yuapi.Infrastructure\yuapi.Infrastructure.csproj", "{F77CF5A2-23F1-4A1E-9AAE-E3B7815CBEF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Infrastructure", "src\yuapi.Infrastructure\yuapi.Infrastructure.csproj", "{F77CF5A2-23F1-4A1E-9AAE-E3B7815CBEF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Domain", "yuapi.Domain\yuapi.Domain.csproj", "{23F50EED-21D3-4304-A7A0-BD0C1458F22F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Domain", "src\yuapi.Domain\yuapi.Domain.csproj", "{23F50EED-21D3-4304-A7A0-BD0C1458F22F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "todo", "todo", "{D615B261-1733-41D6-A275-1ED4FAC80745}"
 	ProjectSection(SolutionItems) = preProject
