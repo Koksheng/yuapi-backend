@@ -23,7 +23,13 @@
         }
 
         public static bool operator ==(Entity<TId> left, Entity<TId> right) 
-        {  
+        {
+            if (ReferenceEquals(left, null) && ReferenceEquals(right, null))
+                return true;
+
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+                return false;
+
             return left.Equals(right); 
         }
 

@@ -5,3 +5,10 @@
 3. change the AutoMapper to Mapster
 4. Nuget install Mapster
 5. Config of Mapster and Dependency Injection
+
+-yuapi-backend
+--yuapi.Api
+--yuapi.Application
+--yuapi.Contracts
+--yuapi.Domain
+--yuapi.Infrastructure

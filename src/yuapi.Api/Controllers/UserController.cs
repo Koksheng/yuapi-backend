@@ -9,6 +9,7 @@ using yuapi.Application.Users.Queries.GetCurrentUser;
 using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.User;
 using yuapi.Domain.Common;
+using yuapi.Domain.Constants;
 using yuapi.Domain.Exception;
 
 namespace yuapi.Api.Controllers
@@ -18,7 +19,7 @@ namespace yuapi.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly ISender _mediator;
-        private const string USER_LOGIN_STATE = "userLoginState";
+        //private const string USER_LOGIN_STATE = "userLoginState";
         private readonly IMapper _mapper;
 
         public UserController(ISender mediator, IMapper mapper)
@@ -49,9 +50,9 @@ namespace yuapi.Api.Controllers
             var serializedSafetyUser = JsonConvert.SerializeObject(safetyUser);
 
             // add user into session
-            if (string.IsNullOrWhiteSpace(HttpContext.Session.GetString(USER_LOGIN_STATE)))
+            if (string.IsNullOrWhiteSpace(HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE)))
             {
-                HttpContext.Session.SetString(USER_LOGIN_STATE, serializedSafetyUser);
+                HttpContext.Session.SetString(ApplicationConstants.USER_LOGIN_STATE, serializedSafetyUser);
             }
 
             // map UserSafetyResult to UserSafetyResponse
@@ -63,12 +64,12 @@ namespace yuapi.Api.Controllers
         [Authorize]
         public async Task<BaseResponse<int>> userLogout()
         {
-            var userState = HttpContext.Session.GetString(USER_LOGIN_STATE);
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
             if (string.IsNullOrWhiteSpace(userState))
             {
                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "session里找不到用户状态");
             }
-            HttpContext.Session.Remove(USER_LOGIN_STATE);
+            HttpContext.Session.Remove(ApplicationConstants.USER_LOGIN_STATE);
             //return 1;
             return ResultUtils.success(1);
         }
@@ -77,7 +78,7 @@ namespace yuapi.Api.Controllers
         [Authorize]
         public async Task<BaseResponse<UserSafetyResponse>?> getCurrentUser()
         {
-            var userState = HttpContext.Session.GetString(USER_LOGIN_STATE);
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
 
             var query = new GetCurrentUserQuery(userState);
             var currentSafetyUser = await _mediator.Send(query);

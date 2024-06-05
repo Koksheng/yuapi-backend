@@ -10,7 +10,7 @@ namespace yuapi.Domain.UserAggregate
         public string userAccount { get; set; }
         public string userAvatar { get; set; }
         public int gender { get; set; }
-        public int userRole { get; set; }
+        public string userRole { get; set; }
         public string userPassword { get; set; }
         public string accessKey { get; set; } // 签名 accessKey
         public string secretKey { get; set; } // 签名 secretKey
@@ -24,7 +24,7 @@ namespace yuapi.Domain.UserAggregate
             string userAccount,
             string userAvatar,
             int gender,
-            int userRole,
+            string userRole,
             string userPassword,
             string accessKey,
             string secretKey,
@@ -51,7 +51,7 @@ namespace yuapi.Domain.UserAggregate
             string userAccount,
             string userAvatar,
             int gender,
-            int userRole,
+            string userRole,
             string userPassword,
             string accessKey,
             string secretKey)

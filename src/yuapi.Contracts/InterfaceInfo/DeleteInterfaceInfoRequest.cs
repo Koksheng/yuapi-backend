@@ -6,6 +6,5 @@ using System.Threading.Tasks;
 
 namespace yuapi.Contracts.InterfaceInfo
 {
-    public record DeleteInterfaceInfoRequest(
-    int id);
+    public record DeleteInterfaceInfoRequest(int id);
 }

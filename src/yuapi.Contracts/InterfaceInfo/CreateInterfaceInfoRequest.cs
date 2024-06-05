@@ -21,7 +21,10 @@ namespace yuapi.Contracts.InterfaceInfo
      * 接口地址
      */
     string url,
-
+    /**
+     * 请求参数
+     */
+    string requestParams,
     /**
      * 请求头
      */
@@ -38,10 +41,7 @@ namespace yuapi.Contracts.InterfaceInfo
      */
     string method
 
-    /**
-     * 请求参数
-     */
-    //string requestParams,
+    
 
     );
 }

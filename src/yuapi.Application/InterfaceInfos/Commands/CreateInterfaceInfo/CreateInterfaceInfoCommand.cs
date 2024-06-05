@@ -25,6 +25,11 @@ namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
     string url,
 
     /**
+     * 请求参数
+     */
+    string requestParams,
+
+    /**
      * 请求头
      */
     string requestHeader,
@@ -33,19 +38,13 @@ namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
      * 响应头
      */
     string responseHeader,
-
-    
-    string userId,
     int status,
 
     /**
      * 请求类型
      */
-    string method
+    string method,
 
-    /**
-     * 请求参数
-     */
-    //string requestParams
+    int userId
         ) : IRequest<BaseResponse<int>>;
 }

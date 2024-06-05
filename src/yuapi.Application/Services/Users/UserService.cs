@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using yuapi.Application.Common.Interfaces.Authentication;
@@ -7,6 +8,7 @@ using yuapi.Application.Services.Common;
 using yuapi.Application.Users.Common;
 using yuapi.Contracts.User;
 using yuapi.Domain.Common;
+using yuapi.Domain.Constants;
 using yuapi.Domain.Exception;
 using yuapi.Domain.UserAggregate;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -18,6 +20,7 @@ namespace yuapi.Application.Services.Users
         private readonly IMapper _mapper;
         //private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IUserRepository _userRepository;
+        //private const string ADMIN_ROLE = "admin";
 
         public UserService(IUserRepository userRepository, IMapper mapper)
         {
@@ -165,7 +168,7 @@ namespace yuapi.Application.Services.Users
         {
             if (string.IsNullOrEmpty(userState))
             {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+                throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
             }
             // 1. get user by id
             var loggedInUser = JsonConvert.DeserializeObject<UserSafetyResult>(userState);
@@ -179,6 +182,17 @@ namespace yuapi.Application.Services.Users
             // 3. 用户脱敏 desensitization
             UserSafetyResult safetyUser = _mapper.Map<UserSafetyResult>(user);
             return safetyUser;
+        }
+
+        public async Task<bool> IsAdmin(UserSafetyResult safetyUser)
+        {
+            if (safetyUser == null)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+            var isAdmin = ApplicationConstants.ADMIN_ROLE.Equals(safetyUser.userRole);
+            return isAdmin;
+
         }
 
         //public async Task<BaseResponse<List<UserSafetyResponse>>?> SearchUserList(SearchUserRequest request)

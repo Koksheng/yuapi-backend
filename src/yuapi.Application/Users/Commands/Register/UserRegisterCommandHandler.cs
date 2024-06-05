@@ -41,11 +41,13 @@ namespace yuapi.Application.Users.Commands.Register
             // 3. Insert User to DB
 
             User newUser = _mapper.Map<User>(command);
-            newUser.userPassword = hashedPassword;
-            newUser.userName = "test"; 
+            newUser.userName = "test_userName";
+            newUser.userAvatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpy6bicoFta2pSa5I3U1mKbUQPEB7Hxobc0oVEKp2YZknVoJlq0CjgtrbxEFSM4O6F8Dg&usqp=CAU";
+            newUser.gender = 1;
+            newUser.userRole = "user"; // default 'user', or 'admin'
+            newUser.userPassword = hashedPassword; 
             newUser.accessKey = "access";
             newUser.secretKey = "secret";
-            newUser.userAvatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpy6bicoFta2pSa5I3U1mKbUQPEB7Hxobc0oVEKp2YZknVoJlq0CjgtrbxEFSM4O6F8Dg&usqp=CAU";
             newUser.createTime = DateTime.Now;
 
             int result = await _userRepository.CreateUser(newUser);

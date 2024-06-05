@@ -12,7 +12,7 @@ namespace yuapi.Contracts.User
         string userAccount, 
         string userAvatar,
         int gender,
-        int userRole,
+        string userRole,
         DateTime createTime,
         DateTime updateTime,
         string token);
