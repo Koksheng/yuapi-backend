@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using yuapi.Application.Common.Behaviors;
-using yuapi.Application.Services.Users;
 
 namespace yuapi.Application
 {
@@ -25,8 +24,6 @@ namespace yuapi.Application
 
             // Register pipeline behaviors
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
-            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

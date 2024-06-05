@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using Newtonsoft.Json;
 using yuapi.Application.Common.Interfaces.Persistence;
-using yuapi.Application.Services.Users;
+using yuapi.Application.Common.Interfaces.Services;
 using yuapi.Application.Users.Common;
 using yuapi.Domain.Common;
 using yuapi.Domain.Exception;
@@ -14,13 +13,13 @@ namespace yuapi.Application.Users.Queries.GetCurrentUser
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private readonly IUserService _userService;
+        private readonly ICurrentUserService _currentUserService;
 
-        public GetCurrentUserQueryHandler(IUserRepository userRepository, IMapper mapper, IUserService userService)
+        public GetCurrentUserQueryHandler(IUserRepository userRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
-            _userService = userService;
+            _currentUserService = currentUserService;
         }
 
         public async Task<UserSafetyResult> Handle(GetCurrentUserQuery query, CancellationToken cancellationToken)
@@ -47,7 +46,7 @@ namespace yuapi.Application.Users.Queries.GetCurrentUser
             ////safetyUser.IsAdmin = await verifyIsAdminRoleAsync();
             ////return safetyUser;
 
-            var safetyUser = await _userService.GetCurrentUser(userState);
+            var safetyUser = await _currentUserService.GetCurrentUserAsync(userState);
 
             return safetyUser;
         }

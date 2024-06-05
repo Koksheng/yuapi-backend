@@ -53,7 +53,7 @@ namespace yuapi.Infrastructure.Persistence.Repositories
 
             // Update the isDelete column and updateTime column
             interfaceInfo.isDelete = 1;
-            interfaceInfo.updateTime = DateTime.UtcNow;
+            interfaceInfo.updateTime = DateTime.Now;
 
             // Save the changes to the database
             var result = await _context.SaveChangesAsync();

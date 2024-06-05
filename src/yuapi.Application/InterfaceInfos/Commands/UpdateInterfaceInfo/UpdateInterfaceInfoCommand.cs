@@ -6,9 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using yuapi.Domain.Common;
 
-namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
+namespace yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo
 {
-    public record CreateInterfaceInfoCommand(
+    public record UpdateInterfaceInfoCommand(
+    int id,
     /**
      * 接口名称
      */

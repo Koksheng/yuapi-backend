@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using yuapi.Application.Common.Interfaces.Persistence;
+using yuapi.Application.Common.Interfaces.Services;
 using yuapi.Domain.Common;
 using yuapi.Domain.Exception;
 using yuapi.Domain.InterfaceInfoAggregate;
@@ -11,20 +12,28 @@ namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
         IRequestHandler<CreateInterfaceInfoCommand, BaseResponse<int>>
     {
         private readonly IInterfaceInfoRepository _interfaceInfoRepository;
+        private readonly ICurrentUserService _currentUserService;
         private readonly IMapper _mapper;
 
-        public CreateInterfaceInfoCommandHandler(IInterfaceInfoRepository interfaceInfoRepository, IMapper mapper)
+        public CreateInterfaceInfoCommandHandler(IInterfaceInfoRepository interfaceInfoRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _interfaceInfoRepository = interfaceInfoRepository;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
 
         public async Task<BaseResponse<int>> Handle(CreateInterfaceInfoCommand command, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
+            string userState = command.userState;
+
+            // 1. Verify User using userId in userState
+            var safetyUser = await _currentUserService.GetCurrentUserAsync(userState);
+
 
             // Map Command to InterfaceInfo
             InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(command);
+            interfaceInfo.userId = safetyUser.Id;
+            interfaceInfo.createTime = DateTime.Now;
 
             // Verify User
 
