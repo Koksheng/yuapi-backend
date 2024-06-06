@@ -8,5 +8,6 @@ namespace yuapi.Application.Common.Interfaces.Persistence
         Task<InterfaceInfo> GetById(int id);
         Task<int> DeleteById(int id);
         Task<int> Update(InterfaceInfo interfaceInfo);
+        Task<List<InterfaceInfo>> List(InterfaceInfo query);
     }
 }

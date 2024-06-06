@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using yuapi.Api.AuthCheck;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo;
-using yuapi.Application.InterfaceInfos.Queries;
+using yuapi.Application.InterfaceInfos.Queries.GetInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos;
 using yuapi.Contracts.InterfaceInfo;
-using yuapi.Contracts.User;
 using yuapi.Domain.Common;
 using yuapi.Domain.Constants;
 using yuapi.Domain.Exception;
@@ -78,7 +77,6 @@ namespace yuapi.Api.Controllers
             return await _mediator.Send(command);
         }
 
-        [AuthCheck("admin")]
         [HttpGet]
         public async Task<BaseResponse<InterfaceInfoSafetyResponse>> getInterfaceInfoById(int id)
         {
@@ -88,6 +86,24 @@ namespace yuapi.Api.Controllers
 
             // map result to response
             var response = _mapper.Map<InterfaceInfoSafetyResponse>(result);
+
+            return ResultUtils.success(response);
+        }
+
+        [AuthCheck("admin")]
+        [HttpGet("list")]
+        public async Task<BaseResponse<List<InterfaceInfoSafetyResponse>>> listInterfaceInfo([FromQuery] ListInterfaceInfosRequest request)
+        {
+            if (request == null)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+
+            var query = _mapper.Map<ListInterfaceInfosQuery>(request);
+            var result = await _mediator.Send(query);
+
+            // map result to response
+            var response = _mapper.Map<List<InterfaceInfoSafetyResponse>>(result);
 
             return ResultUtils.success(response);
         }

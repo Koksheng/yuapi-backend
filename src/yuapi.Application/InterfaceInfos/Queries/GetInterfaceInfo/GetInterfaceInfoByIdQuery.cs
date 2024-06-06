@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using yuapi.Application.InterfaceInfos.Common;
 
-namespace yuapi.Application.InterfaceInfos.Queries
+namespace yuapi.Application.InterfaceInfos.Queries.GetInterfaceInfo
 {
     public class GetInterfaceInfoByIdQuery : IRequest<InterfaceInfoSafetyResult>
     {

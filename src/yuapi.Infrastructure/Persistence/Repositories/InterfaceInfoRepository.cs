@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Domain.Common;
 using yuapi.Domain.Exception;
@@ -67,6 +68,58 @@ namespace yuapi.Infrastructure.Persistence.Repositories
             _context.InterfaceInfos.Update(interfaceInfo);
             // Save the changes to the database
             return await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<InterfaceInfo>> List(InterfaceInfo query)
+        {
+            var queryable = _context.InterfaceInfos.AsQueryable();
+
+            if (query.Id != null)
+            {
+                queryable = queryable.Where(i => i.Id == query.Id);
+            }
+
+            if (!string.IsNullOrEmpty(query.name))
+            {
+                queryable = queryable.Where(i => i.name.Contains(query.name));
+            }
+
+            if (!string.IsNullOrEmpty(query.description))
+            {
+                queryable = queryable.Where(i => i.description.Contains(query.description));
+            }
+
+            if (!string.IsNullOrEmpty(query.url))
+            {
+                queryable = queryable.Where(i => i.url.Contains(query.url));
+            }
+
+            if (!string.IsNullOrEmpty(query.requestHeader))
+            {
+                queryable = queryable.Where(i => i.requestHeader.Contains(query.requestHeader));
+            }
+
+            if (!string.IsNullOrEmpty(query.responseHeader))
+            {
+                queryable = queryable.Where(i => i.responseHeader.Contains(query.responseHeader));
+            }
+
+            if (query.status != null)
+            {
+                queryable = queryable.Where(i => i.status == query.status);
+            }
+
+            if (!string.IsNullOrEmpty(query.method))
+            {
+                queryable = queryable.Where(i => i.method.Contains(query.method));
+            }
+
+            if (query.userId != null)
+            {
+                queryable = queryable.Where(i => i.userId == query.userId);
+            }
+
+            return await queryable.ToListAsync();
         }
     }
 }

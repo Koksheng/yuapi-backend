@@ -7,7 +7,7 @@ using yuapi.Domain.Common;
 using yuapi.Domain.Exception;
 using yuapi.Domain.InterfaceInfoAggregate;
 
-namespace yuapi.Application.InterfaceInfos.Queries
+namespace yuapi.Application.InterfaceInfos.Queries.GetInterfaceInfo
 {
     public class GetInterfaceInfoByIdQueryHandler :
         IRequestHandler<GetInterfaceInfoByIdQuery, InterfaceInfoSafetyResult>
