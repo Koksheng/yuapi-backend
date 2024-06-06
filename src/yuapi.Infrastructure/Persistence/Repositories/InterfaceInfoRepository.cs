@@ -4,7 +4,6 @@ using yuapi.Domain.Common;
 using yuapi.Domain.Exception;
 using yuapi.Domain.InterfaceInfoAggregate;
 using yuapi.Domain.InterfaceInfoAggregate.ValueObjects;
-using yuapi.Domain.UserAggregate.ValueObjects;
 
 namespace yuapi.Infrastructure.Persistence.Repositories
 {
@@ -60,6 +59,14 @@ namespace yuapi.Infrastructure.Persistence.Repositories
 
             // Return the result of the deleted interface
             return result;
+        }
+
+        public async Task<int> Update(InterfaceInfo interfaceInfo)
+        {
+            // Attach the entity to the context and mark it as modified
+            _context.InterfaceInfos.Update(interfaceInfo);
+            // Save the changes to the database
+            return await _context.SaveChangesAsync();
         }
     }
 }

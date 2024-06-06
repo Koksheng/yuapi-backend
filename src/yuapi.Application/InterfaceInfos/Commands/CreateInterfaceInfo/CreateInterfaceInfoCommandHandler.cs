@@ -30,18 +30,15 @@ namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
             var safetyUser = await _currentUserService.GetCurrentUserAsync(userState);
 
 
-            // Map Command to InterfaceInfo
+            // 2. Map Command to InterfaceInfo
             InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(command);
             interfaceInfo.userId = safetyUser.Id;
             interfaceInfo.createTime = DateTime.Now;
 
-            // Verify User
-
-
-            // Persist InterfaceInfo
+            // 3. Persist InterfaceInfo
             var result =  await _interfaceInfoRepository.Add(interfaceInfo);
 
-            // Return InterfaceInfo ID
+            // 4. Return InterfaceInfo ID
             if (result == 1)
             {
                 //return ResultUtils.success(data: interfaceInfo.Id);

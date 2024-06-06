@@ -1,13 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using yuapi.Application.Common.Interfaces.Authentication;
 using yuapi.Application.Common.Interfaces.Services;
 
@@ -24,7 +20,7 @@ namespace yuapi.Infrastructure.Authentication
             _jwtSettings = jwtOptions.Value;
         }
 
-        public string GenerateToken(int userId, string userName)
+        public string GenerateToken(int userId, string userName, string userRole)
         {
             ////var keyBytes = Encoding.UTF8.GetBytes("super-secret-key-with-256-bits");
             //var keyBytes = new byte[32];
@@ -48,7 +44,8 @@ namespace yuapi.Infrastructure.Authentication
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.GivenName, userName.ToString()),
                 new Claim(JwtRegisteredClaimNames.FamilyName, userName.ToString()),
-                new Claim(JwtRegisteredClaimNames.Jti, userId.ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, userId.ToString()),
+                new Claim(ClaimTypes.Role, userRole) // Add the role claim
             };
 
             var securityToken = new JwtSecurityToken(

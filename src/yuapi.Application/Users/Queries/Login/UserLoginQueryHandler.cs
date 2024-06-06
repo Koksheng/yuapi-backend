@@ -48,7 +48,7 @@ namespace yuapi.Application.Users.Queries.Login
             UserSafetyResult safetyUser = _mapper.Map<UserSafetyResult>(user);
 
             // 4. JWT Token
-            var token = _jwtTokenGenerator.GenerateToken(user.Id.Value, user.userName);
+            var token = _jwtTokenGenerator.GenerateToken(user.Id.Value, user.userName, user.userRole);
             // Assign the generated token
             safetyUser = safetyUser with { token = token };
 
