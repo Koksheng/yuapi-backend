@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using yuapi.Application.Common.Models;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Common;
 using yuapi.Application.InterfaceInfos.Queries.GetInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos;
+using yuapi.Application.MappingProfiles.Common;
 using yuapi.Contracts.InterfaceInfo;
 using yuapi.Domain.InterfaceInfoAggregate;
 using yuapi.Domain.InterfaceInfoAggregate.ValueObjects;
@@ -40,11 +43,24 @@ namespace yuapi.Application.MappingProfiles
             CreateMap<InterfaceInfoSafetyResult, InterfaceInfoSafetyResponse>();
 
             // List InterfaceInfos
-
             CreateMap<ListInterfaceInfosRequest, ListInterfaceInfosQuery>();
             CreateMap<ListInterfaceInfosQuery, InterfaceInfo>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.id > 0 ? InterfaceInfoId.Create(src.id) : null)); // Adjust based on how InterfaceInfoId is created
 
+            // List InterfaceInfo By Page
+            CreateMap<ListInterfaceInfoByPageRequest, ListInterfaceInfoByPageQuery>()
+               .ForMember(dest => dest.Current, opt => opt.MapFrom(src => src.PageRequest.Current > 0 ? src.PageRequest.Current : null))
+               .ForMember(dest => dest.PageSize, opt => opt.MapFrom(src => src.PageRequest.PageSize > 0 ? src.PageRequest.PageSize : null))
+               .ForMember(dest => dest.SortField, opt => opt.MapFrom(src => src.PageRequest.SortField ?? string.Empty))
+               .ForMember(dest => dest.SortOrder, opt => opt.MapFrom(src => src.PageRequest.SortOrder ?? string.Empty));
+            CreateMap<ListInterfaceInfoByPageQuery, InterfaceInfo>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id > 0 ? InterfaceInfoId.Create(src.Id) : null)); // Adjust based on how InterfaceInfoId is created
+
+            // Mapping for PaginatedList<InterfaceInfoSafetyResult> to PaginatedList<InterfaceInfoSafetyResponse>
+            CreateMap(typeof(PaginatedList<>), typeof(PaginatedList<>)).ConvertUsing(typeof(PaginatedListTypeConverter<,>));
+
+
         }
     }
+
 }

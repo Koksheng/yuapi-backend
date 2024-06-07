@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using yuapi.Application.Common.Interfaces.Persistence;
+using yuapi.Application.Common.Models;
 using yuapi.Domain.Common;
 using yuapi.Domain.Exception;
 using yuapi.Domain.InterfaceInfoAggregate;
@@ -120,6 +121,75 @@ namespace yuapi.Infrastructure.Persistence.Repositories
             }
 
             return await queryable.ToListAsync();
+        }
+
+        public async Task<PaginatedList<InterfaceInfo>> ListByPage(InterfaceInfo query, int current, int pageSize, string sortField, string sortOrder)
+        {
+            var queryable = _context.InterfaceInfos.AsQueryable();
+
+            if (query.Id != null)
+            {
+                queryable = queryable.Where(i => i.Id == query.Id);
+            }
+
+            if (!string.IsNullOrEmpty(query.name))
+            {
+                queryable = queryable.Where(i => i.name.Contains(query.name));
+            }
+
+            if (!string.IsNullOrEmpty(query.description))
+            {
+                queryable = queryable.Where(i => i.description.Contains(query.description));
+            }
+
+            if (!string.IsNullOrEmpty(query.url))
+            {
+                queryable = queryable.Where(i => i.url.Contains(query.url));
+            }
+
+            if (!string.IsNullOrEmpty(query.requestHeader))
+            {
+                queryable = queryable.Where(i => i.requestHeader.Contains(query.requestHeader));
+            }
+
+            if (!string.IsNullOrEmpty(query.responseHeader))
+            {
+                queryable = queryable.Where(i => i.responseHeader.Contains(query.responseHeader));
+            }
+
+            if (query.status != null)
+            {
+                queryable = queryable.Where(i => i.status == query.status);
+            }
+
+            if (!string.IsNullOrEmpty(query.method))
+            {
+                queryable = queryable.Where(i => i.method.Contains(query.method));
+            }
+
+            if (query.userId != null)
+            {
+                queryable = queryable.Where(i => i.userId == query.userId);
+            }
+
+            // Continue with other filters...
+
+            if (!string.IsNullOrEmpty(sortField))
+            {
+                if (sortOrder == "asc")
+                {
+                    queryable = queryable.OrderBy(e => EF.Property<object>(e, sortField));
+                }
+                else
+                {
+                    queryable = queryable.OrderByDescending(e => EF.Property<object>(e, sortField));
+                }
+            }
+
+            var totalCount = await queryable.CountAsync();
+            var items = await queryable.Skip((current - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            return new PaginatedList<InterfaceInfo>(items, totalCount, current, pageSize);
         }
     }
 }

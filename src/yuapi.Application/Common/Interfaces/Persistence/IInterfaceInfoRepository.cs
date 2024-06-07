@@ -1,4 +1,5 @@
-﻿using yuapi.Domain.InterfaceInfoAggregate;
+﻿using yuapi.Application.Common.Models;
+using yuapi.Domain.InterfaceInfoAggregate;
 
 namespace yuapi.Application.Common.Interfaces.Persistence
 {
@@ -9,5 +10,6 @@ namespace yuapi.Application.Common.Interfaces.Persistence
         Task<int> DeleteById(int id);
         Task<int> Update(InterfaceInfo interfaceInfo);
         Task<List<InterfaceInfo>> List(InterfaceInfo query);
+        Task<PaginatedList<InterfaceInfo>> ListByPage(InterfaceInfo query, int current, int pageSize, string sortField, string sortOrder);
     }
 }

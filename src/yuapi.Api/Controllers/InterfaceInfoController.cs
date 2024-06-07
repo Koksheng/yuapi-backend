@@ -2,10 +2,12 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using yuapi.Api.AuthCheck;
+using yuapi.Application.Common.Models;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Queries.GetInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos;
 using yuapi.Contracts.InterfaceInfo;
 using yuapi.Domain.Common;
@@ -90,8 +92,8 @@ namespace yuapi.Api.Controllers
             return ResultUtils.success(response);
         }
 
-        [AuthCheck("admin")]
-        [HttpGet("list")]
+        //[AuthCheck("admin")]
+        [HttpGet]
         public async Task<BaseResponse<List<InterfaceInfoSafetyResponse>>> listInterfaceInfo([FromQuery] ListInterfaceInfosRequest request)
         {
             if (request == null)
@@ -104,6 +106,22 @@ namespace yuapi.Api.Controllers
 
             // map result to response
             var response = _mapper.Map<List<InterfaceInfoSafetyResponse>>(result);
+
+            return ResultUtils.success(response);
+        }
+
+        [HttpGet("list/page")]
+        public async Task<BaseResponse<PaginatedList<InterfaceInfoSafetyResponse>>> listInterfaceInfoByPage([FromQuery] ListInterfaceInfoByPageRequest request)
+        {
+            if (request == null)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+
+            var query = _mapper.Map<ListInterfaceInfoByPageQuery>(request);
+            var result = await _mediator.Send(query);
+
+            var response = _mapper.Map<PaginatedList<InterfaceInfoSafetyResponse>>(result);
 
             return ResultUtils.success(response);
         }
