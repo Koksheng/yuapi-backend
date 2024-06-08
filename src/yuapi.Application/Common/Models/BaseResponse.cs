@@ -1,4 +1,4 @@
-﻿namespace yuapi.Domain.Common
+﻿namespace yuapi.Application.Common.Models
 {
     public record BaseResponse<T>(int code, T data, string message = "", string description = "")
     {

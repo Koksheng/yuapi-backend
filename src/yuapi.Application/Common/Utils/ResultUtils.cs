@@ -1,4 +1,7 @@
-﻿namespace yuapi.Domain.Common
+﻿using yuapi.Application.Common.Constants;
+using yuapi.Application.Common.Models;
+
+namespace yuapi.Application.Common.Utils
 {
     public class ResultUtils
     {
@@ -16,4 +19,3 @@
         }
     }
 }
-

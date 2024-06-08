@@ -1,8 +1,7 @@
-﻿namespace yuapi.Domain.Exception
-{
-    using System;
-    using yuapi.Domain.Common;
+﻿using yuapi.Application.Common.Constants;
 
+namespace yuapi.Application.Common.Exceptions
+{
     public class BusinessException : Exception
     {
         private readonly int _code;

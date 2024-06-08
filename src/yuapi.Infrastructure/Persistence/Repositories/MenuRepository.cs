@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using yuapi.Application.Common.Interfaces.Persistence;
+﻿using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Domain.MenuAggregate;
 
 namespace yuapi.Infrastructure.Persistence.Repositories

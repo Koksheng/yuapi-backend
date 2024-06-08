@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using yuapi.Application.Common.Constants;
+using yuapi.Application.Common.Exceptions;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.InterfaceInfos.Common;
-using yuapi.Domain.Common;
-using yuapi.Domain.Exception;
 using yuapi.Domain.InterfaceInfoAggregate;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos
 {

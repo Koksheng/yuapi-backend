@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using yuapi.Application.Common.Constants;
+using yuapi.Application.Common.Exceptions;
 using yuapi.Application.Common.Interfaces.Persistence;
+using yuapi.Application.Common.Models;
+using yuapi.Application.Common.Utils;
 using yuapi.Application.Services.Common;
-using yuapi.Domain.Common;
-using yuapi.Domain.Exception;
 using yuapi.Domain.UserAggregate;
 
 namespace yuapi.Application.Users.Commands.Register

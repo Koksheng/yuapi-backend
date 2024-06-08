@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using yuapi.Application.Common.Models;
 using yuapi.Domain.Common;
 
 namespace yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo

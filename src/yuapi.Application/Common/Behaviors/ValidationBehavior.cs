@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
-using yuapi.Domain.Common;
-using yuapi.Domain.Exception;
+using yuapi.Application.Common.Constants;
+using yuapi.Application.Common.Exceptions;
 
 namespace yuapi.Application.Common.Behaviors
 {

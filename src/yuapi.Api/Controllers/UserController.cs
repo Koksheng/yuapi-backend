@@ -3,14 +3,15 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using yuapi.Application.Common.Constants;
+using yuapi.Application.Common.Exceptions;
+using yuapi.Application.Common.Models;
+using yuapi.Application.Common.Utils;
 using yuapi.Application.Users.Commands.Register;
-using yuapi.Application.Users.Common;
 using yuapi.Application.Users.Queries.GetCurrentUser;
 using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.User;
-using yuapi.Domain.Common;
 using yuapi.Domain.Constants;
-using yuapi.Domain.Exception;
 
 namespace yuapi.Api.Controllers
 {

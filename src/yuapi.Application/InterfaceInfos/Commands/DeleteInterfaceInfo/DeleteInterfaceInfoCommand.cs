@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using yuapi.Domain.Common;
+using yuapi.Application.Common.Models;
 
 namespace yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo
 {

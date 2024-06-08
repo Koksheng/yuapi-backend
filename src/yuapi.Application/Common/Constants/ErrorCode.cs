@@ -1,4 +1,4 @@
-﻿namespace yuapi.Domain.Common
+﻿namespace yuapi.Application.Common.Constants
 {
     public class ErrorCode
     {
