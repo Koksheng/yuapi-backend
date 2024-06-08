@@ -96,7 +96,7 @@ namespace yuapi.Api.Controllers
 
         //[AuthCheck("admin")]
         [HttpGet]
-        public async Task<BaseResponse<List<InterfaceInfoSafetyResponse>>> listInterfaceInfo([FromQuery] ListInterfaceInfosRequest request)
+        public async Task<BaseResponse<List<InterfaceInfoSafetyResponse>>> listInterfaceInfo([FromQuery] QueryInterfaceInfoRequest request)
         {
             if (request == null)
             {
@@ -113,7 +113,7 @@ namespace yuapi.Api.Controllers
         }
 
         [HttpGet("list/page")]
-        public async Task<BaseResponse<PaginatedList<InterfaceInfoSafetyResponse>>> listInterfaceInfoByPage([FromQuery] ListInterfaceInfoByPageRequest request)
+        public async Task<BaseResponse<PaginatedList<InterfaceInfoSafetyResponse>>> listInterfaceInfoByPage([FromQuery] QueryInterfaceInfoRequest request)
         {
             if (request == null)
             {

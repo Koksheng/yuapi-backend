@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using yuapi.Contracts.Common;
 
 namespace yuapi.Contracts.InterfaceInfo
 {
-    public record ListInterfaceInfosRequest(
+    public record QueryInterfaceInfoRequest(
         int? id,
         /**
         * 接口名称
@@ -41,7 +37,6 @@ namespace yuapi.Contracts.InterfaceInfo
          * 请求类型
          */
         string? method,
-        int? userId
-
-        );
+        int? userId,
+        PageRequest? PageRequest);
 }

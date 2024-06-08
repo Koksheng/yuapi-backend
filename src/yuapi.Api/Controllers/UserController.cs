@@ -62,7 +62,7 @@ namespace yuapi.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<BaseResponse<int>> userLogout()
         {
             var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
@@ -76,7 +76,7 @@ namespace yuapi.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<BaseResponse<UserSafetyResponse>?> getCurrentUser()
         {
             var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);

@@ -24,6 +24,7 @@ namespace yuapi.Application.MappingProfiles
 
             // Create
             CreateMap<CreateInterfaceInfoRequest, CreateInterfaceInfoCommand>()
+                .ForCtorParam("status", opt => opt.MapFrom(src => 1))
                 .ForCtorParam("userState", opt => opt.MapFrom(src => string.Empty));
             CreateMap<CreateInterfaceInfoCommand, InterfaceInfo>();
 
@@ -43,12 +44,12 @@ namespace yuapi.Application.MappingProfiles
             CreateMap<InterfaceInfoSafetyResult, InterfaceInfoSafetyResponse>();
 
             // List InterfaceInfos
-            CreateMap<ListInterfaceInfosRequest, ListInterfaceInfosQuery>();
+            CreateMap<QueryInterfaceInfoRequest, ListInterfaceInfosQuery>();
             CreateMap<ListInterfaceInfosQuery, InterfaceInfo>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.id > 0 ? InterfaceInfoId.Create(src.id) : null)); // Adjust based on how InterfaceInfoId is created
 
             // List InterfaceInfo By Page
-            CreateMap<ListInterfaceInfoByPageRequest, ListInterfaceInfoByPageQuery>()
+            CreateMap<QueryInterfaceInfoRequest, ListInterfaceInfoByPageQuery>()
                .ForMember(dest => dest.Current, opt => opt.MapFrom(src => src.PageRequest.Current > 0 ? src.PageRequest.Current : null))
                .ForMember(dest => dest.PageSize, opt => opt.MapFrom(src => src.PageRequest.PageSize > 0 ? src.PageRequest.PageSize : null))
                .ForMember(dest => dest.SortField, opt => opt.MapFrom(src => src.PageRequest.SortField ?? string.Empty))
