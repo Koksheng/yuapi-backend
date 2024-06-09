@@ -26,18 +26,25 @@ namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage
         }
         public async Task<PaginatedList<InterfaceInfoSafetyResult>> Handle(ListInterfaceInfoByPageQuery query, CancellationToken cancellationToken)
         {
+            //var currentPage = query.Current == 0 ? 1 : query.Current;
+            //var pageSize = query.PageSize == 0 ? 10 : query.PageSize;
+            // Apply default values if necessary
+            query.ApplyDefaults();
+
             InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(query);
+            interfaceInfo.isDelete = 0;
+            interfaceInfo.status = 1;
 
             var paginatedResult = await _interfaceInfoRepository.ListByPage(
                 interfaceInfo,
-                query.Current,
-                query.PageSize,
+                query.Current.Value,
+                query.PageSize.Value,
                 query.SortField,
                 query.SortOrder);
 
             var result = _mapper.Map<List<InterfaceInfoSafetyResult>>(paginatedResult.Items);
 
-            return new PaginatedList<InterfaceInfoSafetyResult>(result, paginatedResult.TotalCount, query.Current, query.PageSize);
+            return new PaginatedList<InterfaceInfoSafetyResult>(result, paginatedResult.TotalCount, query.Current.Value, query.PageSize.Value);
         }
     }
 }

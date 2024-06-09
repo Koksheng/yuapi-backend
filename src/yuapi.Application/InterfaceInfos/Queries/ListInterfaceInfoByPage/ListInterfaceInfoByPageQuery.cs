@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using yuapi.Application.Common.Models;
 using yuapi.Application.InterfaceInfos.Common;
+using yuapi.Contracts.Common;
 
 namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage
 {
-    public class ListInterfaceInfoByPageQuery : IRequest<PaginatedList<InterfaceInfoSafetyResult>>
+    public class ListInterfaceInfoByPageQuery : PageRequest, IRequest<PaginatedList<InterfaceInfoSafetyResult>>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,10 +16,10 @@ namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage
         public int Status { get; set; }
         public string Method { get; set; }
         public int UserId { get; set; }
-        public int Current { get; set; }
-        public int PageSize { get; set; }
-        public string SortField { get; set; }
-        public string SortOrder { get; set; }
+        //public int Current { get; set; } = 1; // Default page number
+        //public int PageSize { get; set; } = 10; // Default page size
+        //public string SortField { get; set; }
+        //public string SortOrder { get; set; }
 
         // Parameterless constructor
         public ListInterfaceInfoByPageQuery() { }

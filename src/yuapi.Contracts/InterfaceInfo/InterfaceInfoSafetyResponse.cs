@@ -44,6 +44,8 @@ namespace yuapi.Contracts.InterfaceInfo
         /**
          * 请求类型
          */
-        string method
+        string method,
+        DateTime createTime,
+        DateTime updateTime
         );
 }

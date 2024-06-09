@@ -166,10 +166,10 @@ namespace yuapi.Infrastructure.Persistence.Repositories
                 queryable = queryable.Where(i => i.method.Contains(query.method));
             }
 
-            if (query.userId != null)
-            {
-                queryable = queryable.Where(i => i.userId == query.userId);
-            }
+            //if (query.userId != null)
+            //{
+            //    queryable = queryable.Where(i => i.userId == query.userId);
+            //}
 
             // Continue with other filters...
 

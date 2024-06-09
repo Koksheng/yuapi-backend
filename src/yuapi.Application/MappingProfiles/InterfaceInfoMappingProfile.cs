@@ -50,10 +50,10 @@ namespace yuapi.Application.MappingProfiles
 
             // List InterfaceInfo By Page
             CreateMap<QueryInterfaceInfoRequest, ListInterfaceInfoByPageQuery>()
-               .ForMember(dest => dest.Current, opt => opt.MapFrom(src => src.PageRequest.Current > 0 ? src.PageRequest.Current : null))
-               .ForMember(dest => dest.PageSize, opt => opt.MapFrom(src => src.PageRequest.PageSize > 0 ? src.PageRequest.PageSize : null))
-               .ForMember(dest => dest.SortField, opt => opt.MapFrom(src => src.PageRequest.SortField ?? string.Empty))
-               .ForMember(dest => dest.SortOrder, opt => opt.MapFrom(src => src.PageRequest.SortOrder ?? string.Empty));
+               .ForMember(dest => dest.Current, opt => opt.MapFrom(src => src.PageRequest.Current))
+               .ForMember(dest => dest.PageSize, opt => opt.MapFrom(src => src.PageRequest.PageSize))
+               .ForMember(dest => dest.SortField, opt => opt.MapFrom(src => src.PageRequest.SortField))
+               .ForMember(dest => dest.SortOrder, opt => opt.MapFrom(src => src.PageRequest.SortOrder));
             CreateMap<ListInterfaceInfoByPageQuery, InterfaceInfo>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id > 0 ? InterfaceInfoId.Create(src.Id) : null)); // Adjust based on how InterfaceInfoId is created
 

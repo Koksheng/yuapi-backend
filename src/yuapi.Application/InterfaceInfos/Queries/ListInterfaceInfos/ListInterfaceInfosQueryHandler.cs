@@ -28,6 +28,7 @@ namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos
             }
 
             InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(query);
+            interfaceInfo.status = 1;
             // how to map query.id into interfaceInfo also
 
             var interfaceInfoList = await _interfaceInfoRepository.List(interfaceInfo);

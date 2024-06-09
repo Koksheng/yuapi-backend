@@ -36,6 +36,7 @@ namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
             InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(command);
             interfaceInfo.userId = safetyUser.Id;
             interfaceInfo.createTime = DateTime.Now;
+            interfaceInfo.updateTime = DateTime.Now;
 
             // 3. Persist InterfaceInfo
             var result =  await _interfaceInfoRepository.Add(interfaceInfo);
