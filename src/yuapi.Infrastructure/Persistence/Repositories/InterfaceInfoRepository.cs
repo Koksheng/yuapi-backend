@@ -119,6 +119,11 @@ namespace yuapi.Infrastructure.Persistence.Repositories
                 queryable = queryable.Where(i => i.userId == query.userId);
             }
 
+            if (query.isDelete != null)
+            {
+                queryable = queryable.Where(i => i.isDelete == query.isDelete);
+            }
+
             return await queryable.ToListAsync();
         }
 
@@ -170,6 +175,11 @@ namespace yuapi.Infrastructure.Persistence.Repositories
             //{
             //    queryable = queryable.Where(i => i.userId == query.userId);
             //}
+
+            if (query.isDelete != null)
+            {
+                queryable = queryable.Where(i => i.isDelete == query.isDelete);
+            }
 
             // Continue with other filters...
 

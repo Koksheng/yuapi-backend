@@ -1,0 +1,25 @@
+@yuapi-interface_HostAddress = http://localhost:8123
+
+
+
+
+
+// GetNameByGet
+GET {{yuapi-interface_HostAddress}}/api/name?name=string
+
+###
+
+// GetUsernameByPost
+POST {{yuapi-interface_HostAddress}}/api/name/user
+Content-Type: application/json
+
+{
+  "username": "yupi"
+}
+
+###
+
+// GetNameByPost
+POST {{yuapi-interface_HostAddress}}/api/name?name=string
+
+###
