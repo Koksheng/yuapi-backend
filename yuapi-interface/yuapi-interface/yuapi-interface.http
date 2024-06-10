@@ -12,6 +12,8 @@ GET {{yuapi-interface_HostAddress}}/api/name?name=string
 // GetUsernameByPost
 POST {{yuapi-interface_HostAddress}}/api/name/user
 Content-Type: application/json
+accessKey: yupi
+secretKey: abcdefgh
 
 {
   "username": "yupi"

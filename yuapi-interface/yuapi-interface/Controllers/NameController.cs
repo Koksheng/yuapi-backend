@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using yuapi_interface.Model;
+using yuapi_interface.Utils;
 
 namespace yuapi_interface.Controllers
 {
@@ -13,13 +13,13 @@ namespace yuapi_interface.Controllers
         {
             //var headerValue = Request.Headers["yupi"];
             //Console.WriteLine(headerValue);
-            return Ok($"GET 你的名字是 {name}");
+            return Ok($"GET 你的名字是 ur name is {name}");
         }
 
         [HttpPost]
         public ActionResult<string> GetNameByPost([FromQuery] string name)
         {
-            return Ok($"POST 你的名字是 {name}");
+            return Ok($"POST 你的名字是 ur name is {name}");
         }
 
         [HttpPost("user")]
@@ -28,35 +28,36 @@ namespace yuapi_interface.Controllers
             // Uncomment and complete the following lines as per your requirement:
             
             var accessKey = Request.Headers["accessKey"].ToString();
-            var secretKey = Request.Headers["secretKey"].ToString();
-            //var nonce = Request.Headers["nonce"].ToString();
-            //var timestamp = Request.Headers["timestamp"].ToString();
-            //var sign = Request.Headers["sign"].ToString();
-            //var body = Request.Headers["body"].ToString();
+            //var secretKey = Request.Headers["secretKey"].ToString();
+            var nonce = Request.Headers["nonce"].ToString();
+            var timestamp = Request.Headers["timestamp"].ToString();
+            var sign = Request.Headers["sign"].ToString();
+            var body = Request.Headers["body"].ToString();
 
-            if (accessKey != "yupi" || secretKey != "abcdefgh")
+            // todo 实际情况应该是去数据库中查是否已分配给用户
+            if (accessKey != "yupi")
             {
                 throw new Exception("无权限");
             }
 
-            //if (long.Parse(nonce) > 10000)
-            //{
-            //    throw new Exception("无权限");
-            //}
+            if (long.Parse(nonce) > 10000)
+            {
+                throw new Exception("无权限");
+            }
 
-            //// Add your timestamp check logic here
+            // Add your timestamp check logic here
 
-            //// Generate server sign and compare
-            //var serverSign = SignUtils.GenSign(body, "abcdefgh");
-            //if (sign != serverSign)
-            //{
-            //    throw new Exception("无权限");
-            //}
+            // Generate server sign and compare
+            var serverSign = SignUtils.GenSign(body, "abcdefgh");
+            if (sign != serverSign)
+            {
+                throw new Exception("无权限");
+            }
 
             // Increment invoke count
-            
 
-            var result = $"POST 用户名字是 {user.username}";
+
+            var result = $"POST 用户名字是 username is {user.username}";
             return Ok(result);
         }
     }
