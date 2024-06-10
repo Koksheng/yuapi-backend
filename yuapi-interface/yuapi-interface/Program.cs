@@ -1,15 +1,6 @@
-using yuapi_interface.Client;
-using yuapi_interface.Model;
+
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Register HttpClient
-builder.Services.AddHttpClient<YuApiClient>(client =>
-{
-    client.BaseAddress = new Uri("http://localhost:8123/");
-});
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

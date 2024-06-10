@@ -1,70 +1,42 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Newtonsoft.Json;
-using System.Security.Cryptography;
-using System.Text;
-using yuapi_interface.Utils;
+using yuapi_client_sdk.Model;
+using yuapi_client_sdkyuapi_client_sdk.Client;
 
-namespace yuapi_interface_console_app
+namespace yuapi_interface_console_client
 {
     class Program
     {
+
         static async Task Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
 
-            using var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8123");
+            // Create an instance of HttpClient
+            using var httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:8123") };
 
-            // GET request example
-            var getNameResponse = await client.GetStringAsync("/api/name?name=yupi");
-            Console.WriteLine(getNameResponse);
+            // Create an instance of YuApiClient
+            var yuApiClient = new YuApiClient(httpClient);
+            // Set the access key
+            yuApiClient.SetAccessKey("yupi");
+            // Set the secret key
+            yuApiClient.SetSecretKey("abcdefgh");
 
-            // POST request example
-            var postNameResponse = await client.PostAsync("/api/name?name=yupi", null);
-            Console.WriteLine(await postNameResponse.Content.ReadAsStringAsync());
+            // Call the GetNameByGet method
+            var getNameResult = await yuApiClient.GetNameByGet("yupi");
+            Console.WriteLine($"GetNameByGet result: {getNameResult}");
 
-            // POST request with User example
-            var user = new { username = "yupi" };
-            var userJson = JsonConvert.SerializeObject(user);
-            var userContent = new StringContent(userJson, Encoding.UTF8, "application/json");
+            // Call the GetNameByPost method
+            var postNameResult = await yuApiClient.GetNameByPost("yupi");
+            Console.WriteLine($"GetNameByPost result: {postNameResult}");
 
-            //client.DefaultRequestHeaders.Add("accessKey", "yupi");
-            //client.DefaultRequestHeaders.Add("secretKey", "abcdefgh");
-            // getHeaderMap() here
-            var headers = GetHeaderMap(userJson);
-            foreach (var header in headers)
-            {
-                client.DefaultRequestHeaders.Add(header.Key, header.Value);
-            }
+            // Create a User object
+            var user = new User("yupi");
 
-            var postUserResponse = await client.PostAsync("/api/name/user", userContent);
-            Console.WriteLine(await postUserResponse.Content.ReadAsStringAsync());
+            // Call the GetUsernameByPost method
+            var postUserResult = await yuApiClient.GetUsernameByPost(user);
+            Console.WriteLine($"GetUsernameByPost result: {postUserResult}");
 
             Console.Read();
-        }
-        
-
-
-        private static Dictionary<string, string> GetHeaderMap(string body)
-        {
-            //var dict = new Dictionary<string, string>
-            //{
-            //    { "accessKey", "yupi" },
-            //    //{ "secretKey", "abcdefgh" },
-            //    { "nonce", new Random().Next(1000000, 10000000).ToString() }, // generate random number length 7
-            //    { "body", body },
-            //    { "timestamp", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, // current time in seconds
-            //    { "sign", genSign(dict, "abcdefgh")}
-            //};
-            var dict = new Dictionary<string, string>();
-            dict.Add("accessKey", "yupi");
-            dict.Add("nonce", new Random().Next(1000, 10000).ToString()); // generate random number length 4
-            dict.Add("body", body);
-            dict.Add("timestamp", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString());
-            dict.Add("sign", SignUtils.GenSign(body, "abcdefgh"));
-            
-
-            return dict;
         }
     }
 }

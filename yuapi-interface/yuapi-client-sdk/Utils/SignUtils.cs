@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace yuapi_interface.Utils
+namespace yuapi_client_sdk.Utils
 {
     public class SignUtils
     {

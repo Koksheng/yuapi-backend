@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\yuapi-client-sdk\yuapi-client-sdk.csproj" />
     <ProjectReference Include="..\yuapi-interface\yuapi-interface.csproj" />
   </ItemGroup>
 

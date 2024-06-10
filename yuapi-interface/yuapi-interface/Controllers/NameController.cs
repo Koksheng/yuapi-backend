@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using yuapi_interface.Model;
-using yuapi_interface.Utils;
+using yuapi_client_sdk.Model;
+using yuapi_client_sdk.Utils;
 
 namespace yuapi_interface.Controllers
 {
