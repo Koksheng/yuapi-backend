@@ -55,7 +55,7 @@ namespace yuapi.Application.Users.Commands.Register
             int result = await _userRepository.CreateUser(newUser);
 
             if (result == 0)
-                throw new BusinessException(ErrorCode.STSTEM_ERROR, "注册失败，数据库错误");
+                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "注册失败，数据库错误");
 
             return ResultUtils.success(newUser.Id.Value);
         }

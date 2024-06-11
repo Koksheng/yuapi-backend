@@ -11,5 +11,7 @@ namespace yuapi.Application.Common.Interfaces.Persistence
         Task<int> Update(InterfaceInfo interfaceInfo);
         Task<List<InterfaceInfo>> List(InterfaceInfo query);
         Task<PaginatedList<InterfaceInfo>> ListByPage(InterfaceInfo query, int current, int pageSize, string sortField, string sortOrder);
+        Task<int> OnlineInterfaceInfoById(int id);
+        Task<int> OfflineInterfaceInfoById(int id);
     }
 }

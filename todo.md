@@ -1,9 +1,15 @@
--yuapi-backend
---yuapi.Api
---yuapi.Application
---yuapi.Contracts
---yuapi.Domain
---yuapi.Infrastructure
+-yuapi-backend.sln
+--src--yuapi.Api
+--src--yuapi.Application
+--src--yuapi.Contracts
+--src--yuapi.Domain
+--src--yuapi.Infrastructure
+
+--yuapi-interface--yuapi-interface.sln
+--yuapi-interface--yuapi-client-sdk
+--yuapi-interface--yuapi-interface
+--yuapi-interface--yuapi-interfce-console-app
+
 
 By organizing your code this way, you ensure that each layer has a specific responsibility, making your application easier to maintain, extend, and test. 
 

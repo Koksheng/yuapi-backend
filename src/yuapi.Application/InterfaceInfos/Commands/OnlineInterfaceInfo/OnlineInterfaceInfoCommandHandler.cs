@@ -6,21 +6,24 @@ using yuapi.Application.Common.Interfaces.Services;
 using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
 using yuapi.Domain.InterfaceInfoAggregate;
+using yuapi_client_sdkyuapi_client_sdk.Client;
 
-namespace yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo
+namespace yuapi.Application.InterfaceInfos.Commands.OnlineInterfaceInfo
 {
-    public class DeleteInterfaceInfoCommandHandler : 
-        IRequestHandler<DeleteInterfaceInfoCommand, BaseResponse<int>>
+    public class OnlineInterfaceInfoCommandHandler :
+        IRequestHandler<OnlineInterfaceInfoCommand, BaseResponse<bool>>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IInterfaceInfoRepository _interfaceInfoRepository;
-        public DeleteInterfaceInfoCommandHandler(ICurrentUserService currentUserService, IInterfaceInfoRepository interfaceInfoRepository)
+        private readonly YuApiClient _yuApiClient;
+        public OnlineInterfaceInfoCommandHandler(ICurrentUserService currentUserService, IInterfaceInfoRepository interfaceInfoRepository, YuApiClient yuApiClient)
         {
             _currentUserService = currentUserService;
             _interfaceInfoRepository = interfaceInfoRepository;
+            _yuApiClient = yuApiClient;
         }
 
-        public async Task<BaseResponse<int>> Handle(DeleteInterfaceInfoCommand command, CancellationToken cancellationToken)
+        public async Task<BaseResponse<bool>> Handle(OnlineInterfaceInfoCommand command, CancellationToken cancellationToken)
         {
             int id = command.id;
             string userState = command.userState;
@@ -45,13 +48,21 @@ namespace yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo
                 }
             }
 
-            int result = await _interfaceInfoRepository.DeleteById(id);
+            // 4. 判断该接口是否可以调用 Verify if the interface can be invoked using YuApiClient
+
+            var yuapiClient_result = await _yuApiClient.GetNameByGet("interfaceCheck");
+            if (yuapiClient_result == "")
+            {
+                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "Interface invocation check failed.");
+            }
+
+            int result = await _interfaceInfoRepository.OnlineInterfaceInfoById(id);
 
             if (result == 0)
-                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "删除失败，数据库错误");
+                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "update失败，数据库错误");
 
 
-            return ResultUtils.success(data: id);
+            return ResultUtils.success(data: true);
         }
     }
 }

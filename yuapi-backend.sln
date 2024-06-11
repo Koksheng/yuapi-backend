@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Infrastructure", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.Domain", "src\yuapi.Domain\yuapi.Domain.csproj", "{23F50EED-21D3-4304-A7A0-BD0C1458F22F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi-client-sdk", "D:\work\Self learn\yuapi\yuapi-backend\yuapi-interface\yuapi-client-sdk\yuapi-client-sdk.csproj", "{23F50EED-21D3-4304-A7A0-BD0C1458F22D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi-interface", "D:\work\Self learn\yuapi\yuapi-backend\yuapi-interface\yuapi-interface\yuapi-interface.csproj", "{23F50EED-21D3-4304-A7A0-BD0C1458F22A}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "todo", "todo", "{D615B261-1733-41D6-A275-1ED4FAC80745}"
 	ProjectSection(SolutionItems) = preProject
 		todo.md = todo.md
@@ -44,6 +48,14 @@ Global
 		{23F50EED-21D3-4304-A7A0-BD0C1458F22F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23F50EED-21D3-4304-A7A0-BD0C1458F22F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23F50EED-21D3-4304-A7A0-BD0C1458F22F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F50EED-21D3-4304-A7A0-BD0C1458F22D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F50EED-21D3-4304-A7A0-BD0C1458F22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F50EED-21D3-4304-A7A0-BD0C1458F22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F50EED-21D3-4304-A7A0-BD0C1458F22D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F50EED-21D3-4304-A7A0-BD0C1458F22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F50EED-21D3-4304-A7A0-BD0C1458F22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F50EED-21D3-4304-A7A0-BD0C1458F22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F50EED-21D3-4304-A7A0-BD0C1458F22A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

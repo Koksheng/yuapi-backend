@@ -6,21 +6,22 @@ using yuapi.Application.Common.Interfaces.Services;
 using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
 using yuapi.Domain.InterfaceInfoAggregate;
+using yuapi_client_sdkyuapi_client_sdk.Client;
 
-namespace yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo
+namespace yuapi.Application.InterfaceInfos.Commands.OfflineInterfaceInfo
 {
-    public class DeleteInterfaceInfoCommandHandler : 
-        IRequestHandler<DeleteInterfaceInfoCommand, BaseResponse<int>>
+    public class OfflineInterfaceInfoCommandHandler :
+        IRequestHandler<OfflineInterfaceInfoCommand, BaseResponse<bool>>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IInterfaceInfoRepository _interfaceInfoRepository;
-        public DeleteInterfaceInfoCommandHandler(ICurrentUserService currentUserService, IInterfaceInfoRepository interfaceInfoRepository)
+        public OfflineInterfaceInfoCommandHandler(ICurrentUserService currentUserService, IInterfaceInfoRepository interfaceInfoRepository)
         {
             _currentUserService = currentUserService;
             _interfaceInfoRepository = interfaceInfoRepository;
         }
 
-        public async Task<BaseResponse<int>> Handle(DeleteInterfaceInfoCommand command, CancellationToken cancellationToken)
+        public async Task<BaseResponse<bool>> Handle(OfflineInterfaceInfoCommand command, CancellationToken cancellationToken)
         {
             int id = command.id;
             string userState = command.userState;
@@ -45,13 +46,13 @@ namespace yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo
                 }
             }
 
-            int result = await _interfaceInfoRepository.DeleteById(id);
+            int result = await _interfaceInfoRepository.OfflineInterfaceInfoById(id);
 
             if (result == 0)
-                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "删除失败，数据库错误");
+                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "update失败，数据库错误");
 
 
-            return ResultUtils.success(data: id);
+            return ResultUtils.success(data: true);
         }
     }
 }

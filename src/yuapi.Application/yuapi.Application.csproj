@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\yuapi.Contracts\yuapi.Contracts.csproj" />
     <ProjectReference Include="..\yuapi.Domain\yuapi.Domain.csproj" />
+	<ProjectReference Include="..\..\yuapi-interface\yuapi-client-sdk\yuapi-client-sdk.csproj" />
   </ItemGroup>
 
 </Project>

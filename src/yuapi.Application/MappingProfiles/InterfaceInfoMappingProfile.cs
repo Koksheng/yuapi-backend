@@ -2,12 +2,15 @@
 using yuapi.Application.Common.Models;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Commands.OfflineInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Commands.OnlineInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Common;
 using yuapi.Application.InterfaceInfos.Queries.GetInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos;
 using yuapi.Application.MappingProfiles.Common;
+using yuapi.Contracts.Common;
 using yuapi.Contracts.InterfaceInfo;
 using yuapi.Domain.InterfaceInfoAggregate;
 using yuapi.Domain.InterfaceInfoAggregate.ValueObjects;
@@ -60,6 +63,13 @@ namespace yuapi.Application.MappingProfiles
             // Mapping for PaginatedList<InterfaceInfoSafetyResult> to PaginatedList<InterfaceInfoSafetyResponse>
             CreateMap(typeof(PaginatedList<>), typeof(PaginatedList<>)).ConvertUsing(typeof(PaginatedListTypeConverter<,>));
 
+            // Online Interface Info
+            CreateMap<IdRequest, OnlineInterfaceInfoCommand>()
+                .ForCtorParam("userState", opt => opt.MapFrom(src => string.Empty));
+
+            // Offline Interface Info
+            CreateMap<IdRequest, OfflineInterfaceInfoCommand>()
+                .ForCtorParam("userState", opt => opt.MapFrom(src => string.Empty));
 
         }
     }

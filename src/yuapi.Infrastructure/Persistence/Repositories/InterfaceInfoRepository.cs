@@ -3,6 +3,7 @@ using yuapi.Application.Common.Constants;
 using yuapi.Application.Common.Exceptions;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Common.Models;
+using yuapi.Domain.Enums;
 using yuapi.Domain.InterfaceInfoAggregate;
 using yuapi.Domain.InterfaceInfoAggregate.ValueObjects;
 
@@ -199,6 +200,57 @@ namespace yuapi.Infrastructure.Persistence.Repositories
             var items = await queryable.Skip((current - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return new PaginatedList<InterfaceInfo>(items, totalCount, current, pageSize);
+        }
+
+        public async Task<int> OnlineInterfaceInfoById(int id)
+        {
+            // Create a UserId object from the provided integer ID
+            var interfaceInfoId = InterfaceInfoId.Create(id);
+
+            // Query the database for the user with the specified ID
+            var interfaceInfo = await _context.InterfaceInfos
+                .FirstOrDefaultAsync(i => i.Id == interfaceInfoId);
+
+            // Check if the interface was found
+            if (interfaceInfo == null)
+            {
+                throw new BusinessException(ErrorCode.NULL_ERROR, "Interface not found");
+            }
+
+            // Update the isDelete column and updateTime column
+            interfaceInfo.status = (int)InterfaceInfoStatus.Online;
+            interfaceInfo.updateTime = DateTime.Now;
+
+            // Save the changes to the database
+            var result = await _context.SaveChangesAsync();
+
+            // Return the result of the deleted interface
+            return result;
+        }
+        public async Task<int> OfflineInterfaceInfoById(int id)
+        {
+            // Create a UserId object from the provided integer ID
+            var interfaceInfoId = InterfaceInfoId.Create(id);
+
+            // Query the database for the user with the specified ID
+            var interfaceInfo = await _context.InterfaceInfos
+                .FirstOrDefaultAsync(i => i.Id == interfaceInfoId);
+
+            // Check if the interface was found
+            if (interfaceInfo == null)
+            {
+                throw new BusinessException(ErrorCode.NULL_ERROR, "Interface not found");
+            }
+
+            // Update the isDelete column and updateTime column
+            interfaceInfo.status = (int)InterfaceInfoStatus.Offline;
+            interfaceInfo.updateTime = DateTime.Now;
+
+            // Save the changes to the database
+            var result = await _context.SaveChangesAsync();
+
+            // Return the result of the deleted interface
+            return result;
         }
     }
 }

@@ -8,10 +8,13 @@ using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Commands.OfflineInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Commands.OnlineInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Queries.GetInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos;
+using yuapi.Contracts.Common;
 using yuapi.Contracts.InterfaceInfo;
 using yuapi.Domain.Common;
 using yuapi.Domain.Constants;
@@ -126,6 +129,40 @@ namespace yuapi.Api.Controllers
             var response = _mapper.Map<PaginatedList<InterfaceInfoSafetyResponse>>(result);
 
             return ResultUtils.success(response);
+        }
+
+        [AuthCheck("admin")]
+        [HttpPost]
+        public async Task<BaseResponse<bool>> onlineInterfaceInfo(IdRequest request)
+        {
+            if (request == null || request.id <= 0)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+
+            var command = _mapper.Map<OnlineInterfaceInfoCommand>(request);
+            // Assign the userState
+            command = command with { userState = userState };
+            return await _mediator.Send(command);
+        }
+
+        [AuthCheck("admin")]
+        [HttpPost]
+        public async Task<BaseResponse<bool>> offlineInterfaceInfo(IdRequest request)
+        {
+            if (request == null || request.id <= 0)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+
+            var command = _mapper.Map<OfflineInterfaceInfoCommand>(request);
+            // Assign the userState
+            command = command with { userState = userState };
+            return await _mediator.Send(command);
         }
     }
 }
