@@ -33,7 +33,7 @@ namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage
 
             InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(query);
             interfaceInfo.isDelete = 0;
-            interfaceInfo.status = 1;
+            //interfaceInfo.status = 1;
 
             var paginatedResult = await _interfaceInfoRepository.ListByPage(
                 interfaceInfo,

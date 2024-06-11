@@ -162,10 +162,10 @@ namespace yuapi.Infrastructure.Persistence.Repositories
                 queryable = queryable.Where(i => i.responseHeader.Contains(query.responseHeader));
             }
 
-            if (query.status != null)
-            {
-                queryable = queryable.Where(i => i.status == query.status);
-            }
+            //if (query.status != null)
+            //{
+            //    queryable = queryable.Where(i => i.status == query.status);
+            //}
 
             if (!string.IsNullOrEmpty(query.method))
             {

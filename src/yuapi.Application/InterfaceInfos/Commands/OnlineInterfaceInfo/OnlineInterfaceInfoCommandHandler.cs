@@ -50,8 +50,11 @@ namespace yuapi.Application.InterfaceInfos.Commands.OnlineInterfaceInfo
 
             // 4. 判断该接口是否可以调用 Verify if the interface can be invoked using YuApiClient
 
-            var yuapiClient_result = await _yuApiClient.GetNameByGet("interfaceCheck");
-            if (yuapiClient_result == "")
+            _yuApiClient.SetAccessKey("yupi");
+            _yuApiClient.SetSecretKey("abcdefgh");
+            yuapi_client_sdk.Model.User clientUser = new yuapi_client_sdk.Model.User("yupi");
+            var yuapiClientResult = await _yuApiClient.GetUsernameByPost(clientUser);
+            if (yuapiClientResult == "")
             {
                 throw new BusinessException(ErrorCode.SYSTEM_ERROR, "Interface invocation check failed.");
             }

@@ -131,7 +131,7 @@ namespace yuapi.Api.Controllers
             return ResultUtils.success(response);
         }
 
-        [AuthCheck("admin")]
+        //[AuthCheck("admin")]
         [HttpPost]
         public async Task<BaseResponse<bool>> onlineInterfaceInfo(IdRequest request)
         {
@@ -148,7 +148,7 @@ namespace yuapi.Api.Controllers
             return await _mediator.Send(command);
         }
 
-        [AuthCheck("admin")]
+        //[AuthCheck("admin")]
         [HttpPost]
         public async Task<BaseResponse<bool>> offlineInterfaceInfo(IdRequest request)
         {

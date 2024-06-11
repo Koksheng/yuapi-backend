@@ -25,7 +25,7 @@ namespace yuapi.Contracts.InterfaceInfo
         /**
          * 请求参数
          */
-        string requestParams,
+        string? requestParams,
         /**
          * 请求头
          */
