@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using yuapi.Api.AuthCheck;
@@ -8,6 +9,7 @@ using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.OfflineInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.OnlineInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo;
@@ -18,6 +20,7 @@ using yuapi.Contracts.Common;
 using yuapi.Contracts.InterfaceInfo;
 using yuapi.Domain.Common;
 using yuapi.Domain.Constants;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace yuapi.Api.Controllers
 {
@@ -160,6 +163,22 @@ namespace yuapi.Api.Controllers
             var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
 
             var command = _mapper.Map<OfflineInterfaceInfoCommand>(request);
+            // Assign the userState
+            command = command with { userState = userState };
+            return await _mediator.Send(command);
+        }
+
+        [HttpPost]
+        public async Task<BaseResponse<string>> invokeInterfaceInfo(InvokeInterfaceInfoRequest request)
+        {
+            if (request == null)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+            
+            var command = _mapper.Map<InvokeInterfaceInfoCommand>(request);
             // Assign the userState
             command = command with { userState = userState };
             return await _mediator.Send(command);

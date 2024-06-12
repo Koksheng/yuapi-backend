@@ -35,7 +35,6 @@ namespace yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo
             // 2. Map Command to InterfaceInfo
             InterfaceInfo interfaceInfo = _mapper.Map<InterfaceInfo>(command);
             interfaceInfo.userId = safetyUser.Id;
-            interfaceInfo.requestParams = "requestParams";
             interfaceInfo.createTime = DateTime.Now;
             interfaceInfo.updateTime = DateTime.Now;
 

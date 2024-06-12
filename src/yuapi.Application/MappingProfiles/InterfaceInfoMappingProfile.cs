@@ -2,6 +2,7 @@
 using yuapi.Application.Common.Models;
 using yuapi.Application.InterfaceInfos.Commands.CreateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.DeleteInterfaceInfo;
+using yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.OfflineInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.OnlineInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo;
@@ -73,6 +74,10 @@ namespace yuapi.Application.MappingProfiles
 
             // Offline Interface Info
             CreateMap<IdRequest, OfflineInterfaceInfoCommand>()
+                .ForCtorParam("userState", opt => opt.MapFrom(src => string.Empty));
+
+            // Invoke Interface Info
+            CreateMap<InvokeInterfaceInfoRequest, InvokeInterfaceInfoCommand>()
                 .ForCtorParam("userState", opt => opt.MapFrom(src => string.Empty));
 
         }

@@ -7,6 +7,8 @@
         string userAvatar,
         int gender,
         string userRole,
+        string accessKey,
+        string secretKey,
         DateTime createTime,
         DateTime updateTime,
         string token);
