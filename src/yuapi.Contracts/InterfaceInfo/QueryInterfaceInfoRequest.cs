@@ -38,5 +38,10 @@ namespace yuapi.Contracts.InterfaceInfo
          */
         string? method,
         int? userId,
-        PageRequest? PageRequest);
+        int? current,
+        int? pageSize,
+        string? sortField,
+        string? sortOrder
+        //PageRequest? PageRequest
+        );
 }

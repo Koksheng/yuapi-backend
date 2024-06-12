@@ -39,6 +39,8 @@ namespace yuapi.Application.Users.Commands.Register
 
             // 2. 加密 (.net core IdentityUser will encrypt themself
             string hashedPassword = EncryptionService.EncryptPassword(userPassword);
+            string hashedAccessKey = EncryptionService.EncryptAccessKey(userAccount);
+            string hashedSecretKey = EncryptionService.EncryptSecretKey(userAccount);
 
             // 3. Insert User to DB
 
@@ -48,8 +50,8 @@ namespace yuapi.Application.Users.Commands.Register
             newUser.gender = 1;
             newUser.userRole = "user"; // default 'user', or 'admin'
             newUser.userPassword = hashedPassword; 
-            newUser.accessKey = "access";
-            newUser.secretKey = "secret";
+            newUser.accessKey = hashedAccessKey;
+            newUser.secretKey = hashedSecretKey;
             newUser.createTime = DateTime.Now;
 
             int result = await _userRepository.CreateUser(newUser);
