@@ -3,6 +3,7 @@ using yuapi.Domain.Common.Models;
 using yuapi.Domain.InterfaceInfoAggregate;
 using yuapi.Domain.MenuAggregate;
 using yuapi.Domain.UserAggregate;
+using yuapi.Domain.UserInterfaceInfoAggregate;
 using yuapi.Infrastructure.Persistence.Interceptors;
 
 namespace yuapi.Infrastructure.Persistence
@@ -17,6 +18,7 @@ namespace yuapi.Infrastructure.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<InterfaceInfo> InterfaceInfos { get; set; }
+        public DbSet<UserInterfaceInfo> UserInterfaceInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

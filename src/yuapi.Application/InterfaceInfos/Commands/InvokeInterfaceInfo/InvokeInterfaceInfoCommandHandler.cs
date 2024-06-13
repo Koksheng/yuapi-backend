@@ -52,7 +52,7 @@ namespace yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo
             }
             if (oldInterfaceInfo.status == (int)InterfaceInfoStatus.Offline)
             {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "Interface info is offline.");
+                throw new BusinessException(ErrorCode.PARAMS_ERROR, "Interface info status is offline.");
             }
 
             _yuApiClient.SetAccessKey(safetyUser.accessKey);
