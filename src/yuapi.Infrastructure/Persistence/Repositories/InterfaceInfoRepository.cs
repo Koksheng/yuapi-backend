@@ -49,7 +49,7 @@ namespace yuapi.Infrastructure.Persistence.Repositories
             // Check if the interface was found
             if (interfaceInfo == null)
             {
-                throw new BusinessException(ErrorCode.NULL_ERROR, "Interface not found");
+                throw new BusinessException(ErrorCode.NULL_ERROR, "Interface Info not found");
             }
 
             // Update the isDelete column and updateTime column

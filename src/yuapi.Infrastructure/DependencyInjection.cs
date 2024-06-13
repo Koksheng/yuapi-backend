@@ -40,6 +40,7 @@ namespace yuapi.Infrastructure
 
             // Register repositories
             services.AddScoped<PublishDomainEventsInterceptor>();
+            services.AddScoped<IUserInterfaceInfoRepository, UserInterfaceInfoRepository>();
             services.AddScoped<IInterfaceInfoRepository, InterfaceInfoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
