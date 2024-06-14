@@ -7,7 +7,6 @@ using yuapi.Application.InterfaceInfos.Commands.OfflineInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.OnlineInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Common;
-using yuapi.Application.InterfaceInfos.Queries.GetInterfaceInfo;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos;
 using yuapi.Application.MappingProfiles.Common;
@@ -42,7 +41,6 @@ namespace yuapi.Application.MappingProfiles
             CreateMap<UpdateInterfaceInfoCommand, InterfaceInfo>();
 
             // Get InterfaceInfo
-            CreateMap<GetInterfaceInfoRequest, GetInterfaceInfoByIdQuery>();
             CreateMap<InterfaceInfo, InterfaceInfoSafetyResult>()
                 .ForMember(dest => dest.id, opt => opt.MapFrom(src => src.Id.Value));
             CreateMap<InterfaceInfoSafetyResult, InterfaceInfoSafetyResponse>();

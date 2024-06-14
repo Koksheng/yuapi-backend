@@ -4,6 +4,7 @@ using yuapi.Domain.UserInterfaceInfoAggregate;
 using yuapi.Domain.UserInterfaceInfoAggregate.ValueObjects;
 using yuapi.Application.Common.Constants;
 using yuapi.Application.Common.Exceptions;
+using yuapi.Application.Common.Models;
 
 namespace yuapi.Infrastructure.Persistence.Repositories
 {
@@ -65,6 +66,107 @@ namespace yuapi.Infrastructure.Persistence.Repositories
             _context.UserInterfaceInfos.Update(userInterfaceInfo);
             // Save the changes to the database
             return await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<UserInterfaceInfo>> List(UserInterfaceInfo query)
+        {
+            var queryable = _context.UserInterfaceInfos.AsQueryable();
+
+            if (query.Id != null)
+            {
+                queryable = queryable.Where(i => i.Id == query.Id);
+            }
+
+            if (query.userId != null && query.userId > 0)
+            {
+                queryable = queryable.Where(i => i.userId == query.userId);
+            }
+
+            if (query.interfaceInfoId != null && query.interfaceInfoId > 0)
+            {
+                queryable = queryable.Where(i => i.interfaceInfoId == query.interfaceInfoId);
+            }
+
+            if (query.totalNum != null && query.totalNum > 0)
+            {
+                queryable = queryable.Where(i => i.totalNum == query.totalNum);
+            }
+
+            if (query.leftNum != null && query.leftNum > 0)
+            {
+                queryable = queryable.Where(i => i.leftNum == query.leftNum);
+            }
+
+            if (query.status != null)
+            {
+                queryable = queryable.Where(i => i.status == query.status);
+            }
+
+            if (query.isDelete != null)
+            {
+                queryable = queryable.Where(i => i.isDelete == query.isDelete);
+            }
+
+            return await queryable.ToListAsync();
+        }
+
+        public async Task<PaginatedList<UserInterfaceInfo>> ListByPage(UserInterfaceInfo query, int current, int pageSize, string sortField, string sortOrder)
+        {
+            var queryable = _context.UserInterfaceInfos.AsQueryable();
+
+            if (query.Id != null)
+            {
+                queryable = queryable.Where(i => i.Id == query.Id);
+            }
+
+            if (query.userId != null && query.userId > 0)
+            {
+                queryable = queryable.Where(i => i.userId == query.userId);
+            }
+
+            if (query.interfaceInfoId != null && query.interfaceInfoId > 0)
+            {
+                queryable = queryable.Where(i => i.interfaceInfoId == query.interfaceInfoId);
+            }
+
+            if (query.totalNum != null && query.totalNum > 0)
+            {
+                queryable = queryable.Where(i => i.totalNum == query.totalNum);
+            }
+
+            if (query.leftNum != null && query.leftNum > 0)
+            {
+                queryable = queryable.Where(i => i.leftNum == query.leftNum);
+            }
+
+            if (query.status != null)
+            {
+                queryable = queryable.Where(i => i.status == query.status);
+            }
+
+            if (query.isDelete != null)
+            {
+                queryable = queryable.Where(i => i.isDelete == query.isDelete);
+            }
+
+            // Continue with other filters...
+
+            if (!string.IsNullOrEmpty(sortField))
+            {
+                if (sortOrder == "asc")
+                {
+                    queryable = queryable.OrderBy(e => EF.Property<object>(e, sortField));
+                }
+                else
+                {
+                    queryable = queryable.OrderByDescending(e => EF.Property<object>(e, sortField));
+                }
+            }
+
+            var totalCount = await queryable.CountAsync();
+            var items = await queryable.Skip((current - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            return new PaginatedList<UserInterfaceInfo>(items, totalCount, current, pageSize);
         }
     }
 }
