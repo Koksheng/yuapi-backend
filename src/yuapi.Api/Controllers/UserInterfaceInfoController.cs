@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using yuapi.Api.AuthCheck;
 using yuapi.Application.Common.Constants;
 using yuapi.Application.Common.Exceptions;
 using yuapi.Application.Common.Models;
@@ -30,6 +31,7 @@ namespace yuapi.Api.Controllers
             _mediator = mediator;
         }
 
+        //[AuthCheck(ApplicationConstants.ADMIN_ROLE)]
         [HttpPost]
         public async Task<BaseResponse<int>> addUserInterfaceInfo(CreateUserInterfaceInfoRequest request)
         {
@@ -46,6 +48,7 @@ namespace yuapi.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        //[AuthCheck(ApplicationConstants.ADMIN_ROLE)]
         [HttpPost]
         public async Task<BaseResponse<int>> deleteUserInterfaceInfo(DeleteRequest request)
         {
@@ -62,6 +65,7 @@ namespace yuapi.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        //[AuthCheck(ApplicationConstants.ADMIN_ROLE)]
         [HttpPost]
         public async Task<BaseResponse<int>> updateUserInterfaceInfo(UpdateUserInterfaceInfoRequest request)
         {
@@ -78,6 +82,7 @@ namespace yuapi.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        //[AuthCheck(ApplicationConstants.ADMIN_ROLE)]
         [HttpGet]
         public async Task<BaseResponse<UserInterfaceInfoSafetyResponse>> getUserInterfaceInfoById(int id)
         {
@@ -91,7 +96,7 @@ namespace yuapi.Api.Controllers
             return ResultUtils.success(response);
         }
 
-        //[AuthCheck("admin")]
+        [AuthCheck(ApplicationConstants.ADMIN_ROLE)]
         [HttpGet]
         public async Task<BaseResponse<List<UserInterfaceInfoSafetyResponse>>> listUserInterfaceInfo([FromQuery] QueryUserInterfaceInfoRequest request)
         {
@@ -109,6 +114,7 @@ namespace yuapi.Api.Controllers
             return ResultUtils.success(response);
         }
 
+        //[AuthCheck(ApplicationConstants.ADMIN_ROLE)]
         [HttpGet("list/page")]
         public async Task<BaseResponse<PaginatedList<UserInterfaceInfoSafetyResponse>>> listUserInterfaceInfoByPage([FromQuery] QueryUserInterfaceInfoRequest request)
         {

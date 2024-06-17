@@ -12,6 +12,8 @@ namespace yuapi.Application.UserInterfaceInfos.Commands.CreateUserInterfaceInfo
             RuleFor(x => x.interfaceInfoId)
                 .NotEmpty().WithMessage("InterfaceInfoId cannot be empty.")
                 .GreaterThan(0).WithMessage("InterfaceInfoId must be greater than zero.");
+            RuleFor(x => x.leftNum)
+                .GreaterThanOrEqualTo(0).WithMessage("LeftNum cannot be less than zero.");
         }
     }
 }

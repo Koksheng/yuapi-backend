@@ -57,7 +57,8 @@ namespace yuapi_interface.Controllers
             // Increment invoke count
 
 
-            var result = $"POST 用户名字是 username is {user.username}";
+            string result = $"POST 用户名字是 username is {user.username}";
+            //
             return Ok(result);
         }
     }
