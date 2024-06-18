@@ -168,5 +168,16 @@ namespace yuapi.Infrastructure.Persistence.Repositories
 
             return new PaginatedList<UserInterfaceInfo>(items, totalCount, current, pageSize);
         }
+
+        public async Task<UserInterfaceInfo> GetByInterfaceInfoAndUserId(int interfaceInfoId, int userId)
+        {
+            // Create a UserId object from the provided integer ID
+
+            // Query the database for the user with the specified ID
+            var userInterfaceInfo = await _context.UserInterfaceInfos
+                .FirstOrDefaultAsync(i => i.interfaceInfoId == interfaceInfoId && i.userId == userId);
+
+            return userInterfaceInfo;
+        }
     }
 }
