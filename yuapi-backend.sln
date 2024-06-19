@@ -19,10 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi-interface", "yuapi-in
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "todo", "todo", "{D615B261-1733-41D6-A275-1ED4FAC80745}"
 	ProjectSection(SolutionItems) = preProject
+		gRPC Service.md = gRPC Service.md
 		todo.md = todo.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yuapi.RPC.InvokeCountService", "yuapi.RPC.InvokeCountService\yuapi.RPC.InvokeCountService.csproj", "{44843C23-F237-44C0-9AD8-0B072B66D2A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.RPC.InvokeCountService", "yuapi.RPC.InvokeCountService\yuapi.RPC.InvokeCountService.csproj", "{44843C23-F237-44C0-9AD8-0B072B66D2A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yuapi-OcelotGateway", "yuapi-OcelotGateway\yuapi-OcelotGateway.csproj", "{92922524-3BBF-49EA-AE67-608559301665}"
 EndProject
