@@ -1,0 +1,34 @@
+{
+  "Routes": [
+    {
+      //http://localhost:8123/api/name
+      "UpstreamPathTemplate": "/api/name",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/name",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8123
+        }
+      ]
+
+    },
+    {
+      //http://localhost:8123/api/name/user
+      "UpstreamPathTemplate": "/api/name/user",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "DownstreamPathTemplate": "/api/name/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8123
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8090"
+  }
+}

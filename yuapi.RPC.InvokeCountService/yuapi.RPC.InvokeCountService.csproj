@@ -14,6 +14,10 @@
 		<Protobuf Include="Protos\invoke_count.proto" GrpcServices="Server" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Protobuf Include="Protos\invoke_count.proto" GrpcServices="Client" />
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
     <PackageReference Include="Grpc.Tools" Version="2.64.0">
