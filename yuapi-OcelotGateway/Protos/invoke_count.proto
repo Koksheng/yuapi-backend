@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "yuapi.RPC.InvokeCountService";
+option csharp_namespace = "yuapi_OcelotGateway";
 
 package invokecount;
 

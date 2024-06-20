@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using yuapi.Application.Common.Interfaces.Persistence;
+using yuapi.Infrastructure.Persistence;
 using yuapi.Infrastructure.Persistence.Repositories;
 using yuapi.RPC.InvokeCountService.Services;
 
@@ -6,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+
+// Register the DataContext with a connection string
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 builder.Services.AddScoped<IUserInterfaceInfoRepository, UserInterfaceInfoRepository>(); // Ensure your repository is registered
 
 var app = builder.Build();

@@ -14,8 +14,7 @@
 		-yuapi-interface
 		-yuapi-interfce-console-app
 
-	-yuapi-gateway (deleted)
-	-yuapi-OcelotGatewaye (new created)
+	-yuapi-OcelotGateway (new created)
 
 yuapi-interface web api (already have)
 - url is http://localhost:8123
@@ -33,7 +32,17 @@ in yuapi-OcelotGateway web api empty net core 8.0
 5. redirect the request to their request interface, eg: http://localhost:8090/api/name/user to http://localhost:8123/api/name/user
 6. handle response by invoke invokeCountService
 
-http://127.0.0.1:5054/api/Name?name=yupi
+
+yuapi.Api
+http://localhost:5218/
+
+yuapi-interface
+http://localhost:8123/
+
+yuapi-OcelotGateway 
+http://localhost:8090/
+http://127.0.0.1:8090/api/Name?name=yupi
+
 
 By organizing your code this way, you ensure that each layer has a specific responsibility, making your application easier to maintain, extend, and test. 
 

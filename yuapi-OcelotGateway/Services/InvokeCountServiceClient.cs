@@ -19,7 +19,15 @@ namespace yuapi_OcelotGateway.Services
                 InterfaceInfoId = interfaceInfoId,
                 UserId = userId
             };
-            await _client.UpdateCountAsync(request);
+            try
+            {
+                await _client.UpdateCountAsync(request);
+            }
+            catch (Exception ex)
+            {
+                var error = ex.InnerException;
+            }
+            
         }
     }
 }

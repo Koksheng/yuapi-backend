@@ -1,0 +1,18 @@
+﻿# @yuapi-OcelotGateway_HostAddress = http://localhost:8090
+@yuapi-OcelotGateway_HostAddress = http://127.0.0.1:8090
+
+GET {{yuapi-OcelotGateway_HostAddress}}/api/Name?name=yupi
+
+### POST request example
+POST {{yuapi-OcelotGateway_HostAddress}}/api/Name/user
+Content-Type: application/json
+accessKey: yupi
+secretKey: abcdefg
+nonce: 1000
+sign: abcdefgh
+
+{
+  "username": "yupi234"
+}
+
+###
