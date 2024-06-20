@@ -22,6 +22,7 @@ namespace yuapi.RPC.InvokeCountService.Services
 
             userInterfaceInfo.leftNum -= 1;
             userInterfaceInfo.totalNum += 1;
+            userInterfaceInfo.updateTime = DateTime.Now;
 
             await _userInterfaceInfoRepository.Update(userInterfaceInfo);
 

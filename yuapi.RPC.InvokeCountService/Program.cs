@@ -1,6 +1,9 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Infrastructure.Persistence;
+using yuapi.Infrastructure.Persistence.Interceptors;
 using yuapi.Infrastructure.Persistence.Repositories;
 using yuapi.RPC.InvokeCountService.Services;
 
@@ -13,8 +16,14 @@ builder.Services.AddGrpc();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Add MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+// Add the interceptors
+builder.Services.AddScoped<PublishDomainEventsInterceptor>();
 
+// Ensure your repository and other services are registered
 builder.Services.AddScoped<IUserInterfaceInfoRepository, UserInterfaceInfoRepository>(); // Ensure your repository is registered
+
 
 var app = builder.Build();
 
