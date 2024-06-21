@@ -19,6 +19,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<Protobuf Include="Protos\interface_info.proto" GrpcServices="Client" />
 		<Protobuf Include="Protos\invoke_count.proto" GrpcServices="Client" />
 		<Protobuf Include="Protos\user_info.proto" GrpcServices="Client" />
 	</ItemGroup>

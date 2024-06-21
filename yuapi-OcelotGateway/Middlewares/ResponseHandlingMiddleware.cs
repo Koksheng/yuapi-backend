@@ -31,11 +31,19 @@ namespace yuapi_OcelotGateway.Middlewares
 
                 // Call the InvokeCountServiceClient to update the count
                 // Assuming you have the interfaceInfoId and userId from the request context or headers
-                int interfaceInfoId = /* Retrieve from context or headers */ 11;
-                int userId = /* Retrieve from context or headers */ 1;
 
-                await _invokeCountServiceClient.UpdateCountAsync(interfaceInfoId, userId);
-
+                if (context.Items.TryGetValue("InterfaceId", out var interfaceIdObj) &&
+                    context.Items.TryGetValue("UserId", out var userIdObj) &&
+                    int.TryParse(interfaceIdObj?.ToString(), out var interfaceInfoId) &&
+                    int.TryParse(userIdObj?.ToString(), out var userId))
+                {
+                    await _invokeCountServiceClient.UpdateCountAsync(interfaceInfoId, userId);
+                }
+                else
+                {
+                    // Handle the error case where the items were not found or not valid integers
+                    throw new InvalidOperationException("Invalid context items: InterfaceId or UserId.");
+                }
                 // Copy the response back to the original body stream
                 await responseBody.CopyToAsync(originalBodyStream);
             }

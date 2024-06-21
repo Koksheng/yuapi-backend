@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "todo", "todo", "{D615B261-1
 		todo.md = todo.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.RPC.InvokeCountService", "yuapi.RPC.InvokeCountService\yuapi.RPC.InvokeCountService.csproj", "{44843C23-F237-44C0-9AD8-0B072B66D2A3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi-OcelotGateway", "yuapi-OcelotGateway\yuapi-OcelotGateway.csproj", "{92922524-3BBF-49EA-AE67-608559301665}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yuapi.RPC.ServiceCenter", "yuapi.RPC.ServiceCenter\yuapi.RPC.ServiceCenter.csproj", "{A9432AE5-F04D-4B46-882A-014797AD9D89}"
@@ -63,10 +61,6 @@ Global
 		{23F50EED-21D3-4304-A7A0-BD0C1458F22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23F50EED-21D3-4304-A7A0-BD0C1458F22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23F50EED-21D3-4304-A7A0-BD0C1458F22A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44843C23-F237-44C0-9AD8-0B072B66D2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44843C23-F237-44C0-9AD8-0B072B66D2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44843C23-F237-44C0-9AD8-0B072B66D2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44843C23-F237-44C0-9AD8-0B072B66D2A3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{92922524-3BBF-49EA-AE67-608559301665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{92922524-3BBF-49EA-AE67-608559301665}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92922524-3BBF-49EA-AE67-608559301665}.Release|Any CPU.ActiveCfg = Release|Any CPU

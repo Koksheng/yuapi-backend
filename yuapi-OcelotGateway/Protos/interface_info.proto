@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "yuapi_OcelotGateway";
+
+package interfaceinfo;
+
+service InterfaceInfo  {
+    rpc GetInterfaceInfo (InterfaceInfoRequest) returns (InterfaceInfoResponse);
+}
+
+message InterfaceInfoRequest {
+    string path = 1;
+    string method = 2;
+}
+
+message InterfaceInfoResponse  {
+    int32 id = 1;
+    string name = 2;
+}

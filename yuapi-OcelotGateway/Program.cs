@@ -10,6 +10,7 @@ builder.Services.AddOcelot(builder.Configuration);
 //builder.Services.AddSingleton<IUserVerificationService, UserVerificationService>();
 builder.Services.AddSingleton(new InvokeCountServiceClient("http://localhost:5266"));
 builder.Services.AddSingleton(new UserInfoServiceClient("http://localhost:5266"));
+builder.Services.AddSingleton(new InterfaceInfoServiceClient("http://localhost:5266"));
 
 // Configure Kestrel to use settings from appsettings.json
 builder.WebHost.ConfigureKestrel(options =>
