@@ -48,5 +48,13 @@ namespace yuapi.Infrastructure.Persistence.Repositories
 
             return user;
         }
+
+        public async Task<User> GetUserInfoByAccessKey(string accessKey)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.accessKey == accessKey);
+
+            return user;
+        }
     }
 }

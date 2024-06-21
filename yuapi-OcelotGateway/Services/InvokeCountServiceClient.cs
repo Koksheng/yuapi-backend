@@ -1,5 +1,4 @@
 ﻿using Grpc.Net.Client;
-using yuapi.RPC.InvokeCountService;
 namespace yuapi_OcelotGateway.Services
 {
     public class InvokeCountServiceClient

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "yuapi.RPC.ServiceCenter";
+
+package invokecount;
+
+service InvokeCount {
+    rpc UpdateCount (UpdateCountRequest) returns (UpdateCountReply);
+}
+
+message UpdateCountRequest {
+    int32 interfaceInfoId = 1;
+    int32 userId = 2;
+}
+
+message UpdateCountReply {
+    bool success = 1;
+}

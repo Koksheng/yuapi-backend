@@ -252,5 +252,12 @@ namespace yuapi.Infrastructure.Persistence.Repositories
             // Return the result of the deleted interface
             return result;
         }
+
+        public async Task<InterfaceInfo> GetInterfaceInfo(string path, string method)
+        {
+            var interfaceInfo = await _context.InterfaceInfos
+                .FirstOrDefaultAsync(i => i.url == path && i.method == method);
+            return interfaceInfo;
+        }
     }
 }

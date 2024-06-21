@@ -31,7 +31,7 @@ namespace yuapi_OcelotGateway.Middlewares
 
                 // Call the InvokeCountServiceClient to update the count
                 // Assuming you have the interfaceInfoId and userId from the request context or headers
-                int interfaceInfoId = /* Retrieve from context or headers */ 14;
+                int interfaceInfoId = /* Retrieve from context or headers */ 11;
                 int userId = /* Retrieve from context or headers */ 1;
 
                 await _invokeCountServiceClient.UpdateCountAsync(interfaceInfoId, userId);

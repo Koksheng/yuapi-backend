@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "yuapi.RPC.ServiceCenter";
+
+package userinfo;
+
+service UserInfo  {
+    rpc GetUserInfo (UserInfoRequest) returns (UserInfoResponse);
+}
+
+message UserInfoRequest {
+    string accessKey = 1;
+}
+
+message UserInfoResponse  {
+    int32 id = 1;
+    string userName = 2;
+    string userAccount = 3;
+}

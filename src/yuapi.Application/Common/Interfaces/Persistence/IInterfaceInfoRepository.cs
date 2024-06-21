@@ -13,5 +13,6 @@ namespace yuapi.Application.Common.Interfaces.Persistence
         Task<PaginatedList<InterfaceInfo>> ListByPage(InterfaceInfo query, int current, int pageSize, string sortField, string sortOrder);
         Task<int> OnlineInterfaceInfoById(int id);
         Task<int> OfflineInterfaceInfoById(int id);
+        Task<InterfaceInfo> GetInterfaceInfo(string path, string method);
     }
 }

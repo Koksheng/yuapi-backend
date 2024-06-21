@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 builder.Services.AddOcelot(builder.Configuration);
-builder.Services.AddSingleton<IUserVerificationService, UserVerificationService>();
-builder.Services.AddSingleton(new InvokeCountServiceClient("http://localhost:5134"));
+//builder.Services.AddSingleton<IUserVerificationService, UserVerificationService>();
+builder.Services.AddSingleton(new InvokeCountServiceClient("http://localhost:5266"));
+builder.Services.AddSingleton(new UserInfoServiceClient("http://localhost:5266"));
 
 // Configure Kestrel to use settings from appsettings.json
 builder.WebHost.ConfigureKestrel(options =>
