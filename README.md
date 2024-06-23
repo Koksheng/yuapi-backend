@@ -1,7 +1,7 @@
 ## yuapi-backend.sln
 **Solution File**: This is the main solution file that includes all the backend projects.
 
-## yuapi.Api
+## yuapi.Api (Start)
 **Function**: This project likely serves as the main API application.
 
 **Features**:
@@ -40,7 +40,7 @@ Implements repositories and data context for database interactions.
 Contains configurations and setups for external services.
 Handles data persistence and retrieval operations.
 
-## yuapi.RPC.ServiceCenter
+## yuapi.RPC.ServiceCenter (Start)
 **Function**: This project hosts multiple gRPC services.
 
 **Features**: Provides inter-service communication via gRPC, allowing other services to call these methods.
@@ -62,11 +62,11 @@ Handles data persistence and retrieval operations.
 
 `yuapi-client-sdk (YuApiClient)`: A client SDK that allows external applications to interact with the yuapi-interface APIs.
 
-`yuapi-interface`: Contains controllers like NameController for handling requests such as GetNameByGet, GetNameByPost, and GetUsernameByPost.
+`yuapi-interface` **(Start)**: Contains controllers like NameController for handling requests such as GetNameByGet, GetNameByPost, and GetUsernameByPost.
 
 `yuapi-interface-console-app`: A console application that references the YuApiClient to interact with the yuapi-interface controllers for testing and demonstration purposes.
 
-## yuapi-OcelotGateway
+## yuapi-OcelotGateway (Start)
 **Function**: This project serves as an API gateway using Ocelot.
 
 **Features**: Uses middleware components like `AccessControlMiddleware`, `RequestLoggingMiddleware`, `UserVerificationMiddleware`, and `ResponseHandlingMiddleware` to implement the features.

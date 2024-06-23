@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{F2D689DF-DD7
 	ProjectSection(SolutionItems) = preProject
 		doc\gRPC Service.md = doc\gRPC Service.md
 		doc\jwt.md = doc\jwt.md
+		README.md = README.md
 		doc\todo.md = doc\todo.md
 	EndProjectSection
 EndProject
