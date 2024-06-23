@@ -43,28 +43,40 @@ Handles data persistence and retrieval operations.
 ## yuapi.RPC.ServiceCenter
 **Function**: This project hosts multiple gRPC services.
 
-**Features**:
+**Features**: Provides inter-service communication via gRPC, allowing other services to call these methods.
+
 `InvokeCountService`: Manages the invocation count of various API methods.
+
 `InterfaceInfoService`: Retrieves interface information based on path and method.
+
 `UserInfoService`: Retrieves user information based on access keys.
-Provides inter-service communication via gRPC, allowing other services to call these methods.
+
+
 
 ## yuapi-interface
 **Function**: This is a separate solution focused on exposing API endpoints and providing a client SDK.
 
 **Features**:
+
 `yuapi-interface.sln`: Solution file for the interface project.
+
 `yuapi-client-sdk (YuApiClient)`: A client SDK that allows external applications to interact with the yuapi-interface APIs.
+
 `yuapi-interface`: Contains controllers like NameController for handling requests such as GetNameByGet, GetNameByPost, and GetUsernameByPost.
+
 `yuapi-interface-console-app`: A console application that references the YuApiClient to interact with the yuapi-interface controllers for testing and demonstration purposes.
 
 ## yuapi-OcelotGateway
 **Function**: This project serves as an API gateway using Ocelot.
 
-**Features**:
+**Features**: Uses middleware components like `AccessControlMiddleware`, `RequestLoggingMiddleware`, `UserVerificationMiddleware`, and `ResponseHandlingMiddleware` to implement the features.
+
 **Access Control**: Manages access control to the APIs.
+
 **User Verification**: Verifies users before allowing them to access certain endpoints.
+
 **Request Redirect**: Redirects requests to appropriate backend services.
+
 **Response Handling**: Handles and modifies responses before sending them back to the client.
+
 **Request Logging**: Logs incoming requests for auditing and debugging purposes.
-Uses middleware components like `AccessControlMiddleware`, `RequestLoggingMiddleware`, `UserVerificationMiddleware`, and `ResponseHandlingMiddleware` to implement these features.
