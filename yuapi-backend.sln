@@ -17,15 +17,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi-client-sdk", "yuapi-i
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi-interface", "yuapi-interface\yuapi-interface\yuapi-interface.csproj", "{23F50EED-21D3-4304-A7A0-BD0C1458F22A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "todo", "todo", "{D615B261-1733-41D6-A275-1ED4FAC80745}"
-	ProjectSection(SolutionItems) = preProject
-		gRPC Service.md = gRPC Service.md
-		todo.md = todo.md
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi-OcelotGateway", "yuapi-OcelotGateway\yuapi-OcelotGateway.csproj", "{92922524-3BBF-49EA-AE67-608559301665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yuapi.RPC.ServiceCenter", "yuapi.RPC.ServiceCenter\yuapi.RPC.ServiceCenter.csproj", "{A9432AE5-F04D-4B46-882A-014797AD9D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yuapi.RPC.ServiceCenter", "yuapi.RPC.ServiceCenter\yuapi.RPC.ServiceCenter.csproj", "{A9432AE5-F04D-4B46-882A-014797AD9D89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{F2D689DF-DD71-483F-8F5D-E33EAA5EA273}"
+	ProjectSection(SolutionItems) = preProject
+		doc\gRPC Service.md = doc\gRPC Service.md
+		doc\jwt.md = doc\jwt.md
+		doc\todo.md = doc\todo.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
