@@ -1,44 +1,70 @@
-# Yu Api Project - Backend
+## yuapi-backend.sln
+**Solution File**: This is the main solution file that includes all the backend projects.
 
+## yuapi.Api
+**Function**: This project likely serves as the main API application.
 
-[Frontend at here](https://github.com/Koksheng/yuapi-frontend)
+**Features**:
+Exposes different endpoints for clients.
+Handles incoming HTTP requests and processes them.
+Includes controllers, such as the UserController, InterfaceInfoController, UserInterfaceInfoController.
 
-## JWT Notes
+## yuapi.Application
+**Function**: This project contains the application logic and services.
 
-[Video](https://www.youtube.com/watch?v=7ILCRfPmQxQ&list=PLzYkqgWkHPKBcDIP5gzLfASkQyTdy0t4k&index=9)
+**Features**:
+Implements business rules.
+Provides application services that interact with the domain and infrastructure layers.
+Contains interfaces and implementations for various operations needed by the **yuapi.Api**.
 
-1. When the user successfully logs in, generate a JWT token and pass it to the frontend.
-   
-   `yuapi.Application` -> `UserService.cs` -> `UserLogin()`
-   
-   ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/8da851d9-e68d-493f-8c6c-2348efe0946f)
+## yuapi.Contracts
+**Function**: This project defines the data transfer objects (DTOs) and contracts used for communication.
 
-   `yuapi.Infrastructure` -> `JwtTokenGenerator.cs` -> `GenerateToken()`
+**Features**:
+Defines request and response models for API endpoints.
+Ensures consistency in the data exchanged between the client and server.
 
-   ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/08d40bab-2a2a-46b1-9015-ebd8879e37fe)
-   
-   `yuapi.Infrastructure` -> `DependencyInjection.cs` -> `AddAuth()` -> Token Validation
+## yuapi.Domain
+**Function**: This project contains the domain models and business logic.
 
-   ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/04c78701-5b55-44e4-a2f2-b9fcd636dd6a)
+**Features**:
+Defines the core entities and value objects.
+Implements domain services and business rules.
+Contains domain events and other domain-related logic.
 
+## yuapi.Infrastructure
+**Function**: This project handles the infrastructure concerns like data access and external service integrations.
 
-   `yuapi.Api` -> `Program.cs`
+**Features**:
+Implements repositories and data context for database interactions.
+Contains configurations and setups for external services.
+Handles data persistence and retrieval operations.
 
-   ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/f6674d65-50e9-48f1-abcb-1f61cd12a9be)
+## yuapi.RPC.ServiceCenter
+**Function**: This project hosts multiple gRPC services.
 
-   `yuapi.Api` -> `Controller.cs` -> add `[Authorize]`
+**Features**:
+`InvokeCountService`: Manages the invocation count of various API methods.
+`InterfaceInfoService`: Retrieves interface information based on path and method.
+`UserInfoService`: Retrieves user information based on access keys.
+Provides inter-service communication via gRPC, allowing other services to call these methods.
 
-   ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/680dff46-fc9a-4480-bac3-5a7185ed1f95)
+## yuapi-interface
+**Function**: This is a separate solution focused on exposing API endpoints and providing a client SDK.
 
+**Features**:
+`yuapi-interface.sln`: Solution file for the interface project.
+`yuapi-client-sdk (YuApiClient)`: A client SDK that allows external applications to interact with the yuapi-interface APIs.
+`yuapi-interface`: Contains controllers like NameController for handling requests such as GetNameByGet, GetNameByPost, and GetUsernameByPost.
+`yuapi-interface-console-app`: A console application that references the YuApiClient to interact with the yuapi-interface controllers for testing and demonstration purposes.
 
-3. Frontend, store the token in localStorage.
+## yuapi-OcelotGateway
+**Function**: This project serves as an API gateway using Ocelot.
 
-   ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/a5cf2285-33eb-4d47-ad3f-ca1322382b5b)
-
-   `globalRequest.ts` -> `request.interceptors (请求拦截器)` -> Add the token to the request interceptor to include the token in the request header.
-
-   ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/c397cb30-b4ec-48dd-b378-0d248317b432)
-
-
-4. Backend, verify the token for each request.
-   ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/76965d82-636e-48fa-baeb-a97abe3d2822)
+**Features**:
+**Access Control**: Manages access control to the APIs.
+**User Verification**: Verifies users before allowing them to access certain endpoints.
+**Request Redirect**: Redirects requests to appropriate backend services.
+**Response Handling**: Handles and modifies responses before sending them back to the client.
+**Request Logging**: Logs incoming requests for auditing and debugging purposes.
+Uses middleware components like `AccessControlMiddleware`, `RequestLoggingMiddleware`, `UserVerificationMiddleware`, and `ResponseHandlingMiddleware` to implement these features.
