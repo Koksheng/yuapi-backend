@@ -16,4 +16,5 @@ message UserInfoResponse  {
     int32 id = 1;
     string userName = 2;
     string userAccount = 3;
+    string secretKey = 4;
 }

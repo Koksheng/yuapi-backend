@@ -29,7 +29,8 @@ namespace yuapi.Application
             // Register HttpClient and YuApiClient
             services.AddHttpClient<YuApiClient>(client =>
             {
-                client.BaseAddress = new Uri("http://localhost:8123"); // Adjust the base address as needed
+                //client.BaseAddress = new Uri("http://localhost:8123"); // Adjust the base address as needed
+                client.BaseAddress = new Uri("http://127.0.0.1:8090"); // Adjust the base address as needed
             });
 
             return services;

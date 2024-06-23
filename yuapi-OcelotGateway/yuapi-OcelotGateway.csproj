@@ -18,6 +18,10 @@
     <PackageReference Include="Ocelot" Version="23.3.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\yuapi-interface\yuapi-client-sdk\yuapi-client-sdk.csproj" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<Protobuf Include="Protos\interface_info.proto" GrpcServices="Client" />
 		<Protobuf Include="Protos\invoke_count.proto" GrpcServices="Client" />

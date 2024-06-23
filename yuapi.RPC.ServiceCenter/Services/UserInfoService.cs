@@ -24,7 +24,8 @@ namespace yuapi.RPC.ServiceCenter.Services
             {
                 Id = user.Id.Value,
                 UserName = user.userName,
-                UserAccount= user.userAccount
+                UserAccount= user.userAccount,
+                SecretKey = user.secretKey,
             };
 
             return await Task.FromResult(response);
