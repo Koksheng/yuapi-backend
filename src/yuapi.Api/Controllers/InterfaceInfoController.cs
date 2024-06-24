@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using yuapi.Api.AuthCheck;
 using yuapi.Application.Common.Constants;
 using yuapi.Application.Common.Exceptions;
 using yuapi.Application.Common.Models;
@@ -18,9 +16,7 @@ using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage;
 using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos;
 using yuapi.Contracts.Common;
 using yuapi.Contracts.InterfaceInfo;
-using yuapi.Domain.Common;
 using yuapi.Domain.Constants;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace yuapi.Api.Controllers
 {
