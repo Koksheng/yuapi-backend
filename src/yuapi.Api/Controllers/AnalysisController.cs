@@ -28,6 +28,7 @@ namespace yuapi.Api.Controllers
         {
 
             var query = _mapper.Map<ListInterfaceInfoByPageQuery>();
+            //test 
             var result = await _mediator.Send(query);
 
             var response = _mapper.Map<PaginatedList<InterfaceInfoSafetyResponse>>(result);
