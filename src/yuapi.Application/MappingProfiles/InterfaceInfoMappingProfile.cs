@@ -78,6 +78,9 @@ namespace yuapi.Application.MappingProfiles
             CreateMap<InvokeInterfaceInfoRequest, InvokeInterfaceInfoCommand>()
                 .ForCtorParam("userState", opt => opt.MapFrom(src => string.Empty));
 
+            // List Top Invoke Interface Info
+            CreateMap<InterfaceInfoWithTotalNumResult, InterfaceInfoWithTotalNumResponse>();
+
         }
     }
 

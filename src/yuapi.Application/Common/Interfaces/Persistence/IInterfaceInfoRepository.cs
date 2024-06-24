@@ -14,5 +14,6 @@ namespace yuapi.Application.Common.Interfaces.Persistence
         Task<int> OnlineInterfaceInfoById(int id);
         Task<int> OfflineInterfaceInfoById(int id);
         Task<InterfaceInfo> GetInterfaceInfo(string path, string method);
+        Task<List<InterfaceInfo>> ListByIdsAsync(List<int> ids);
     }
 }

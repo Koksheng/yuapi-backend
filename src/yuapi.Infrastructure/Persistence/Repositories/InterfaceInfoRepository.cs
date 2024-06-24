@@ -259,5 +259,17 @@ namespace yuapi.Infrastructure.Persistence.Repositories
                 .FirstOrDefaultAsync(i => i.url == path && i.method == method);
             return interfaceInfo;
         }
+
+        public async Task<List<InterfaceInfo>> ListByIdsAsync(List<int> ids)
+        {
+            var idsString = string.Join(",", ids);
+            var query = $"SELECT * FROM InterfaceInfos WHERE Id IN ({idsString})";
+
+            var interfaceInfos = await _context.InterfaceInfos
+                .FromSqlRaw(query)
+                .ToListAsync();
+
+            return interfaceInfos;
+        }
     }
 }

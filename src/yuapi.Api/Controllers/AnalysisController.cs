@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using yuapi.Application.Common.Constants;
-using yuapi.Application.Common.Exceptions;
 using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
-using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage;
+using yuapi.Application.InterfaceInfos.Queries.ListTopInvokeInterfaceInfo;
 using yuapi.Contracts.InterfaceInfo;
 
 namespace yuapi.Api.Controllers
@@ -24,14 +21,14 @@ namespace yuapi.Api.Controllers
             _mediator = mediator;
         }
         [HttpGet]
-        public async Task<BaseResponse<PaginatedList<InterfaceInfoSafetyResponse>>> listTopInvokeInterfaceInfo()
+        public async Task<BaseResponse<List<InterfaceInfoWithTotalNumResponse>>> listTopInvokeInterfaceInfo()
         {
 
-            var query = _mapper.Map<ListInterfaceInfoByPageQuery>();
+            var query = new ListTopInvokeInterfaceInfoQuery(3);
             //test 
             var result = await _mediator.Send(query);
 
-            var response = _mapper.Map<PaginatedList<InterfaceInfoSafetyResponse>>(result);
+            var response = _mapper.Map<List<InterfaceInfoWithTotalNumResponse>>(result);
 
             return ResultUtils.success(response);
         }

@@ -179,5 +179,14 @@ namespace yuapi.Infrastructure.Persistence.Repositories
 
             return userInterfaceInfo;
         }
+
+        public async Task<List<UserInterfaceInfo>> ListTopInvokeInterfaceInfoAsync(int limit)
+        {
+            var userInterfaceInfo = await _context.UserInterfaceInfos
+                .OrderByDescending(ui => ui.totalNum)
+                .Take(limit)
+                .ToListAsync();
+            return userInterfaceInfo;
+        }
     }
 }

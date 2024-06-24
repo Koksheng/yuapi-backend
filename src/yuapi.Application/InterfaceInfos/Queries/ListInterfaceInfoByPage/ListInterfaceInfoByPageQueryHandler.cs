@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using yuapi.Application.Common.Interfaces.Persistence;
 using yuapi.Application.Common.Models;
 using yuapi.Application.InterfaceInfos.Common;
-using yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfos;
 using yuapi.Domain.InterfaceInfoAggregate;
 
 namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage
