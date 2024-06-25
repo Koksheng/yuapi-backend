@@ -5,6 +5,7 @@ using yuapi.Domain.UserInterfaceInfoAggregate.ValueObjects;
 using yuapi.Application.Common.Constants;
 using yuapi.Application.Common.Exceptions;
 using yuapi.Application.Common.Models;
+using yuapi.Application.UserInterfaceInfos.Common;
 
 namespace yuapi.Infrastructure.Persistence.Repositories
 {
@@ -180,12 +181,19 @@ namespace yuapi.Infrastructure.Persistence.Repositories
             return userInterfaceInfo;
         }
 
-        public async Task<List<UserInterfaceInfo>> ListTopInvokeInterfaceInfoAsync(int limit)
+        public async Task<List<UserInterfaceInfoWithTotalNumResult>> ListTopInvokeInterfaceInfoAsync(int limit)
         {
             var userInterfaceInfo = await _context.UserInterfaceInfos
+                .GroupBy(ui => ui.interfaceInfoId)
+                .Select(group => new UserInterfaceInfoWithTotalNumResult
+                {
+                    interfaceInfoId = group.Key,
+                    totalNum = group.Sum(ui => ui.totalNum)
+                })
                 .OrderByDescending(ui => ui.totalNum)
                 .Take(limit)
                 .ToListAsync();
+
             return userInterfaceInfo;
         }
     }

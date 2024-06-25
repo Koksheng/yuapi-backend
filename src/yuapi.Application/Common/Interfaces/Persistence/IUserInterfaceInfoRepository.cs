@@ -1,4 +1,5 @@
 ﻿using yuapi.Application.Common.Models;
+using yuapi.Application.UserInterfaceInfos.Common;
 using yuapi.Domain.UserInterfaceInfoAggregate;
 
 namespace yuapi.Application.Common.Interfaces.Persistence
@@ -12,6 +13,6 @@ namespace yuapi.Application.Common.Interfaces.Persistence
         Task<List<UserInterfaceInfo>> List(UserInterfaceInfo query);
         Task<PaginatedList<UserInterfaceInfo>> ListByPage(UserInterfaceInfo query, int current, int pageSize, string sortField, string sortOrder);
         Task<UserInterfaceInfo> GetByInterfaceInfoAndUserId(int interfaceInfoId, int userId);
-        Task<List<UserInterfaceInfo>> ListTopInvokeInterfaceInfoAsync(int limit);
+        Task<List<UserInterfaceInfoWithTotalNumResult>> ListTopInvokeInterfaceInfoAsync(int limit);
     }
 }
