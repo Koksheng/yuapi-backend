@@ -39,7 +39,7 @@ namespace yuapi.Contracts.InterfaceInfo
         /**
          * 接口状态（0-关闭，1-开启）
          */
-        int status,
+        //int status,
 
         /**
          * 请求类型
