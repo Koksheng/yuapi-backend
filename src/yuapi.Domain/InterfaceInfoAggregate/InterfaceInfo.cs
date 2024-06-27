@@ -11,7 +11,7 @@ namespace yuapi.Domain.InterfaceInfoAggregate
         public string requestParams { get; set; }
         public string requestHeader { get; set; }
         public string responseHeader { get; set; }
-        public int status { get; set; }
+        public int? status { get; set; }
         public string method { get; set; }
         public int userId { get; set; }
         public DateTime createTime { get; set; }
@@ -26,7 +26,7 @@ namespace yuapi.Domain.InterfaceInfoAggregate
             string requestParams,
             string requestHeader,
             string responseHeader,
-            int status,
+            int? status,
             string method,
             int userId,
             DateTime createTime,

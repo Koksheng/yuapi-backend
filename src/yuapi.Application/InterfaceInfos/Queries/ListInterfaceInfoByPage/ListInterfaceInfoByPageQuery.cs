@@ -13,7 +13,7 @@ namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage
         public string Url { get; set; }
         public string RequestHeader { get; set; }
         public string ResponseHeader { get; set; }
-        public int Status { get; set; }
+        public int? Status { get; set; }
         public string Method { get; set; }
         public int UserId { get; set; }
         //public int Current { get; set; } = 1; // Default page number
@@ -27,7 +27,7 @@ namespace yuapi.Application.InterfaceInfos.Queries.ListInterfaceInfoByPage
         // Optional constructor with parameters
         public ListInterfaceInfoByPageQuery(
             int id, string name, string description, string url,
-            string requestHeader, string responseHeader, int status,
+            string requestHeader, string responseHeader, int? status,
             string method, int userId, int current, int pageSize,
             string sortField, string sortOrder)
         {

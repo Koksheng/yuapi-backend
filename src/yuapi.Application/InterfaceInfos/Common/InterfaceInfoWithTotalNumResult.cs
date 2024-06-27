@@ -8,7 +8,7 @@
         string RequestParams,
         string RequestHeader,
         string ResponseHeader,
-        int Status,
+        int? Status,
         string Method,
         DateTime CreateTime,
         DateTime UpdateTime,
