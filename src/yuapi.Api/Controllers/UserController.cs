@@ -9,6 +9,7 @@ using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
 using yuapi.Application.Users.Commands.Register;
 using yuapi.Application.Users.Queries.GetCurrentUser;
+using yuapi.Application.Users.Queries.ListUserByPage;
 using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.User;
 using yuapi.Domain.Constants;
@@ -111,5 +112,38 @@ namespace yuapi.Api.Controllers
         //    var safetyUsersList = await _userService.SearchUserList(userRquest);
         //    return ResultUtils.success(safetyUsersList);
         //}
+
+        //[HttpPost]
+        //public async Task<BaseResponse<int>> updateUser(UpdateInterfaceInfoRequest request)
+        //{
+        //    if (request == null)
+        //    {
+        //        throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        //    }
+
+        //    var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+
+        //    var command = _mapper.Map<UpdateInterfaceInfoCommand>(request);
+        //    // Assign the userState
+        //    command = command with { userState = userState };
+        //    return await _mediator.Send(command);
+        //}
+
+        [HttpGet("list/page")]
+        public async Task<BaseResponse<PaginatedList<UserSafetyResponse>>> listUserByPage([FromQuery] QueryUserRequest request)
+        {
+            if (request == null)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+
+            var query = _mapper.Map<ListUserByPageQuery>(request);
+            var result = await _mediator.Send(query);
+
+            var response = _mapper.Map<PaginatedList<UserSafetyResponse>>(result);
+
+            return ResultUtils.success(response);
+        }
+
     }
 }

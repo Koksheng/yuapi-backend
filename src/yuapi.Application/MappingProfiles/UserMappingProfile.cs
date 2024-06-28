@@ -5,6 +5,9 @@ using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.User;
 using yuapi.Domain.UserAggregate;
 using yuapi.Domain.UserAggregate.ValueObjects;
+using yuapi.Application.Users.Queries.ListUserByPage;
+using yuapi.Application.Common.Models;
+using yuapi.Application.MappingProfiles.Common;
 
 namespace yuapi.Application.MappingProfiles
 {
@@ -25,7 +28,18 @@ namespace yuapi.Application.MappingProfiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.Value))  // Mapping UserId.Value to Id
                 .ForCtorParam("token", opt => opt.MapFrom(src => string.Empty));
             CreateMap<UserSafetyResult, UserSafetyResponse>();
-            CreateMap<SearchUserRequest, User>();
+
+            // List User By Page
+            CreateMap<QueryUserRequest, ListUserByPageQuery>()
+               .ForMember(dest => dest.Current, opt => opt.MapFrom(src => src.current))
+               .ForMember(dest => dest.PageSize, opt => opt.MapFrom(src => src.pageSize))
+               .ForMember(dest => dest.SortField, opt => opt.MapFrom(src => src.sortField))
+               .ForMember(dest => dest.SortOrder, opt => opt.MapFrom(src => src.sortOrder));
+            CreateMap<ListUserByPageQuery, User>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id > 0 ? UserId.Create(src.Id) : null)); // Adjust based on how UserId is created
+
+            // Mapping for PaginatedList<UserSafetyResult> to PaginatedList<UserSafetyResponse>
+            CreateMap(typeof(PaginatedList<>), typeof(PaginatedList<>)).ConvertUsing(typeof(PaginatedListTypeConverter<,>));
         }
     }
 }

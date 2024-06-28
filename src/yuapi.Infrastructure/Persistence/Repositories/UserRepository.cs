@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using yuapi.Application.Common.Interfaces.Persistence;
+using yuapi.Application.Common.Models;
 using yuapi.Domain.UserAggregate;
 using yuapi.Domain.UserAggregate.Events;
 using yuapi.Domain.UserAggregate.ValueObjects;
@@ -55,6 +56,60 @@ namespace yuapi.Infrastructure.Persistence.Repositories
                 .FirstOrDefaultAsync(u => u.accessKey == accessKey);
 
             return user;
+        }
+
+        public async Task<PaginatedList<User>> ListByPage(User query, int current, int pageSize, string sortField, string sortOrder)
+        {
+            var queryable = _context.Users.AsQueryable();
+
+            if (query.Id != null)
+            {
+                queryable = queryable.Where(i => i.Id == query.Id);
+            }
+
+            if (!string.IsNullOrEmpty(query.userName))
+            {
+                queryable = queryable.Where(i => i.userName.Contains(query.userName));
+            }
+
+            if (!string.IsNullOrEmpty(query.userAccount))
+            {
+                queryable = queryable.Where(i => i.userAccount.Contains(query.userAccount));
+            }
+
+            if (query.gender != null)
+            {
+                queryable = queryable.Where(i => i.gender == query.gender);
+            }
+
+            if (!string.IsNullOrEmpty(query.userRole))
+            {
+                queryable = queryable.Where(i => i.userRole.Contains(query.userRole));
+            }
+
+            if (query.isDelete != null)
+            {
+                queryable = queryable.Where(i => i.isDelete == query.isDelete);
+            }
+
+            // Continue with other filters...
+
+            if (!string.IsNullOrEmpty(sortField))
+            {
+                if (sortOrder == "asc")
+                {
+                    queryable = queryable.OrderBy(e => EF.Property<object>(e, sortField));
+                }
+                else
+                {
+                    queryable = queryable.OrderByDescending(e => EF.Property<object>(e, sortField));
+                }
+            }
+
+            var totalCount = await queryable.CountAsync();
+            var items = await queryable.Skip((current - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            return new PaginatedList<User>(items, totalCount, current, pageSize);
         }
     }
 }
