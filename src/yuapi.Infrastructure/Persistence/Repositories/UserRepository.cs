@@ -18,7 +18,7 @@ namespace yuapi.Infrastructure.Persistence.Repositories
         public async Task<User> GetUserByUserAccount(string userAccount)
         {
             var user = await _context.Users
-                             .Where(u => !u.isDelete && u.userAccount == userAccount)
+                             .Where(u => u.isDelete != true && u.userAccount == userAccount)
                              .FirstOrDefaultAsync();
             return user;
         }
@@ -56,6 +56,14 @@ namespace yuapi.Infrastructure.Persistence.Repositories
                 .FirstOrDefaultAsync(u => u.accessKey == accessKey);
 
             return user;
+        }
+
+        public async Task<int> Update(User user)
+        {
+            // Attach the entity to the context and mark it as modified
+            _context.Users.Update(user);
+            // Save the changes to the database
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<PaginatedList<User>> ListByPage(User query, int current, int pageSize, string sortField, string sortOrder)

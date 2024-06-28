@@ -8,6 +8,7 @@ using yuapi.Domain.UserAggregate.ValueObjects;
 using yuapi.Application.Users.Queries.ListUserByPage;
 using yuapi.Application.Common.Models;
 using yuapi.Application.MappingProfiles.Common;
+using yuapi.Application.Users.Commands.UpdateUser;
 
 namespace yuapi.Application.MappingProfiles
 {
@@ -37,6 +38,12 @@ namespace yuapi.Application.MappingProfiles
                .ForMember(dest => dest.SortOrder, opt => opt.MapFrom(src => src.sortOrder));
             CreateMap<ListUserByPageQuery, User>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id > 0 ? UserId.Create(src.Id) : null)); // Adjust based on how UserId is created
+            CreateMap<UserSafetyResult, AdminPageUserSafetyResponse>();
+
+            // Update
+            CreateMap<UpdateUserRequest, UpdateUserCommand>()
+                .ForCtorParam("userState", opt => opt.MapFrom(src => string.Empty));
+            CreateMap<UpdateUserCommand, User>();
 
             // Mapping for PaginatedList<UserSafetyResult> to PaginatedList<UserSafetyResponse>
             CreateMap(typeof(PaginatedList<>), typeof(PaginatedList<>)).ConvertUsing(typeof(PaginatedListTypeConverter<,>));

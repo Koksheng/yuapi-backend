@@ -30,7 +30,7 @@ namespace yuapi.Infrastructure.Services
             var loggedInUser = JsonConvert.DeserializeObject<UserSafetyResult>(userState);
             var user = await _userRepository.GetUser(loggedInUser.Id);
 
-            if (user == null || user.isDelete)
+            if (user == null || user.isDelete == true)
             {
                 //return null;
                 throw new BusinessException(ErrorCode.NULL_ERROR, "找不到该用户");

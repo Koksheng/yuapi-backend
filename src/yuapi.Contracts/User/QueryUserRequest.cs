@@ -7,6 +7,7 @@
         //string? userAvatar,
         int? gender,
         string? userRole,
+        int? isDelete,
         int? current,
         int? pageSize,
         string? sortField,

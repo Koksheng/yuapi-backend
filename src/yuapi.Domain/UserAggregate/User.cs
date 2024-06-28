@@ -16,7 +16,7 @@ namespace yuapi.Domain.UserAggregate
         public string secretKey { get; set; } // 签名 secretKey
         public DateTime createTime { get; set; }
         public DateTime updateTime { get; set; }
-        public bool isDelete { get; set; }
+        public bool? isDelete { get; set; }
 
         private User(
             UserId userId,
@@ -30,7 +30,7 @@ namespace yuapi.Domain.UserAggregate
             string secretKey,
             DateTime createTime,
             DateTime updateTime,
-            bool isDelete)
+            bool? isDelete)
             : base(userId)
         {
             userName = userName;

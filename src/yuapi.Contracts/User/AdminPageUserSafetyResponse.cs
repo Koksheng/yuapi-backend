@@ -1,16 +1,14 @@
-﻿namespace yuapi.Application.Users.Common
+﻿namespace yuapi.Contracts.User
 {
-    public record UserSafetyResult(
+    public record AdminPageUserSafetyResponse(
         int Id,
         string userName,
         string userAccount,
         string userAvatar,
         int gender,
         string userRole,
-        string accessKey,
-        string secretKey,
+        int isDelete,
         DateTime createTime,
         DateTime updateTime,
-        int isDelete,
         string token);
 }

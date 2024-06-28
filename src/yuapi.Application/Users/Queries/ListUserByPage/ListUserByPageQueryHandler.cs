@@ -27,7 +27,7 @@ namespace yuapi.Application.Users.Queries.ListUserByPage
             query.ApplyDefaults();
 
             User user = _mapper.Map<User>(query);
-            user.isDelete = false;
+            //user.isDelete = false;
 
             var paginatedResult = await _userRepository.ListByPage(
                 user,
