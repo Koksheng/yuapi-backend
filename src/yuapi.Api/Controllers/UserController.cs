@@ -7,10 +7,12 @@ using yuapi.Application.Common.Constants;
 using yuapi.Application.Common.Exceptions;
 using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
+using yuapi.Application.Users.Commands.RegenerateKey;
 using yuapi.Application.Users.Commands.Register;
 using yuapi.Application.Users.Commands.UpdateUser;
 using yuapi.Application.Users.Commands.UpdateUserAvatar;
 using yuapi.Application.Users.Queries.GetCurrentUser;
+using yuapi.Application.Users.Queries.GetKey;
 using yuapi.Application.Users.Queries.ListUserByPage;
 using yuapi.Application.Users.Queries.Login;
 using yuapi.Contracts.User;
@@ -162,5 +164,32 @@ namespace yuapi.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [HttpGet]
+        public async Task<BaseResponse<UserDevKeyResponse>> getKey()
+        {
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+
+            var query = new GetKeyQuery(userState);
+            var currentSafetyUser = await _mediator.Send(query);
+
+            // map UserSafetyResult to UserDevKeyResponse
+            var response = _mapper.Map<UserDevKeyResponse>(currentSafetyUser);
+
+            return ResultUtils.success(response);
+        }
+
+        [HttpPost]
+        public async Task<BaseResponse<UserDevKeyResponse>> regenerateKey()
+        {
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+
+            var query = new RegenerateKeyCommand(userState);
+            var currentSafetyUser = await _mediator.Send(query);
+
+            // map UserSafetyResult to UserDevKeyResponse
+            var response = _mapper.Map<UserDevKeyResponse>(currentSafetyUser);
+
+            return ResultUtils.success(response);
+        }
     }
 }

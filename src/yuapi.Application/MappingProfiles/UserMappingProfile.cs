@@ -47,6 +47,10 @@ namespace yuapi.Application.MappingProfiles
 
             // Mapping for PaginatedList<UserSafetyResult> to PaginatedList<UserSafetyResponse>
             CreateMap(typeof(PaginatedList<>), typeof(PaginatedList<>)).ConvertUsing(typeof(PaginatedListTypeConverter<,>));
+
+            // Get User Access Key & Secret Key
+            CreateMap<UserSafetyResult, UserDevKeyResponse>();
+
         }
     }
 }

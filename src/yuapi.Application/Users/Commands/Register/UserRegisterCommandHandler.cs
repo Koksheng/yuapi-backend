@@ -53,6 +53,7 @@ namespace yuapi.Application.Users.Commands.Register
             newUser.accessKey = hashedAccessKey;
             newUser.secretKey = hashedSecretKey;
             newUser.createTime = DateTime.Now;
+            newUser.isDelete = false;
 
             int result = await _userRepository.CreateUser(newUser);
 
