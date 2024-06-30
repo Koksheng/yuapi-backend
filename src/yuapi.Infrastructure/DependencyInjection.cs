@@ -27,6 +27,7 @@ namespace yuapi.Infrastructure
                 .AddPersistance(configuration);
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IFileUploadService, FileUploadService>();
 
             return services;
         }

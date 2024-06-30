@@ -79,6 +79,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(); // This sets up the web root path
 app.UseRouting();
 
 app.UseCors("AllowSpecificOrigins");

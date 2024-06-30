@@ -9,6 +9,7 @@ using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
 using yuapi.Application.Users.Commands.Register;
 using yuapi.Application.Users.Commands.UpdateUser;
+using yuapi.Application.Users.Commands.UpdateUserAvatar;
 using yuapi.Application.Users.Queries.GetCurrentUser;
 using yuapi.Application.Users.Queries.ListUserByPage;
 using yuapi.Application.Users.Queries.Login;
@@ -144,6 +145,21 @@ namespace yuapi.Api.Controllers
             var response = _mapper.Map<PaginatedList<AdminPageUserSafetyResponse>>(result);
 
             return ResultUtils.success(response);
+        }
+
+        [HttpPost("update/avatar")]
+        public async Task<BaseResponse<int>> updateUserAvatar([FromForm] IFormFile file)
+        {
+            if (file == null)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+
+            var command = new UpdateUserAvatarCommand(file, userState);
+            
+            return await _mediator.Send(command);
         }
 
     }
