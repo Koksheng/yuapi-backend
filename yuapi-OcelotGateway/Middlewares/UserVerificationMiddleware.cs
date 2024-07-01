@@ -21,10 +21,11 @@ namespace yuapi_OcelotGateway.Middlewares
             var nonce = context.Request.Headers["nonce"].FirstOrDefault();
             var timestamp = context.Request.Headers["timestamp"].FirstOrDefault();
             var sign = context.Request.Headers["sign"].FirstOrDefault();
+            var body = context.Request.Headers["body"].FirstOrDefault();
 
-            context.Request.EnableBuffering();
-            var body = await new StreamReader(context.Request.Body).ReadToEndAsync();
-            context.Request.Body.Position = 0;
+            //context.Request.EnableBuffering();
+            //var body = await new StreamReader(context.Request.Body).ReadToEndAsync();
+            //context.Request.Body.Position = 0;
             /*
              * Issue encounter !!
              * It looks like the issue might be with how the request body is being read in the middleware. 

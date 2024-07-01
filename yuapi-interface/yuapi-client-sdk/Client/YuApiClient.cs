@@ -1,9 +1,7 @@
-﻿using System.Text.Json;
-using System.Text;
+﻿using System.Text;
 using yuapi_client_sdk.Model;
 using yuapi_client_sdk.Utils;
 using Newtonsoft.Json;
-using yuapi_client_sdk;
 
 namespace yuapi_client_sdkyuapi_client_sdk.Client
 {
@@ -30,6 +28,26 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
             _secretKey = secretKey;
         }
 
+        public async Task<string> InvokeAsync(string methodName, params object[] parameters)
+        {
+            var method = GetType().GetMethod(methodName, parameters.Select(p => p.GetType()).ToArray());
+            if (method == null)
+            {
+                throw new ArgumentException($"Method {methodName} not found.");
+            }
+
+            //var userJson = JsonConvert.SerializeObject(parameters);
+            var userJson = JsonConvert.SerializeObject(parameters.Length == 1 ? parameters[0] : parameters);
+            var headers = HeaderUtils.GetHeaderMap(userJson, _accessKey, _secretKey);
+            foreach (var header in headers)
+            {
+                _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+            }
+
+            var task = (Task<string>)method.Invoke(this, parameters);
+            return await task;
+        }
+
         public async Task<string> GetNameByGet(string name)
         {
             var response = await _httpClient.GetAsync($"/api/name?name={name}");
@@ -49,11 +67,11 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
         {
             var userJson = JsonConvert.SerializeObject(user);
             var userContent = new StringContent(userJson, Encoding.UTF8, "application/json");
-            var headers = HeaderUtils.GetHeaderMap(userJson, _accessKey, _secretKey);
-            foreach (var header in headers)
-            {
-                _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-            }
+            //var headers = HeaderUtils.GetHeaderMap(userJson, _accessKey, _secretKey);
+            //foreach (var header in headers)
+            //{
+            //    _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+            //}
 
             var postUserResponse = await _httpClient.PostAsync("/api/name/user", userContent);
             //Console.WriteLine(await postUserResponse.Content.ReadAsStringAsync());
