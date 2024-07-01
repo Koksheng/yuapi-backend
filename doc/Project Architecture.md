@@ -45,6 +45,7 @@ The project consists of several interconnected services and components that work
 
 ### Diagram
 
+```
 [Client Request] --> [UserInterfaceInfoController (yuapi.Api)]
                          |
                          v
@@ -69,3 +70,4 @@ The project consists of several interconnected services and components that work
                          |
                          v
                     [Final Response]
+```
