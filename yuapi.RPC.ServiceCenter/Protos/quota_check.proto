@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "yuapi.RPC.ServiceCenter";
+
+package quotacheck;
+
+service QuotaCheck  {
+    rpc CheckQuota (QuotaCheckRequest) returns (QuotaCheckReply);
+}
+
+message QuotaCheckRequest {
+    int32 interfaceInfoId = 1;
+    int32 userId = 2;
+}
+
+message QuotaCheckReply  {
+    bool success = 1;
+}

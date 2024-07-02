@@ -28,20 +28,30 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
             _secretKey = secretKey;
         }
 
-        public async Task<string> InvokeAsync(string methodName, params object[] parameters)
+        public async Task<string> InvokeAsync(string methodName, string serializedParams)
         {
+            object[] parameters = methodName switch
+            {
+                "GetNameByGet" => new object[] { serializedParams },
+                "GetUsernameByPost" => new object[] { JsonConvert.DeserializeObject<User>(serializedParams) },
+                _ => throw new ArgumentException($"Unsupported method {methodName}.")
+            };
+
+            var userJson = JsonConvert.SerializeObject(parameters);
+            var headers = HeaderUtils.GetHeaderMap(userJson, _accessKey, _secretKey);
+            foreach (var header in headers)
+            {
+                if (_httpClient.DefaultRequestHeaders.Contains(header.Key))
+                {
+                    _httpClient.DefaultRequestHeaders.Remove(header.Key);
+                }
+                _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+            }
+
             var method = GetType().GetMethod(methodName, parameters.Select(p => p.GetType()).ToArray());
             if (method == null)
             {
                 throw new ArgumentException($"Method {methodName} not found.");
-            }
-
-            //var userJson = JsonConvert.SerializeObject(parameters);
-            var userJson = JsonConvert.SerializeObject(parameters.Length == 1 ? parameters[0] : parameters);
-            var headers = HeaderUtils.GetHeaderMap(userJson, _accessKey, _secretKey);
-            foreach (var header in headers)
-            {
-                _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
             }
 
             var task = (Task<string>)method.Invoke(this, parameters);

@@ -10,6 +10,7 @@
     <None Remove="Protos\interface_info.proto" />
     <None Remove="Protos\invoke_count.proto" />
     <None Remove="Protos\user_info.proto" />
+	<None Remove="Protos\quota_check.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
     <Protobuf Include="Protos\interface_info.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\user_info.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\invoke_count.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\quota_check.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

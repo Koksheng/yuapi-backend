@@ -50,28 +50,7 @@ namespace yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo
             _yuApiClient.SetAccessKey(safetyUser.accessKey);
             _yuApiClient.SetSecretKey(safetyUser.secretKey);
 
-            //var user = JsonConvert.DeserializeObject<User>(userRequestParams);
-            //var usernameByPost = await _yuApiClient.GetUsernameByPost(user);
-            //return ResultUtils.success(data: usernameByPost);
-            //var result = await _yuApiClient.InvokeAsync(interfaceInfo.name, user);
-            //return ResultUtils.success(data: result);
-
-            string result;
-
-            if (interfaceInfo.name == "GetNameByGet")
-            {
-                var name = JsonConvert.DeserializeObject<string>(userRequestParams);
-                result = await _yuApiClient.InvokeAsync(interfaceInfo.name, name);
-            }
-            else if (interfaceInfo.name == "GetUsernameByPost")
-            {
-                var user = JsonConvert.DeserializeObject<User>(userRequestParams);
-                result = await _yuApiClient.InvokeAsync(interfaceInfo.name, user);
-            }
-            else
-            {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "Unknown method name.");
-            }
+            var result = await _yuApiClient.InvokeAsync(interfaceInfo.name, userRequestParams);
 
             return ResultUtils.success(data: result);
         }
