@@ -19,13 +19,23 @@ namespace yuapi.RPC.ServiceCenter.Services
                 return new QuotaCheckReply { Success = false };
             }
 
-            userInterfaceInfo.leftNum -= 1;
-            userInterfaceInfo.totalNum += 1;
-            userInterfaceInfo.updateTime = DateTime.Now;
+            // Map domain model to proto message
+            var userInterfaceInfoMessage = new UserInterfaceInfo
+            {
+                UserId = userInterfaceInfo.userId,
+                InterfaceInfoId = userInterfaceInfo.interfaceInfoId,
+                TotalNum = userInterfaceInfo.totalNum,
+                LeftNum = userInterfaceInfo.leftNum,
+                Status = userInterfaceInfo.status,
+                CreateTime = userInterfaceInfo.createTime.ToString("o"), // ISO 8601 format,
+                UpdateTime = userInterfaceInfo.updateTime.ToString("o")  // ISO 8601 format
+            };
 
-            await _userInterfaceInfoRepository.Update(userInterfaceInfo);
-
-            return new QuotaCheckReply { Success = true };
+            return new QuotaCheckReply
+            {
+                Success = true,
+                UserInterfaceInfo = userInterfaceInfoMessage
+            };
         }
     }
 }

@@ -11,6 +11,7 @@ builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddSingleton(new InvokeCountServiceClient("http://localhost:5266"));
 builder.Services.AddSingleton(new UserInfoServiceClient("http://localhost:5266"));
 builder.Services.AddSingleton(new InterfaceInfoServiceClient("http://localhost:5266"));
+builder.Services.AddSingleton(new QuotaCheckServiceClient("http://localhost:5266"));
 
 // Configure Kestrel to use settings from appsettings.json
 builder.WebHost.ConfigureKestrel(options =>
@@ -25,6 +26,7 @@ var app = builder.Build();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseMiddleware<AccessControlMiddleware>();
 app.UseMiddleware<UserVerificationMiddleware>();
+app.UseMiddleware<QuotaCheckMiddleware>();
 app.UseMiddleware<ResponseHandlingMiddleware>();
 
 app.MapGet("/", () => "Hello World!");
