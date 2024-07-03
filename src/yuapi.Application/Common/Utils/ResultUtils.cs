@@ -9,9 +9,9 @@ namespace yuapi.Application.Common.Utils
         {
             return new BaseResponse<T>(0, data, "ok");
         }
-        public static BaseResponse<T> error<T>(ErrorCode errorCode)
+        public static BaseResponse<T> error<T>(ErrorCode errorCode, string message)
         {
-            return new BaseResponse<T>(errorCode.Code, default(T), errorCode.Message, errorCode.Description);
+            return new BaseResponse<T>(errorCode.Code, default(T), message, errorCode.Description);
         }
         public static BaseResponse<T> error<T>(int code, T data, string message, string description)
         {

@@ -50,9 +50,16 @@ namespace yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo
             _yuApiClient.SetAccessKey(safetyUser.accessKey);
             _yuApiClient.SetSecretKey(safetyUser.secretKey);
 
-            var result = await _yuApiClient.InvokeAsync(interfaceInfo.name, userRequestParams);
-
-            return ResultUtils.success(data: result);
+            try
+            {
+                var result = await _yuApiClient.InvokeAsync(interfaceInfo.name, userRequestParams);
+                return ResultUtils.success(data: result);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                return ResultUtils.error<string>(ErrorCode.SYSTEM_ERROR, ex.Message);
+            }
         }
     }
 }

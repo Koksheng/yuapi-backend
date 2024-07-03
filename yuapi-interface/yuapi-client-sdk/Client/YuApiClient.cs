@@ -53,15 +53,26 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
             {
                 throw new ArgumentException($"Method {methodName} not found.");
             }
-
-            var task = (Task<string>)method.Invoke(this, parameters);
-            return await task;
+            try
+            {
+                var task = (Task<string>)method.Invoke(this, parameters);
+                var result = await task;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<string> GetNameByGet(string name)
         {
             var response = await _httpClient.GetAsync($"/api/name?name={name}");
-            //Console.WriteLine(response);
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorContent);
+            }
             return await response.Content.ReadAsStringAsync();
         }
 
@@ -69,7 +80,11 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
         {
             //var content = new StringContent($"name={name}", Encoding.UTF8, "application/x-www-form-urlencoded");
             var response = await _httpClient.PostAsync($"/api/name?name={name}", null);
-            //Console.WriteLine(await response.Content.ReadAsStringAsync());
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorContent);
+            }
             return await response.Content.ReadAsStringAsync();
         }
 
@@ -77,14 +92,13 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
         {
             var userJson = JsonConvert.SerializeObject(user);
             var userContent = new StringContent(userJson, Encoding.UTF8, "application/json");
-            //var headers = HeaderUtils.GetHeaderMap(userJson, _accessKey, _secretKey);
-            //foreach (var header in headers)
-            //{
-            //    _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-            //}
 
             var postUserResponse = await _httpClient.PostAsync("/api/name/user", userContent);
-            //Console.WriteLine(await postUserResponse.Content.ReadAsStringAsync());
+            if (!postUserResponse.IsSuccessStatusCode)
+            {
+                var errorContent = await postUserResponse.Content.ReadAsStringAsync();
+                throw new Exception(errorContent);
+            }
             return await postUserResponse.Content.ReadAsStringAsync();
 
         }

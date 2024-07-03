@@ -32,7 +32,7 @@ namespace yuapi_OcelotGateway.Middlewares
                 if (quotaCheckReply.UserInterfaceInfo.LeftNum <= 0)
                 {
                     context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                    await context.Response.WriteAsync("No remaining quota to call/invoke anymore.");
+                    await context.Response.WriteAsync("No remaining quota to invoke anymore.");
                     return;
                 }
             }
