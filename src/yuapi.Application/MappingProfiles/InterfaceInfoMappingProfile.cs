@@ -42,7 +42,8 @@ namespace yuapi.Application.MappingProfiles
 
             // Get InterfaceInfo
             CreateMap<InterfaceInfo, InterfaceInfoSafetyResult>()
-                .ForMember(dest => dest.id, opt => opt.MapFrom(src => src.Id.Value));
+                .ForMember(dest => dest.id, opt => opt.MapFrom(src => src.Id.Value))
+                .ForCtorParam("userInterfaceInfoRemainingCount", opt => opt.MapFrom(src => 0));
             CreateMap<InterfaceInfoSafetyResult, InterfaceInfoSafetyResponse>();
 
             // List InterfaceInfos

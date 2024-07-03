@@ -86,7 +86,9 @@ namespace yuapi.Api.Controllers
         [HttpGet]
         public async Task<BaseResponse<InterfaceInfoSafetyResponse>> getInterfaceInfoById(int id)
         {
-            var query = new GetInterfaceInfoByIdQuery(id);
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+
+            var query = new GetInterfaceInfoByIdQuery(id, userState);
 
             var result= await _mediator.Send(query);
 

@@ -8,6 +8,7 @@ using yuapi.Application.Common.Models;
 using yuapi.Application.Common.Utils;
 using yuapi.Application.UserInterfaceInfos.Commands.CreateUserInterfaceInfo;
 using yuapi.Application.UserInterfaceInfos.Commands.DeleteUserInterfaceInfo;
+using yuapi.Application.UserInterfaceInfos.Commands.UpdateFreeTrialUserInterfaceInfo;
 using yuapi.Application.UserInterfaceInfos.Commands.UpdateUserInterfaceInfo;
 using yuapi.Application.UserInterfaceInfos.Queries.GetUserInterfaceInfoById;
 using yuapi.Application.UserInterfaceInfos.Queries.ListUserInterfaceInfoByPage;
@@ -131,5 +132,20 @@ namespace yuapi.Api.Controllers
             return ResultUtils.success(response);
         }
 
+        [HttpPost]
+        public async Task<BaseResponse<int>> getFreeTrialUserInterfaceInfo(UpdateFreeTrialUserInterfaceInfoRequest request)
+        {
+            if (request == null)
+            {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+
+            var userState = HttpContext.Session.GetString(ApplicationConstants.USER_LOGIN_STATE);
+
+            var command = _mapper.Map<UpdateFreeTrialUserInterfaceInfoCommand>(request);
+            // Assign the userState
+            command = command with { userState = userState };
+            return await _mediator.Send(command);
+        }
     }
 }

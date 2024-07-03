@@ -41,6 +41,10 @@
         string method,
 
         DateTime createTime,
-        DateTime updateTime
+        DateTime updateTime,
+        /**
+         * 接口剩余调用次数
+         */
+        int userInterfaceInfoRemainingCount
         );
 }

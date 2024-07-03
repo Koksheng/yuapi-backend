@@ -40,6 +40,7 @@
          */
         string method,
         DateTime createTime,
-        DateTime updateTime
+        DateTime updateTime,
+        int userInterfaceInfoRemainingCount
         );
 }

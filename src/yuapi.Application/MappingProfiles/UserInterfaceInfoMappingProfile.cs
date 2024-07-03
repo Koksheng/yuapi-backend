@@ -3,6 +3,7 @@ using yuapi.Application.Common.Models;
 using yuapi.Application.MappingProfiles.Common;
 using yuapi.Application.UserInterfaceInfos.Commands.CreateUserInterfaceInfo;
 using yuapi.Application.UserInterfaceInfos.Commands.DeleteUserInterfaceInfo;
+using yuapi.Application.UserInterfaceInfos.Commands.UpdateFreeTrialUserInterfaceInfo;
 using yuapi.Application.UserInterfaceInfos.Commands.UpdateUserInterfaceInfo;
 using yuapi.Application.UserInterfaceInfos.Common;
 using yuapi.Application.UserInterfaceInfos.Queries.ListUserInterfaceInfoByPage;
@@ -58,6 +59,10 @@ namespace yuapi.Application.MappingProfiles
             // Mapping for PaginatedList<UserInterfaceInfoSafetyResult> to PaginatedList<UserInterfaceInfoSafetyResponse>
             CreateMap(typeof(PaginatedList<>), typeof(PaginatedList<>)).ConvertUsing(typeof(PaginatedListTypeConverter<,>));
 
+            // Update Free Trial
+            CreateMap<UpdateFreeTrialUserInterfaceInfoRequest, UpdateFreeTrialUserInterfaceInfoCommand>()
+                .ForCtorParam("userState", opt => opt.MapFrom(src => string.Empty));
+            CreateMap<UpdateFreeTrialUserInterfaceInfoCommand, UserInterfaceInfo>();
         }
     }
 }
