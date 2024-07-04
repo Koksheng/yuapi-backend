@@ -7,5 +7,5 @@ namespace yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo
         int id,
         string userRequestParams,
         string userState
-        ) : IRequest<BaseResponse<string>>;
+        ) : IRequest<BaseResponse<object>>;
 }

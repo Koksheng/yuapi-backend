@@ -28,12 +28,13 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
             _secretKey = secretKey;
         }
 
-        public async Task<string> InvokeAsync(string methodName, string serializedParams)
+        public async Task<object> InvokeAsync(string methodName, string serializedParams)
         {
             object[] parameters = methodName switch
             {
                 "GetNameByGet" => new object[] { serializedParams },
                 "GetUsernameByPost" => new object[] { JsonConvert.DeserializeObject<User>(serializedParams) },
+                "GetRandomAnimeImage" => new object[] {  },
                 _ => throw new ArgumentException($"Unsupported method {methodName}.")
             };
 
@@ -55,9 +56,11 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
             }
             try
             {
-                var task = (Task<string>)method.Invoke(this, parameters);
-                var result = await task;
-                return result;
+                var task = (Task)method.Invoke(this, parameters);
+                await task.ConfigureAwait(false);
+
+                var resultProperty = task.GetType().GetProperty("Result");
+                return resultProperty?.GetValue(task);
             }
             catch (Exception ex)
             {
@@ -78,7 +81,6 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
 
         public async Task<string> GetNameByPost(string name)
         {
-            //var content = new StringContent($"name={name}", Encoding.UTF8, "application/x-www-form-urlencoded");
             var response = await _httpClient.PostAsync($"/api/name?name={name}", null);
             if (!response.IsSuccessStatusCode)
             {
@@ -101,6 +103,17 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
             }
             return await postUserResponse.Content.ReadAsStringAsync();
 
+        }
+
+        public async Task<byte[]> GetRandomAnimeImage()
+        {
+            var response = await _httpClient.GetAsync("https://pic.re/image");
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorContent);
+            }
+            return await response.Content.ReadAsByteArrayAsync();
         }
     }
 

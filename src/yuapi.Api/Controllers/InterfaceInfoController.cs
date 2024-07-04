@@ -167,7 +167,7 @@ namespace yuapi.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<BaseResponse<string>> invokeInterfaceInfo(InvokeInterfaceInfoRequest request)
+        public async Task<BaseResponse<object>> invokeInterfaceInfo(InvokeInterfaceInfoRequest request)
         {
             if (request == null)
             {
@@ -179,7 +179,9 @@ namespace yuapi.Api.Controllers
             var command = _mapper.Map<InvokeInterfaceInfoCommand>(request);
             // Assign the userState
             command = command with { userState = userState };
-            return await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            return result;
         }
     }
 }

@@ -14,7 +14,7 @@ using yuapi.Application.Common.Utils;
 namespace yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo
 {
     public class InvokeInterfaceInfoCommandHandler :
-        IRequestHandler<InvokeInterfaceInfoCommand, BaseResponse<string>>
+        IRequestHandler<InvokeInterfaceInfoCommand, BaseResponse<object>>
     {
         private readonly IInterfaceInfoRepository _interfaceInfoRepository;
         private readonly ICurrentUserService _currentUserService;
@@ -27,7 +27,7 @@ namespace yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo
             _yuApiClient = yuApiClient;
         }
 
-        public async Task<BaseResponse<string>> Handle(InvokeInterfaceInfoCommand command, CancellationToken cancellationToken)
+        public async Task<BaseResponse<object>> Handle(InvokeInterfaceInfoCommand command, CancellationToken cancellationToken)
         {
             int id = command.id;
             string userState = command.userState;
@@ -53,12 +53,18 @@ namespace yuapi.Application.InterfaceInfos.Commands.InvokeInterfaceInfo
             try
             {
                 var result = await _yuApiClient.InvokeAsync(interfaceInfo.name, userRequestParams);
-                return ResultUtils.success(data: result);
+
+                if (result is byte[] byteArrayResult)
+                {
+                    return ResultUtils.success<object>(Convert.ToBase64String(byteArrayResult));
+                }
+
+                return ResultUtils.success<object>(result);
             }
             catch (Exception ex)
             {
                 // Log the exception if needed
-                return ResultUtils.error<string>(ErrorCode.SYSTEM_ERROR, ex.Message);
+                return ResultUtils.error<object>(ErrorCode.SYSTEM_ERROR, ex.Message);
             }
         }
     }
