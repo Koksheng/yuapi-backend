@@ -35,6 +35,7 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
                 "GetNameByGet" => new object[] { serializedParams },
                 "GetUsernameByPost" => new object[] { JsonConvert.DeserializeObject<User>(serializedParams) },
                 "GetRandomAnimeImage" => new object[] {  },
+                "GetRandomWallpaper" => new object[] { },
                 _ => throw new ArgumentException($"Unsupported method {methodName}.")
             };
 
@@ -108,6 +109,17 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
         public async Task<byte[]> GetRandomAnimeImage()
         {
             var response = await _httpClient.GetAsync("https://pic.re/image");
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorContent);
+            }
+            return await response.Content.ReadAsByteArrayAsync();
+        }
+
+        public async Task<byte[]> GetRandomWallpaper()
+        {
+            var response = await _httpClient.GetAsync("https://unsplash.it/1920/1080/?random");
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
