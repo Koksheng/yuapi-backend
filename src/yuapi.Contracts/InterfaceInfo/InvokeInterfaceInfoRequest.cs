@@ -8,6 +8,6 @@ namespace yuapi.Contracts.InterfaceInfo
 {
     public record InvokeInterfaceInfoRequest(
         int id,
-        string userRequestParams
+        string? userRequestParams
         );
 }

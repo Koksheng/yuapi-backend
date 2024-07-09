@@ -108,7 +108,7 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
 
         public async Task<byte[]> GetRandomAnimeImage()
         {
-            var response = await _httpClient.GetAsync("https://pic.re/image");
+            var response = await _httpClient.GetAsync($"/api/random-anime-image");
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
@@ -119,7 +119,7 @@ namespace yuapi_client_sdkyuapi_client_sdk.Client
 
         public async Task<byte[]> GetRandomWallpaper()
         {
-            var response = await _httpClient.GetAsync("https://unsplash.it/1920/1080/?random");
+            var response = await _httpClient.GetAsync($"/api/random-wallpaper");
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();

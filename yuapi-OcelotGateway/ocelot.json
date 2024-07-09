@@ -1,6 +1,7 @@
 {
   "Routes": [
     {
+      // Route for GetNameByGet
       //http://localhost:8123/api/name
       "UpstreamPathTemplate": "/api/name",
       "UpstreamHttpMethod": [ "GET" ],
@@ -15,6 +16,7 @@
 
     },
     {
+      // Route for GetUsernameByPost
       //http://localhost:8123/api/name/user
       "UpstreamPathTemplate": "/api/name/user",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -24,6 +26,32 @@
         {
           "Host": "localhost",
           "Port": 8123
+        }
+      ]
+    },
+    {
+      // Route for GetRandomAnimeImage
+      "UpstreamPathTemplate": "/api/random-anime-image",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/image",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pic.re",
+          "Port": 443
+        }
+      ]
+    },
+    {
+      // Route for GetRandomWallpaper
+      "UpstreamPathTemplate": "/api/random-wallpaper",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/1920/1080/?random",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "unsplash.it",
+          "Port": 443
         }
       ]
     }
