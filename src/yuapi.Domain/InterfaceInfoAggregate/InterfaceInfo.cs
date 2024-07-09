@@ -11,6 +11,7 @@ namespace yuapi.Domain.InterfaceInfoAggregate
         public string requestParams { get; set; }
         public string requestHeader { get; set; }
         public string responseHeader { get; set; }
+        public string parameterExample { get; set; }
         public int? status { get; set; }
         public string method { get; set; }
         public int userId { get; set; }
@@ -26,6 +27,7 @@ namespace yuapi.Domain.InterfaceInfoAggregate
             string requestParams,
             string requestHeader,
             string responseHeader,
+            string parameterExample,
             int? status,
             string method,
             int userId,
@@ -40,6 +42,7 @@ namespace yuapi.Domain.InterfaceInfoAggregate
             requestParams = requestParams;
             requestHeader = requestHeader;
             responseHeader = responseHeader;
+            parameterExample = parameterExample;
             status = status;
             method = method;
             userId = userId;
@@ -55,6 +58,7 @@ namespace yuapi.Domain.InterfaceInfoAggregate
             string requestParams,
             string requestHeader,
             string responseHeader,
+            string parameterExample,
             int status,
             string method,
             int userId)
@@ -67,6 +71,7 @@ namespace yuapi.Domain.InterfaceInfoAggregate
                 requestParams,
                 requestHeader,
                 responseHeader,
+                parameterExample,
                 status,
                 method,
                 userId,

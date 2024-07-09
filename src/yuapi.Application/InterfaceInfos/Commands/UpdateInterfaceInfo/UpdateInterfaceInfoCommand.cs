@@ -34,6 +34,7 @@ namespace yuapi.Application.InterfaceInfos.Commands.UpdateInterfaceInfo
      * 响应头
      */
     string responseHeader,
+    string parameterExample,
 
     /**
      * 接口状态（0-关闭，1-开启）
