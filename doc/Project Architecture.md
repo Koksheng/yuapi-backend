@@ -38,7 +38,7 @@ The project consists of several interconnected services and components that work
 	- **RequestLoggingMiddleware** logs the request.
 	- **AccessControlMiddleware** verifies the interface information via gRPC.
 	- **UserVerificationMiddleware** verifies the user information via gRPC.
-	- **QuotaCheckMiddleware ** checks the user quota limits via gRPC.
+	- **QuotaCheckMiddleware** checks the user quota limits via gRPC.
 	- **ResponseHandlingMiddleware**:
 		- Executes the API logic by calling `GetUsernameByPost (http://localhost:8123/)`.
 		- Updates the invocation count via gRPC.
