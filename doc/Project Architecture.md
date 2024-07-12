@@ -1,6 +1,6 @@
 ## Project Overview and Architecture
 
-The project consists of several interconnected services and components that work together to handle API requests, process them, and track their usage. Here’s a detailed breakdown of the workflow and the components involved:
+The project consists of several interconnected services and components that work together to handle API requests, process them, and track their usage. Hereâ€™s a detailed breakdown of the workflow and the components involved:
 
 ### Components
 
@@ -23,7 +23,8 @@ The project consists of several interconnected services and components that work
 	1. **RequestLoggingMiddleware**: Logs the incoming requests.
 	2. **AccessControlMiddleware**: Checks interface information via `InterfaceInfoService` using gRPC at `yuapi.RPC.ServiceCenter (http://localhost:5266)`.
 	3. **UserVerificationMiddleware**: Verifies user information via `GetUserInfo` service using gRPC at `yuapi.RPC.ServiceCenter (http://localhost:5266)`.
-	4. **ResponseHandlingMiddleware**:
+	4. **QuotaCheckMiddleware**: Checks user quota limits for API usage via `CheckQuota` service using gRPC at `yuapi.RPC.ServiceCenter (http://localhost:5266)`.
+	5. **ResponseHandlingMiddleware**:
 		- Executes the API logic by calling `GetUsernameByPost (http://localhost:8123/)`.
 		- Updates the invocation count via `InvokeCountService` using gRPC at `yuapi.RPC.ServiceCenter (http://localhost:5266)`.
 
@@ -37,6 +38,7 @@ The project consists of several interconnected services and components that work
 	- **RequestLoggingMiddleware** logs the request.
 	- **AccessControlMiddleware** verifies the interface information via gRPC.
 	- **UserVerificationMiddleware** verifies the user information via gRPC.
+	- **QuotaCheckMiddleware ** checks the user quota limits via gRPC.
 	- **ResponseHandlingMiddleware**:
 		- Executes the API logic by calling `GetUsernameByPost (http://localhost:8123/)`.
 		- Updates the invocation count via gRPC.
@@ -57,10 +59,10 @@ The project consists of several interconnected services and components that work
                          v
 [Ocelot API Gateway (yuapi-OcelotGateway)]
                          |
-      -------------------------------------------------
-     |                 |                  |             |
-     v                 v                  v             v
-[RequestLogging] [AccessControl] [UserVerification] [ResponseHandling]
+      -----------------------------------------------------------------
+     |                 |                  |             |               |
+     v                 v                  v             v               v
+[RequestLogging] [AccessControl] [UserVerification] [QuotaCheck] [ResponseHandling]
                          |
                          v
        [GetUsernameByPost (http://localhost:8123/)]
