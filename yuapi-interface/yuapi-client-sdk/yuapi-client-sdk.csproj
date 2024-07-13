@@ -5,6 +5,14 @@
     <RootNamespace>yuapi_client_sdk</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Authors>Koksheng</Authors>
+    <Company>Koksheng</Company>
+    <Description>This package is designed to work with the YuAPI platform and requires proper configuration of the Ocelot API Gateway and related middleware for optimal performance.</Description>
+    <PackageProjectUrl>https://github.com/Koksheng/yuapi-backend</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Koksheng/yuapi-backend</RepositoryUrl>
+    <PackageTags>YuAPI API .NET Ocelot Middleware</PackageTags>
+    <PackageReleaseNotes>This package is designed to work with the YuAPI platform and requires proper configuration of the Ocelot API Gateway and related middleware for optimal performance.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
