@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{F2D689DF-DD7
 		doc\jwt.md = doc\jwt.md
 		doc\Project Architecture.md = doc\Project Architecture.md
 		README.md = README.md
+		doc\step to create NugetPackage for yuapiclient sdk.md = doc\step to create NugetPackage for yuapiclient sdk.md
 		doc\todo.md = doc\todo.md
 		doc\yuapi-client-sdk.md = doc\yuapi-client-sdk.md
 	EndProjectSection
