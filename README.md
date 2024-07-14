@@ -9,7 +9,9 @@ An API platform for users to register, share, and track their APIs.
 
 ## Project Description
 
-Yuapi API is a full-stack project built with a .NET Core backend and a React frontend. It allows users to register their APIs, make them available for others to invoke, and track usage statistics. This platform provides a centralized solution for API management, ensuring easy sharing and detailed analytics.
+Yuapi API is a full-stack project built with a .NET Core backend and a React frontend. 
+
+Administrators can access and publish interfaces, as well as perform statistics and analysis on the calls of each interface. Users can register and log in to activate interface call permissions, browse interfaces, debug online, and use the client SDK to easily call interfaces in code.
 
 ## Tech Stack
 
@@ -43,8 +45,34 @@ Yuapi API is a full-stack project built with a .NET Core backend and a React fro
 ## Interface Info
 ![image](https://github.com/user-attachments/assets/1caccab2-d177-469e-a8a2-28fc1afd1448)
 
-## Interface Info Free Trial
+### Interface Info Free Trial
 ![image](https://github.com/user-attachments/assets/af1c8931-c0f2-4379-8629-268a71f4c975)
+
+### Interface Online Invoke
+**GetUsernameByPost**
+
+![image](https://github.com/user-attachments/assets/27b143ef-a693-4fb8-af78-4c84a665ef38)
+
+**GetRandomWallpaper**
+
+![image](https://github.com/user-attachments/assets/89f55979-cd91-4902-afda-85b61e51cd81)
+
+### NuGet Package to Invoke Interface
+1. Install `yuapi-client-sdk`
+   ![image](https://github.com/user-attachments/assets/21abcbd9-a37b-4576-94f0-91091bba9c6c)
+
+2. With a few lines of code, you can invoke the interface:
+   ```
+	 using yuapi_client_sdkyuapi_client_sdk.Client;
+
+	 var httpClient = new HttpClient { BaseAddress = new Uri("http://127.0.0.1:8090") };
+	 var yuApiClient = new YuApiClient(httpClient);
+	 
+	 yuApiClient.SetAccessKey("9d8ebf4636e2dec32117b9d72e1a3d70");
+	 yuApiClient.SetSecretKey("296791011ea2292bc7efc73deeaddc45");
+	 var result = await yuApiClient.InvokeAsync("GetUsernameByPost", "{\"username\":\"exampleUser\"}");
+   ```
+
 
 ## Interface Management
 ![image](https://github.com/user-attachments/assets/74527d4b-e996-4ade-ac82-1d918dac417c)
@@ -55,13 +83,17 @@ Yuapi API is a full-stack project built with a .NET Core backend and a React fro
 ## User Management
 ![image](https://github.com/user-attachments/assets/f2f2ec19-a33a-4682-b8b6-1841c27a4710)
 
-## Personak Info
+## Personal Info
 ![image](https://github.com/user-attachments/assets/a1d33ef6-3092-4267-a98b-fc848114d1a3)
 
 
 
 
 ## Project Structure:
+![Untitled Diagram drawio](https://github.com/user-attachments/assets/3c9f309c-7c72-46b4-9885-d907e2616edb)
+
+
+
 
 ### yuapi-backend.sln
 **Solution File**: This is the main solution file that includes all the backend projects.
