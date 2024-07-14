@@ -38,16 +38,25 @@ Yuapi API is a full-stack project built with a .NET Core backend and a React fro
 ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/f2c72a89-f43b-469c-a87b-8167af57bb63)
 
 ## Main Page
-![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/4efdd33c-a008-4ebd-8524-662c30ede58a)
+![image](https://github.com/user-attachments/assets/2f87cf95-c901-4f8e-80bb-6a7c0de0f4bc)
 
 ## Interface Info
-![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/80aec7ef-2d6d-41d8-8646-cd1c343c3e5b)
+![image](https://github.com/user-attachments/assets/1caccab2-d177-469e-a8a2-28fc1afd1448)
+
+## Interface Info Free Trial
+![image](https://github.com/user-attachments/assets/af1c8931-c0f2-4379-8629-268a71f4c975)
 
 ## Interface Management
-![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/63eb95a7-d9d7-40a6-9c85-dfd67425dca1)
+![image](https://github.com/user-attachments/assets/74527d4b-e996-4ade-ac82-1d918dac417c)
 
 ## Interface Analysis
-![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/c8187962-49f3-4e6d-9165-038ac0eb19c8)
+![image](https://github.com/user-attachments/assets/80f1ca5b-2bff-4654-864a-a3830c0ae8fa)
+
+## User Management
+![image](https://github.com/user-attachments/assets/f2f2ec19-a33a-4682-b8b6-1841c27a4710)
+
+## Personak Info
+![image](https://github.com/user-attachments/assets/a1d33ef6-3092-4267-a98b-fc848114d1a3)
 
 
 
