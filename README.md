@@ -30,7 +30,7 @@ Administrators can access and publish interfaces, as well as perform statistics 
 	- AutoMapper (for object-to-object mapping)
 	- Ocelot (for API Gateway)
 - Database: Microsoft SQL Server
-- Middleware: Custom middleware for user verification, access control, request logging, and response handling
+- Middleware: Custom middleware for user verification, access control, quota check, request logging, and response handling
 - RPC Services: gRPC (for inter-service communication)
 
 ## Login
