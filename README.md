@@ -32,6 +32,7 @@ Administrators can access and publish interfaces, as well as perform statistics 
 - Database: Microsoft SQL Server
 - Middleware: Custom middleware for user verification, access control, quota check, request logging, and response handling
 - RPC Services: gRPC (for inter-service communication)
+- SDK: Created yuapi-client-sdk as a NuGet Package, making it easy for users to trial invoke the interface
 
 ## Login
 ![image](https://github.com/Koksheng/yuapi-backend/assets/33799735/60e008cd-741f-4d3f-a829-81742938b3dd)
