@@ -146,6 +146,8 @@ Handles data persistence and retrieval operations.
 
 `InterfaceInfoService`: Retrieves interface information based on path and method.
 
+`QuotaCheckService`: Checks the user’s remaining quota limits for the API.
+
 `UserInfoService`: Retrieves user information based on access keys.
 
 
@@ -166,11 +168,13 @@ Handles data persistence and retrieval operations.
 ### yuapi-OcelotGateway (Start)
 **Function**: This project serves as an API gateway using Ocelot.
 
-**Features**: Uses middleware components like `AccessControlMiddleware`, `RequestLoggingMiddleware`, `UserVerificationMiddleware`, and `ResponseHandlingMiddleware` to implement the features.
+**Features**: Uses middleware components like `AccessControlMiddleware`, `QuotaCheckMiddleware`, `RequestLoggingMiddleware`, `UserVerificationMiddleware`, and `ResponseHandlingMiddleware` to implement the features.
 
 **Access Control**: Manages access control to the APIs.
 
 **User Verification**: Verifies users before allowing them to access certain endpoints.
+
+**Quota Check**:  Checks user quota limits for the API.
 
 **Request Redirect**: Redirects requests to appropriate backend services.
 
