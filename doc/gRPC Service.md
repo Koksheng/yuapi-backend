@@ -1,3 +1,8 @@
+# Building an API Gateway using Ocelot + gRPC
+https://medium.com/c-sharp-progarmming/building-an-api-gateway-using-ocelot-grpc-part-1-d2245a0f930c
+
+https://medium.com/c-sharp-progarmming/building-an-api-gateway-using-ocelot-grpc-part-2-d702e8848280
+
 # gRPC Service Implementation (Server)
 
 In your yuapi.RPC.InvokeCountService project, you implement the gRPC service. This project includes the invoke_count.proto file and is configured to generate the server-side code:
